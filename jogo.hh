@@ -5,7 +5,7 @@ class Jogo
 private:
     /* data */
 
-    tabuleiro *inicial;
+    tabuleiro *ini;
     tabuleiro *final;
 
 public:
@@ -15,10 +15,16 @@ public:
     bool is_solvable();
 };
 
-Jogo::Jogo(/* args */)
+Jogo::Jogo(char * ini, char * fin)
 {
+    ini = new tabuleiro(ini);
+    final = new tabuleiro(final);   
 }
+
+
 
 Jogo::~Jogo()
 {
+    delete ini;
+    delete final;
 }

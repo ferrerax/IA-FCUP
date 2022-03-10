@@ -1,7 +1,8 @@
 #ifndef __TABULEIRO_H__
 #define __TABULEIRO_H__
 
-#define N_NUMEROS 16
+#define N_ROW 4
+#define N_NUMEROS N_ROW*N_ROW
 
 class tabuleiro
 {
@@ -16,7 +17,7 @@ public:
 
     char consulta_n(int n);
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
-    char busca_blanc();
+    int busca_blanc();
 
     void print();
     void print_formatted();
