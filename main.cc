@@ -39,13 +39,6 @@ int main(int argc, char *argv[])
 
 
     main_jogo = new Jogo(input_inicial, input_final);
-
-    if (main_jogo->is_solvable())
-    {
-        cout << "Is solvable!" << endl;
-    } else {
-        cout << "Is not solvable :(" << endl;
-    }
     
 
     return 0;

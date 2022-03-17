@@ -1,4 +1,5 @@
 #include "jogo.hh"
+#include<queue>
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
@@ -21,4 +22,17 @@ bool Jogo::is_solvable() {
 
     return ( (inv_i%2 == 0) == (blanc_row_i%2 == 1) ) 
                 == ( (inv_f%2 == 0) == (blanc_row_f%2 == 1) );
+}
+
+no* Jogo::search(t_algorithm a)
+{
+    std::queue<no> q_nodes;
+    no *initial_node = new no(ini);
+    
+    if (!this->is_solvable())
+    {
+        return nullptr;
+    }
+
+    
 }

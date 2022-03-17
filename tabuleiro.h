@@ -4,14 +4,21 @@
 #define N_ROW 4
 #define N_NUMEROS N_ROW*N_ROW
 
+typedef enum {
+    RIGHT,
+    LEFT,
+    TOP,
+    BOT
+} t_dir;
+
 class tabuleiro
 {
 private:
     /* data */
     char matriu[N_NUMEROS];
+    tabuleiro(char *nums, t_dir dir);
 
 public:
-    tabuleiro(/* args */);
     tabuleiro(char * numbs);
     ~tabuleiro();
 

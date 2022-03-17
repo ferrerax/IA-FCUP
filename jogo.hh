@@ -1,6 +1,14 @@
 #include "tabuleiro.h"
 #include "no.hh"
 
+typedef enum {
+    DFS,
+    BFS,
+    IDFS,
+    A_ESTRELA,
+    GULOSA
+} t_algorithm;
+
 class Jogo
 {
 private:
@@ -14,4 +22,6 @@ public:
     ~Jogo();
 
     bool is_solvable();
+
+    no* search(t_algorithm a);
 };

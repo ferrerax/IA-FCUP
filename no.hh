@@ -9,14 +9,6 @@ private:
     no *filhos[4];
 
 public:
-    no(/* args */);
+    no(tabuleiro *t);
     ~no();
 };
-
-no::no(/* args */)
-{
-}
-
-no::~no()
-{
-}
