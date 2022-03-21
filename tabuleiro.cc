@@ -1,4 +1,4 @@
-#include "tabuleiro.h"
+#include "tabuleiro.hh"
 #include <iostream>
 #include<string.h>
 
