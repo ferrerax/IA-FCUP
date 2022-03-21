@@ -1,12 +1,12 @@
-#include "tabuleiro.h"
+#include "tabuleiro.hh"
 #include "no.hh"
 
 typedef enum {
-    DFS,
-    BFS,
-    IDFS,
-    A_ESTRELA,
-    GULOSA
+    a_DFS,
+    a_BFS,
+    a_IDFS,
+    a_A_ESTRELA,
+    a_GULOSA
 } t_algorithm;
 
 class Jogo
@@ -16,6 +16,8 @@ private:
 
     tabuleiro *ini;
     tabuleiro *fin;
+
+    bool frontNodeIsSolution(no * node);
 
 public:
     Jogo(char *, char *);

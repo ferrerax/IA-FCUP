@@ -1,6 +1,8 @@
 #include "jogo.hh"
 #include<queue>
 
+#include "Algorithm.hh"
+#include "DFS.hh"
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
     ini = new tabuleiro(ini_nums);
@@ -24,15 +26,38 @@ bool Jogo::is_solvable() {
                 == ( (inv_f%2 == 0) == (blanc_row_f%2 == 1) );
 }
 
-no* Jogo::search(t_algorithm a)
+bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?
+	return tabuleiro::comparar_tabs((tabuleiro *)node->getData(), fin);
+}
+
+no* Jogo::search(t_algorithm algorithm)
 {
-    std::queue<no> q_nodes;
-    no *initial_node = new no(ini);
-    
+	Algorithm A;
+	no * node;
+
+	node = new no(ini);
+
+	switch(algorithm){ //First node will be added.
+	case a_DFS:
+		A = DFS(node);
+		break;
+	default:
+		break;
+	}
+
     if (!this->is_solvable())
     {
         return nullptr;
     }
-
     
+
+    while (!A.is_empty()){
+    	node = A.pullTop();
+    	if (frontNodeIsSolution(node)){
+    		return A.returnSolution();
+    	}
+    	A.makeAndInsertDescendants();
+    }
+
+    return nullptr;
 }
