@@ -13,6 +13,19 @@ tabuleiro::~tabuleiro()
     
 }
 
+bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
+{
+    for (int i = 0; i < N_NUMEROS; i++)
+    {
+        if (a->matriu[i] != b->matriu[i])
+        {
+            return false;
+        }
+    }
+    return true;
+    
+}
+
 int tabuleiro::busca_blanc(){
         for(int i = 0; i < N_NUMEROS; i++){
             if (matriu[i] == 0)
