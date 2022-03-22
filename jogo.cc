@@ -5,14 +5,18 @@
 #include "DFS.hh"
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
-    ini = new tabuleiro(ini_nums);
-    fin = new tabuleiro(fin_nums);
+    ini  = new tabuleiro(ini_nums);
+    fin  = new tabuleiro(fin_nums);
+    root = new no(nullptr,ini);
+
 }
 
 Jogo::~Jogo()
 {
     delete ini;
     delete fin;
+
+    //todo: Ha de recorrer tot l'arbre i borrar tots els nodes
 }
 
 bool Jogo::is_solvable() {
@@ -30,12 +34,16 @@ bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el re
 	return tabuleiro::comparar_tabs((tabuleiro *)node->getData(), fin);
 }
 
+void Jogo::printSolution() {
+}
+
 no* Jogo::search(t_algorithm algorithm)
 {
 	Algorithm A;
 	no * node;
+	no * solution = nullptr;
 
-	node = new no(ini);
+	node = root;
 
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
@@ -45,19 +53,16 @@ no* Jogo::search(t_algorithm algorithm)
 		break;
 	}
 
-    if (!this->is_solvable())
-    {
-        return nullptr;
-    }
-    
-
-    while (!A.is_empty()){
-    	node = A.pullTop();
-    	if (frontNodeIsSolution(node)){
-    		return A.returnSolution();
-    	}
-    	A.makeAndInsertDescendants();
-    }
-
-    return nullptr;
+	if (this->is_solvable())
+	{
+		while (!A.is_empty()){
+			node = A.pullTop(); //Also marks node as visited.
+			if (frontNodeIsSolution(node)){
+				solution = A.getSolution();
+			} else if (!A.visited(node)) {  //un check aqui
+				A.makeAndInsertDescendants(node); //Nodes created
+			}
+		}
+	}
+    return solution;
 }

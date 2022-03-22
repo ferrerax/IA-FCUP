@@ -14,6 +14,8 @@ class Jogo
 private:
     /* data */
 
+	no * root;
+
     tabuleiro *ini;
     tabuleiro *fin;
 
@@ -24,6 +26,6 @@ public:
     ~Jogo();
 
     bool is_solvable();
-
+    void printSolution();
     no* search(t_algorithm a);
 };

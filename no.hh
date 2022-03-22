@@ -5,18 +5,21 @@ class no
 private:
     /* data */
     tabuleiro *data;
-
-    no *filhos[4];
+    no * parent;
+    bool valid_childs;
+    no childs[4]; //Child array
 
 public:
-    no(tabuleiro *t);
+    no(no * parent, tabuleiro *t);
     ~no();
 
-	const tabuleiro* getData() const {
+    void getChilds(no * childs[]);
+
+    const tabuleiro* getData() const {
 		return data;
 	}
 
-	void setData(const tabuleiro *&data) {
+	void setData(tabuleiro * data) {
 		this->data = data;
 	}
 };
