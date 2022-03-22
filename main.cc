@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
 			if (jogo->search(a_DFS) == nullptr){
 				cout << "[!] There's no solution" << endl;
 			} else {
+				cout << "Solved!" << endl;
 				//jogo->printSolution();
 			}
 			delete jogo;

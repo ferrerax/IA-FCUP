@@ -23,8 +23,8 @@ bool Jogo::is_solvable() {
     int inv_i = ini->get_inversions();
     int inv_f = fin->get_inversions();
 
-    int  blanc_row_i = ini->busca_blanc()%N_ROW;
-    int  blanc_row_f = fin->busca_blanc()%N_ROW;
+    int  blanc_row_i = N_ROW - ini->busca_blanc()%N_ROW;  // Starts to count from bottom and index 1
+    int  blanc_row_f = N_ROW - fin->busca_blanc()%N_ROW;
 
     return ( (inv_i%2 == 0) == (blanc_row_i%2 == 1) ) 
                 == ( (inv_f%2 == 0) == (blanc_row_f%2 == 1) );
