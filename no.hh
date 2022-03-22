@@ -10,7 +10,7 @@ private:
     /* data */
     tabuleiro *data;
     no * parent;
-    no childs[4]; //Child array
+    no * childs[4]; //Child array
     bool valid_childs;
 
 public:
@@ -19,7 +19,7 @@ public:
     void trackToRoot(no * node_in, list<no>& list_out);
     no ** getChilds();
 
-    const tabuleiro* getData() const {
+    tabuleiro* getData() const {
 		return data;
 	}
 

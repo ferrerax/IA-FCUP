@@ -35,6 +35,7 @@ bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el re
 }
 
 void Jogo::printSolution() {
+
 }
 
 no* Jogo::search(t_algorithm algorithm)
