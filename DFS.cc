@@ -22,7 +22,7 @@ bool DFS::is_empty() {
 no * DFS::pullTop() {
 	no * aux = queue.top();
 	queue.pop();
-	visitedNodes[*aux->getData()] = true;
+	visitedNodes[aux->getData()->getHash()] = true;
 	return aux;
 }
 

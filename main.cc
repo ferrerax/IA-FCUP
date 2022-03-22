@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 			cout << "Using initial table " << ini << "\n";
 			cout << "Using final table " << fin << "\n";
 
-			jogo = new Jogo((char*) ini,(char *) fin); //new game created.
+			jogo = new Jogo((char*) ini.c_str(),(char *) fin.c_str()); //new game created.
 			if (jogo->search(a_DFS) == nullptr){
 				cout << "[!] There's no solution" << endl;
 			} else {

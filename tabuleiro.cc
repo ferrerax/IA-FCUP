@@ -68,6 +68,12 @@ tabuleiro *tabuleiro::top()
         return NULL;
     }
 }
+
+string tabuleiro::getHash() {
+	string aux(this->matriu);
+	return aux;
+}
+
 tabuleiro *tabuleiro::bot()
 {
     int blanc = this->busca_blanc();

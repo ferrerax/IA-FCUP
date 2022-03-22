@@ -7,16 +7,18 @@
 
 #ifndef ALGORITHM_HH_
 #define ALGORITHM_HH_
+#include <string>
 #include <unordered_map>
 
 #include "no.hh"
 
+using std::string;
 using std::unordered_map;
 
 class Algorithm {
 
 protected:
-	unordered_map<tabuleiro,bool> visitedNodes; //keep track of visited nodes
+	unordered_map<string,bool> visitedNodes; //keep track of visited nodes
 
 private:
 	//no * solution;

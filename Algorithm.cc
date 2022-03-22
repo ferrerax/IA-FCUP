@@ -33,5 +33,5 @@ void Algorithm::makeAndInsertDescendants(no * node) {  //NO EDIT
 }
 
 bool Algorithm::visited(no * node) {
-	return visitedNodes[node->getData()]; //Sabrem si l'hem visitat.
+	return visitedNodes[node->getData()->getHash()]; //Sabrem si l'hem visitat.
 }

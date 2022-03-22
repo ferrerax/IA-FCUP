@@ -1,8 +1,11 @@
+#ifndef __NO_H__
+#define __NO_H__
+
 #include <list>
 
 #include "tabuleiro.hh"
 
-using std::__cxx11::list;
+using std::list;
 
 class no
 {
@@ -19,11 +22,9 @@ public:
     void trackToRoot(no * node_in, list<no>& list_out);
     no ** getChilds();
 
-    tabuleiro* getData() const {
-		return data;
-	}
+    tabuleiro* getData() const;
 
-	void setData(tabuleiro * data) {
-		this->data = data;
-	}
+	void setData(tabuleiro * data);
 };
+
+#endif

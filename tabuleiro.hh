@@ -1,7 +1,14 @@
 #ifndef __TABULEIRO_H__
 #define __TABULEIRO_H__
 
+//#include <string.h>
+#include "tabuleiro.hh"
+
+#include <string>
+
 #include "config.hh"
+
+using std::string;
 
 typedef enum {
     RIGHT,
@@ -25,6 +32,8 @@ public:
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
     int busca_blanc();
 
+    string getHash();
+
     void print();
     void print_formatted();
 
@@ -34,10 +43,6 @@ public:
     tabuleiro* left();
     tabuleiro* top();
     tabuleiro* bot();
-
-    bool operator== (tabuleiro x){
-    	return comparar_tabs(this, &x);
-    }
 
 };
 
