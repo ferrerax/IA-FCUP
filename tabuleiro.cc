@@ -87,6 +87,30 @@ string tabuleiro::getHash() {
 	return aux;
 }
 
+void tabuleiro::print()
+{
+    for (size_t i = 0; i < N_NUMEROS; i++)
+    {
+        cout << to_string((int) this->matriu[i]) << " ";
+    }
+    cout << endl;
+    
+}
+
+void tabuleiro::print_formatted()
+{
+    for (size_t i = 0; i < N_ROW; i++)
+    {
+        for (size_t j = 0; j < N_ROW; j++)
+        {
+            cout << to_string((int)this->matriu[i*N_ROW + j]) << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    
+}
+
 tabuleiro *tabuleiro::bot()
 {
     int blanc = this->busca_blanc();
