@@ -15,7 +15,7 @@
 using std::string;
 using std::unordered_map;
 
-class Algorithm {
+class Algorithm {   //Abstract
 
 protected:
 	unordered_map<string,bool> visitedNodes; //keep track of visited nodes
@@ -27,10 +27,11 @@ public:
 	Algorithm();
 	virtual ~Algorithm();
 
-	bool is_empty();
-	no * pullTop(); //Pulls and sets node as visited.
+	virtual bool is_empty() = 0;
+	virtual no * pullTop() = 0; //Pulls and sets node as visited.
+	virtual void makeAndInsertDescendants(no * node) = 0; //lines 11 and 12 from general algorithm
+
 	bool visited(no * node);
-	void makeAndInsertDescendants(no * node); //lines 11 and 12 from general algorithm
 
 
 };

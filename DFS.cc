@@ -22,7 +22,6 @@ bool DFS::is_empty() {
 no * DFS::pullTop() {
 	no * aux = queue.top();
 	queue.pop();
-	visitedNodes[aux->getData()->getHash()] = true;
 	return aux;
 }
 
@@ -30,7 +29,10 @@ no * DFS::pullTop() {
 
 void DFS::makeAndInsertDescendants(no * node) {
 	no ** childs = node->getChilds();
+	visitedNodes[node->getData()->getHash()] = true;
 	for (int i = 0; i < 4; i++){
-		queue.push(childs[i]);
+		if (childs[i] != nullptr) {
+			queue.push(childs[i]);
+		}
 	}
 }

@@ -40,15 +40,16 @@ void Jogo::printSolution() {
 
 no* Jogo::search(t_algorithm algorithm)
 {
-	Algorithm A;
+	Algorithm * A;
 	no * node;
 	no * solution = nullptr;
+	static int i = 0;
 
 	node = root;
 
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
-		A = DFS(node);
+		A = new DFS(node);
 		break;
 	default:
 		break;
@@ -56,17 +57,22 @@ no* Jogo::search(t_algorithm algorithm)
 
 	if (this->is_solvable())
 	{
-		while (!A.is_empty()){
-			node = A.pullTop(); //Also marks node as visited.
+		while (!A->is_empty()){
+			i++;
+			node = A->pullTop();
 			if (frontNodeIsSolution(node)){
 				solution = node;
 				break;
-			} else if (!A.visited(node)) {
-				A.makeAndInsertDescendants(node); //Nodes created
+			} else if (!A->visited(node)) {
+				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
 			}
 		}
-		throw "Error Algoritme";
+		if (solution == nullptr){
+			throw "Error Algoritme";
+		}
 		//TODO: Valorar sobre el problema d'haver arribat aqui i solution = nullptr.
 	}
+
+	delete A;
     return solution;
 }
