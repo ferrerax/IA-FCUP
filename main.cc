@@ -22,11 +22,40 @@ int main(int argc, char *argv[])
 	if (newini.is_open() && newfin.is_open()){   //checking whether the file is open
 		string ini;
 		string fin;
+
+		char ini_chars[16];
+		char fin_chars[16];
+
 		while(getline(newini, ini) && getline(newfin, fin)){
 			cout << "Using initial table " << ini << "\n";
 			cout << "Using final table " << fin << "\n";
 
-			jogo = new Jogo((char*) ini.c_str(),(char *) fin.c_str()); //new game created.
+			size_t pos = 0;
+			string token;
+			int it = 0;
+			string delimiter = " ";
+
+			while ((pos = ini.find(delimiter)) != string::npos)
+			{
+				token = ini.substr(0, pos);
+				ini_chars[it] = (char) stoi(token);
+				ini.erase(0, pos + delimiter.length());
+				it++;
+			}
+			ini_chars[it] = (char) stoi(ini);  // Last token
+
+			pos = 0;
+			it = 0;
+			while ((pos = fin.find(delimiter)) != string::npos)
+			{
+				token = fin.substr(0, pos);
+				fin_chars[it] = (char)stoi(token);
+				fin.erase(0, pos + delimiter.length());
+				it++;
+			}
+			fin_chars[it] = (char) stoi(fin);
+
+			jogo = new Jogo(ini_chars, fin_chars); //new game created.
 			if (jogo->search(a_DFS) == nullptr){
 				cout << "[!] There's no solution" << endl;
 			} else {

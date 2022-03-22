@@ -65,6 +65,7 @@ no* Jogo::search(t_algorithm algorithm)
 				A.makeAndInsertDescendants(node); //Nodes created
 			}
 		}
+		throw "Error Algoritme";
 		//TODO: Valorar sobre el problema d'haver arribat aqui i solution = nullptr.
 	}
     return solution;
