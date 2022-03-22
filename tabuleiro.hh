@@ -35,6 +35,10 @@ public:
     tabuleiro* top();
     tabuleiro* bot();
 
+    bool operator== (tabuleiro x){
+    	return comparar_tabs(this, &x);
+    }
+
 };
 
 

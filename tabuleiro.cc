@@ -107,3 +107,4 @@ tabuleiro::tabuleiro(char *nums, t_dir dir)
         break;
     }
 }
+
