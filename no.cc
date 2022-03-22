@@ -12,14 +12,16 @@ no::~no()
 {
 }
 
-void no::getChilds(no *childs[]) {
+ no ** no::getChilds() {
 	if (not valid_childs) {    //create it if not created.
 		valid_childs = true;
-		//TODO: Aquestes linies de sota estan mal, nomes sha de crear el node si el resultat no es nullptr!!!
-		this->childs[0] = new no(this,this->data->left());
-		this->childs[1] = new no(this,this->data->top());
-		this->childs[2] = new no(this,this->data->bot());
-		this->childs[3] = new no(this,this->data->right());
+		this->childs[0] = this->data->left()  ? new no(this,this->data->left())  : nullptr;
+		this->childs[1] = this->data->top()   ? new no(this,this->data->top())   : nullptr;
+		this->childs[2] = this->data->bot()   ? new no(this,this->data->bot())   : nullptr;
+		this->childs[3] = this->data->right() ? new no(this,this->data->right()) : nullptr;
 	}
-	childs = this->childs; //controlled aliasing
+	return this->childs; //controlled aliasing
+}
+
+void no::trackToRoot(no *node_in, list<no> &list_out) {
 }

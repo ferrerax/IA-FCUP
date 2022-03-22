@@ -58,11 +58,13 @@ no* Jogo::search(t_algorithm algorithm)
 		while (!A.is_empty()){
 			node = A.pullTop(); //Also marks node as visited.
 			if (frontNodeIsSolution(node)){
-				solution = A.getSolution();
-			} else if (!A.visited(node)) {  //un check aqui
+				solution = node;
+				break;
+			} else if (!A.visited(node)) {
 				A.makeAndInsertDescendants(node); //Nodes created
 			}
 		}
+		//TODO: Valorar sobre el problema d'haver arribat aqui i solution = nullptr.
 	}
     return solution;
 }
