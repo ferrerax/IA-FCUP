@@ -5,6 +5,7 @@
 #include "DFS.hh"
 #include "IDFS.hh"
 #include "BFS.hh"
+#include "GS.hh"
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
@@ -65,6 +66,7 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 no* Jogo::search(t_algorithm algorithm)
 {
 	Algorithm * A;
+	no * sol;
 
 	if (!this->is_solvable()){
 		return nullptr;
@@ -73,22 +75,28 @@ no* Jogo::search(t_algorithm algorithm)
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
 		A = new DFS(root);
+		sol = generalSearchAlgorithm(A);
 		break;
 	case a_BFS:
 		A = new BFS(root);
+		sol = generalSearchAlgorithm(A);
 		break;
 	case a_IDFS:
 		for (int it = 0; it < MAX_DEPTH; it++){
 			A = new IDFS(root,it);
-			no * sol = generalSearchAlgorithm(A);
+			sol = generalSearchAlgorithm(A);
 			if (sol){  //got solution
-				return sol;
+				break;
 			}
 		}
+		break;
+	case a_GULOSA:
+			A = new GS(root,fin);
+			sol = generalSearchAlgorithm(A);
 		break;
 	default:
 		break;
 	}
 
-	return generalSearchAlgorithm(A);
+	return sol;
 }
