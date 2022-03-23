@@ -22,6 +22,7 @@ protected:
 
 private:
 	//no * solution;
+	int nodesGenerated;
 
 public:
 	Algorithm();
@@ -33,7 +34,7 @@ public:
 
 	bool visited(no * node);
 
-
+	int getNodesGenerated();
 };
 
 #endif /* ALGORITHM_HH_ */

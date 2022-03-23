@@ -40,3 +40,7 @@ bool Algorithm::visited(no * node) {
 	return false;
 	//return visitedNodes.find(node->getData()->getHash()) != visitedNodes.end();//visitedNodes[node->getData()->getHash()]; //Sabrem si l'hem visitat.
 }
+
+int Algorithm::getNodesGenerated() {
+	return this->nodesGenerated;
+}
