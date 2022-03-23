@@ -42,52 +42,58 @@ void Jogo::printSolution() {
 
 }
 
-no* Jogo::search(t_algorithm algorithm)
-{
-	Algorithm * A;
+no* Jogo::generalSearchAlgorithm(Algorithm *A) {
+
 	no * node;
 	no * solution = nullptr;
 	static int i = 0;
 
-	node = root;
+	while (!A->is_empty()){
+		i++;
+		node = A->pullTop();
+		if (frontNodeIsSolution(node)){
+			solution = node;
+			break;
+		}
+		A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
+		if (node->isLeaf())
+		{
+			node->getParent()->notifyChildLeaf(node);
+			delete node;
+		}
+	}
+
+	delete A;
+    return solution;
+}
+
+no* Jogo::search(t_algorithm algorithm)
+{
+	Algorithm * A;
+
+	if (!this->is_solvable()){
+		return nullptr;
+	}
 
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
-		A = new DFS(node);
+		A = new DFS(root);
 		break;
 	case a_BFS:
-		A = new BFS(node);
+		A = new BFS(root);
 		break;
 	case a_IDFS:
-		A = new IDFS(node);
+		for (int it = 0; it < MAX_DEPTH; it++){
+			A = new IDFS(root,it);
+			no * sol = generalSearchAlgorithm(A);
+			if (sol){  //got solution
+				return sol;
+			}
+		}
 		break;
 	default:
 		break;
 	}
 
-	if (this->is_solvable())
-	{
-		while (!A->is_empty()){
-			i++;
-			node = A->pullTop();
-			if (frontNodeIsSolution(node)){
-				solution = node;
-				break;
-			}
-			//else if (!A->visited(node)) {
-				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
-			//}
-				if(node->isLeaf()) {
-					node->getParent()->notifyChildLeaf(node);
-					delete node;
-				}
-		}
-		if (solution == nullptr){
-			throw "Error Algoritme";
-		}
-		//TODO: Valorar sobre el problema d'haver arribat aqui i solution = nullptr.
-	}
-
-	delete A;
-    return solution;
+	return generalSearchAlgorithm(A);
 }

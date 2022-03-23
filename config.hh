@@ -13,8 +13,8 @@
 #define N_NUMEROS N_ROW*N_ROW
 
 //Only for IDFS
-#ifndef DEFAULT_DEPTH
-#define DEFAULT_DEPTH 10
+#ifndef MAX_DEPTH
+#define MAX_DEPTH 100
 #endif
 
 

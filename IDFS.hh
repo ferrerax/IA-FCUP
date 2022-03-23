@@ -23,8 +23,8 @@ private:
 
 
 public:
-	IDFS(no * node);
-	virtual ~IDFS();
+	IDFS(no * node, int limit);
+	~IDFS();
 
 	bool is_empty();
 	no * pullTop();
