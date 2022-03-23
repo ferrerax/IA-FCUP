@@ -39,3 +39,37 @@ tabuleiro* no::getData() const {
 void no::setData(tabuleiro * data) {
 	this->data = data;
 }
+
+void no::notifyChildLeaf(no * childNode)
+{
+	int alreadyNull = 0;
+	for (size_t i = 0; i < 4; i++)
+	{
+		if(this->childs[i] == nullptr)
+		{
+			alreadyNull++;
+		} else if (this->childs[i] == childNode)
+		{
+			this->childs[i] = nullptr;
+		}
+	}
+	if(alreadyNull == 3) {
+		this->parent->notifyChildLeaf(this);
+		delete this;
+	}
+	
+}
+
+bool no::isLeaf() {
+	if(this->valid_childs) {
+		int nchildren = 0;
+		for (size_t i = 0; i < 4; i++)
+		{
+			if(this->childs[i] != nullptr) return false;
+		}
+		
+	} else {
+		return false;
+	}
+	return true;
+}
