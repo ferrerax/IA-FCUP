@@ -7,6 +7,7 @@
 #include "IDFS.hh"
 #include "BFS.hh"
 #include "GS.hh"
+#include "AStar.hh"
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
@@ -96,6 +97,8 @@ no* Jogo::search(t_algorithm algorithm)
 		return nullptr;
 	}
 
+	clock_t c_start = clock();
+
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
 		A = new DFS(root);
@@ -115,13 +118,30 @@ no* Jogo::search(t_algorithm algorithm)
 		}
 		break;
 	case a_GULOSA:
-			A = new GS(root,fin);
-			sol = generalSearchAlgorithm(A);
+		A = new GS(root,fin);
+		sol = generalSearchAlgorithm(A);
+		break;
+	case a_A_ESTRELA:
+		A = new AStar(root, fin);
+		sol = generalSearchAlgorithm(A);
 		break;
 	default:
 		break;
 	}
 
+	clock_t c_end = clock();
+
 	deleteTree(root);
+
+	// Save statistics
+	t_stat run_stats = {
+		algorithm,
+		1000.0*(c_end - c_start) / CLOCKS_PER_SEC,
+		A->getNodesGenerated(),
+		A->getNodesGenerated() * (sizeof(no) + sizeof(tabuleiro))
+	};
+
+	this->statistics.push_back(run_stats);
+
 	return sol;
 }

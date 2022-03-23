@@ -1,6 +1,7 @@
 #include "tabuleiro.hh"
 #include "no.hh"
 #include "Algorithm.hh"
+#include <vector>
 
 typedef enum {
     a_DFS,
@@ -10,12 +11,21 @@ typedef enum {
     a_GULOSA
 } t_algorithm;
 
+struct t_stat {
+    t_algorithm al;
+    double time;
+    int total_stored_nodes;
+    size_t total_stored_bytes;
+};
+
 class Jogo
 {
 private:
     /* data */
 
-	no * root;
+    std::vector<t_stat> statistics;
+
+    no * root;
 
     tabuleiro *ini;
     tabuleiro *fin;
@@ -24,7 +34,9 @@ private:
     no * generalSearchAlgorithm(Algorithm * A);
     void deleteTree(no * node);
 
+
 public:
+    
     Jogo(char *, char *);
     ~Jogo();
 

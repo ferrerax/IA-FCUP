@@ -11,7 +11,6 @@
 #include <queue>
 #include <utility>
 #include <vector>
-#include <bits/stdc++.h>
 
 #include "config.hh"
 #include "Algorithm.hh"
