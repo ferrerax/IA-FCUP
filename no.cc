@@ -5,6 +5,12 @@ no::no(no * parent, tabuleiro *t)
     this->data   = t;
     this->parent = parent;
     this->valid_childs = false;
+    if (parent == nullptr){
+    	depth = 0;
+    }
+    else {
+    	depth = parent->depth + 1;
+    }
 
 }
 

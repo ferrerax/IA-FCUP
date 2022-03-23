@@ -15,6 +15,7 @@ private:
     no * parent;
     no * childs[4]; //Child array
     bool valid_childs;
+    int depth;
 
 public:
     no(no * parent, tabuleiro *t);
@@ -28,6 +29,10 @@ public:
 
 	const no * getParent() const {
 		return parent;
+	}
+
+	int getDepth() const {
+		return depth;
 	}
 };
 

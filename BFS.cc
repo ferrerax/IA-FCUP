@@ -41,7 +41,7 @@ void BFS::makeAndInsertDescendants(no * node) {
 //		if (childs[i] != nullptr and tabuleiro::comparar_tabs((tabuleiro *)childs[i]->getData(),&t_debug)){ //debug
 //				throw "S'ha empilat la solució";
 //				return;
-		    }
+//		    }
 		//end debug
 		if (childs[i] != nullptr and !visited(childs[i])) {
 			q.push(childs[i]);

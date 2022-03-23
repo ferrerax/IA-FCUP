@@ -8,7 +8,6 @@
 #ifndef IDFS_HH_
 #define IDFS_HH_
 
-#define DEFAULT_DEPTH 50
 
 #include <stack>
 #include "config.hh"
@@ -19,7 +18,8 @@ using std::stack;
 class IDFS: public Algorithm {
 
 private:
-stack<no*> stck;
+	stack<no*> stck;
+	int max_depth;
 
 
 public:

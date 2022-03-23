@@ -3,6 +3,7 @@
 
 #include "Algorithm.hh"
 #include "DFS.hh"
+#include "IDFS.hh"
 #include "BFS.hh"
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
@@ -56,6 +57,9 @@ no* Jogo::search(t_algorithm algorithm)
 		break;
 	case a_BFS:
 		A = new BFS(node);
+		break;
+	case a_IDFS:
+		A = new IDFS(node);
 		break;
 	default:
 		break;

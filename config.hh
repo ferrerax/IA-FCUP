@@ -12,7 +12,10 @@
 #define N_ROW 4
 #define N_NUMEROS N_ROW*N_ROW
 
-
+//Only for IDFS
+#ifndef DEFAULT_DEPTH
+#define DEFAULT_DEPTH 10
+#endif
 
 
 #endif /* CONFIG_HH_ */
