@@ -68,7 +68,7 @@ no* Jogo::search(t_algorithm algorithm)
 			}
 		}
 		if (solution == nullptr){
-			//throw "Error Algoritme";
+			throw "Error Algoritme";
 		}
 		//TODO: Valorar sobre el problema d'haver arribat aqui i solution = nullptr.
 	}
