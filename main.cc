@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 	fstream newini;
 	fstream newfin;
 	Jogo * jogo;
+	no * solution;
 
 	newini.open(argv[1],ios::in); //open initial configurations file.
 	newfin.open(argv[2],ios::in); //open final configurations file.
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
 			fin_chars[it] = (char) stoi(fin);
 
 			jogo = new Jogo(ini_chars, fin_chars); //new game created.
-			if (jogo->search(a_GULOSA) == nullptr){
+			if ( (solution = jogo->search(a_GULOSA)) == nullptr){
 				cout << "[!] There's no solution" << endl;
 			} else {
 				cout << "Solved!" << endl;

@@ -20,7 +20,7 @@ private:
 public:
     no(no * parent, tabuleiro *t);
     ~no();
-    void trackToRoot(no * node_in, list<no>& list_out);
+    void trackToRoot(no * node_in, list<no*>& list_out);
     no ** getChilds();
 
     tabuleiro* getData() const;

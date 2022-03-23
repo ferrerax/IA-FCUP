@@ -30,7 +30,15 @@ no::~no()
 	return this->childs; //controlled aliasing
 }
 
-void no::trackToRoot(no *node_in, list<no> &list_out) {
+void no::trackToRoot(no *node_in, list<no*> &list_out) {
+	no * node = node_in;
+
+	while(node->parent){
+		list_out.push_front(node);
+		node = node->parent;
+	}
+
+	list_out.push_front(node);  //last node
 }
 
 tabuleiro* no::getData() const {
