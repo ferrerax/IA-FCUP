@@ -72,13 +72,13 @@ int main(int argc, char *argv[])
 			jogo = new Jogo(ini_chars, fin_chars); //new game created.
 
 			//algorithms
-			cout << endl << "***** DFS *****" << endl << endl;
-			try {
-				execute_algorithm(jogo, a_DFS);
-			}
-			catch(string &s){
-				cout << "Algorithm Timeout" << endl << endl;
-			}
+//			cout << endl << "***** DFS *****" << endl << endl;
+//			try {
+//				execute_algorithm(jogo, a_DFS);
+//			}
+//			catch(string &s){
+//				cout << "Algorithm Timeout" << endl << endl;
+//			}
 
 			cout << endl << "***** BFS *****" << endl << endl;
 			try {
