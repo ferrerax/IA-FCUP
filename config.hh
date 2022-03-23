@@ -18,6 +18,6 @@
 #endif
 
 //To choose heuristics. Commented->pieces distance | Not Commented->Manhattan distanc//e
-//#define HEURISTIC
+#define HEURISTIC
 
 #endif /* CONFIG_HH_ */
