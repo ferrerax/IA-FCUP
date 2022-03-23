@@ -25,6 +25,10 @@ public:
     tabuleiro* getData() const;
 
 	void setData(tabuleiro * data);
+
+	const no * getParent() const {
+		return parent;
+	}
 };
 
 #endif

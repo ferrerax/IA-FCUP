@@ -38,12 +38,12 @@ void DFS::makeAndInsertDescendants(no * node) {
 	visitedNodes[node->getData()->getHash()] = true;
 	for (int i = 0; i < 4; i++){
 		//debug
-		if (tabuleiro::comparar_tabs((tabuleiro *)node->getData(),&t_debug)){ //debug
+		if (childs[i] != nullptr and tabuleiro::comparar_tabs((tabuleiro *)childs[i]->getData(),&t_debug)){ //debug
 				throw "S'ha empilat la solució";
 				return;
 		    }
 		//end debug
-		if (childs[i] != nullptr) {
+		if (childs[i] != nullptr and !visited(childs[i])) {
 			queue.push(childs[i]);
 		}
 	}

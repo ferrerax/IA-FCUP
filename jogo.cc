@@ -64,9 +64,10 @@ no* Jogo::search(t_algorithm algorithm)
 			if (frontNodeIsSolution(node)){
 				solution = node;
 				break;
-			} else if (!A->visited(node)) {
-				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
 			}
+			//else if (!A->visited(node)) {
+				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
+			//}
 		}
 		if (solution == nullptr){
 			throw "Error Algoritme";

@@ -33,5 +33,14 @@ void Algorithm::makeAndInsertDescendants(no * node) {  //NO EDIT
 }
 
 bool Algorithm::visited(no * node) {
-	return visitedNodes[node->getData()->getHash()]; //Sabrem si l'hem visitat.
+	//Tornar a fer el canvi.
+	no * n = (no *)node->getParent();
+	while(n->getParent()){
+		if (node->getData()->getHash() == n->getData()->getHash()){
+			return true;
+		}
+		n = (no *)n->getParent();
+	}
+	return false;
+	//return visitedNodes.find(node->getData()->getHash()) != visitedNodes.end();//visitedNodes[node->getData()->getHash()]; //Sabrem si l'hem visitat.
 }
