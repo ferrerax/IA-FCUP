@@ -35,6 +35,11 @@ public:
 	int getDepth() const {
 		return depth;
 	}
+
+    bool getValidChilds() const {
+        return valid_childs;
+    }
+
     void notifyChildLeaf(no * childNode);
     bool isLeaf();
 };
