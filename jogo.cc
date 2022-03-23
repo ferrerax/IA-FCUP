@@ -57,6 +57,11 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 			break;
 		}
 		A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
+		if (node->isLeaf())
+		{
+			node->getParent()->notifyChildLeaf(node);
+			delete node;
+		}
 	}
 
 	delete A;

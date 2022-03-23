@@ -27,13 +27,15 @@ public:
 
 	void setData(tabuleiro * data);
 
-	const no * getParent() const {
+	no * getParent() const {
 		return parent;
 	}
 
 	int getDepth() const {
 		return depth;
 	}
+    void notifyChildLeaf(no * childNode);
+    bool isLeaf();
 };
 
 #endif
