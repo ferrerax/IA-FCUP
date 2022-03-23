@@ -44,6 +44,10 @@ public:
     tabuleiro* top();
     tabuleiro* bot();
 
+	//Heuristics
+	int getNumberPieces(tabuleiro * t);
+	int getManhattanDistance(tabuleiro * t);
+
 };
 
 

@@ -20,6 +20,7 @@ class Algorithm {   //Abstract
 protected:
 	unordered_map<string,bool> visitedNodes; //keep track of visited nodes
 
+
 private:
 	//no * solution;
 

@@ -1,6 +1,7 @@
 #include "tabuleiro.hh"
 #include <iostream>
 #include<string.h>
+#include <cmath>
 
 using namespace std;
 
@@ -152,3 +153,26 @@ tabuleiro::tabuleiro(char *nums, t_dir dir)
     }
 }
 
+int tabuleiro::getNumberPieces(tabuleiro *t) {
+	int r = 0;
+	for (int i = 0; i < N_NUMEROS; i++){
+		if (t->matriu[i] != this->matriu[i]){
+			r++;
+		}
+	}
+	return r;
+}
+
+int tabuleiro::getManhattanDistance(tabuleiro *t) {
+	int r,x1,x2,y1,y2 = 0;
+
+	for (int i = 0; i < N_NUMEROS; i++){
+		x1 = t->matriu[i]%N_ROW;
+		x2 = this->matriu[i]%N_ROW;
+		y1 = t->matriu[i]/N_ROW;
+		y2 = this->matriu[i]/N_ROW;
+
+		r += abs(x1-x2) + abs(y1-y2);
+	}
+	return r;
+}
