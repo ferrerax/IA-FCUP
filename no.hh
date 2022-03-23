@@ -26,7 +26,7 @@ public:
 
 	void setData(tabuleiro * data);
 
-	const no * getParent() const {
+	no * getParent() const {
 		return parent;
 	}
 

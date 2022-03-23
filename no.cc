@@ -39,11 +39,12 @@ void no::notifyChildLeaf(no * childNode)
 	int alreadyNull = 0;
 	for (size_t i = 0; i < 4; i++)
 	{
-		if(this->childs[i] == nullptr){
+		if(this->childs[i] == nullptr)
+		{
 			alreadyNull++;
 		} else if (this->childs[i] == childNode)
 		{
-			this->childs[i] == nullptr;
+			this->childs[i] = nullptr;
 		}
 	}
 	if(alreadyNull == 3) {

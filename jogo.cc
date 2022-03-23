@@ -73,6 +73,9 @@ no* Jogo::search(t_algorithm algorithm)
 			//else if (!A->visited(node)) {
 				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
 			//}
+				if(node->isLeaf()) {
+					node->getParent()->notifyChildLeaf(node);
+				}
 		}
 		if (solution == nullptr){
 			throw "Error Algoritme";
