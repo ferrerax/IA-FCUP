@@ -30,8 +30,8 @@ no::~no()
 	return this->childs; //controlled aliasing
 }
 
-void no::trackToRoot(no *node_in, list<no*> &list_out) {
-	no * node = node_in;
+void no::trackToRoot(list<no*> &list_out) {
+	no * node = this;
 
 	while(node->parent){
 		list_out.push_front(node);

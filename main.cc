@@ -60,7 +60,9 @@ int main(int argc, char *argv[])
 			if ( (solution = jogo->search(a_GULOSA)) == nullptr){
 				cout << "[!] There's no solution" << endl;
 			} else {
-				cout << "Solved!" << endl;
+				list<no*> path;
+				solution->trackToRoot(path);
+				cout << "Solved! Done in " << path.size() << endl;
 				//jogo->printSolution();
 			}
 			delete jogo;
