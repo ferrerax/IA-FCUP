@@ -29,6 +29,9 @@ public:
 	const no * getParent() const {
 		return parent;
 	}
+
+    void notifyChildLeaf(no * childNode);
+    bool isLeaf();
 };
 
 #endif
