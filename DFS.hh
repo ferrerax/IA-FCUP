@@ -17,7 +17,7 @@ using std::stack;
 class DFS: public Algorithm {
 
 private:
-stack<no*> queue;
+stack<no*> stck;
 
 public:
 	DFS(no * node);

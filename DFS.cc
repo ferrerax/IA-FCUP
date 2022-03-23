@@ -9,7 +9,7 @@
 #include "DFS.hh"
 
 DFS::DFS(no * node) {
-	queue.push(node);
+	stck.push(node);
 }
 
 DFS::~DFS() {
@@ -17,12 +17,12 @@ DFS::~DFS() {
 }
 
 bool DFS::is_empty() {
-	return queue.empty();
+	return stck.empty();
 }
 
 no * DFS::pullTop() {
-	no * aux = queue.top();
-	queue.pop();
+	no * aux = stck.top();
+	stck.pop();
 	return aux;
 }
 
@@ -38,13 +38,13 @@ void DFS::makeAndInsertDescendants(no * node) {
 	visitedNodes[node->getData()->getHash()] = true;
 	for (int i = 0; i < 4; i++){
 		//debug
-		if (tabuleiro::comparar_tabs((tabuleiro *)node->getData(),&t_debug)){ //debug
+		if (childs[i] != nullptr and tabuleiro::comparar_tabs((tabuleiro *)childs[i]->getData(),&t_debug)){ //debug
 				throw "S'ha empilat la solució";
 				return;
 		    }
 		//end debug
-		if (childs[i] != nullptr) {
-			queue.push(childs[i]);
+		if (childs[i] != nullptr and !visited(childs[i])) {
+			stck.push(childs[i]);
 		}
 	}
 }

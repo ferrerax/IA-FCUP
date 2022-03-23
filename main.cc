@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 			fin_chars[it] = (char) stoi(fin);
 
 			jogo = new Jogo(ini_chars, fin_chars); //new game created.
-			if (jogo->search(a_DFS) == nullptr){
+			if (jogo->search(a_BFS) == nullptr){
 				cout << "[!] There's no solution" << endl;
 			} else {
 				cout << "Solved!" << endl;

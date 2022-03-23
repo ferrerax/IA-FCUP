@@ -3,6 +3,8 @@
 
 #include "Algorithm.hh"
 #include "DFS.hh"
+#include "BFS.hh"
+
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
     ini  = new tabuleiro(ini_nums);
@@ -52,6 +54,9 @@ no* Jogo::search(t_algorithm algorithm)
 	case a_DFS:
 		A = new DFS(node);
 		break;
+	case a_BFS:
+		A = new BFS(node);
+		break;
 	default:
 		break;
 	}
@@ -64,9 +69,10 @@ no* Jogo::search(t_algorithm algorithm)
 			if (frontNodeIsSolution(node)){
 				solution = node;
 				break;
-			} else if (!A->visited(node)) {
-				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
 			}
+			//else if (!A->visited(node)) {
+				A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
+			//}
 		}
 		if (solution == nullptr){
 			throw "Error Algoritme";
