@@ -103,7 +103,8 @@ void tabuleiro::print_formatted()
     {
         for (size_t j = 0; j < N_ROW; j++)
         {
-            cout << to_string((int)this->matriu[i*N_ROW + j]) << " ";
+            if (matriu[i * N_ROW + j] < 10) cout << " ";
+            cout << to_string((int)this->matriu[i * N_ROW + j]) << " ";
         }
         cout << endl;
     }
