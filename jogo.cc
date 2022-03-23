@@ -31,6 +31,7 @@ bool Jogo::is_solvable() {
 }
 
 bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?
+
 	return tabuleiro::comparar_tabs((tabuleiro *)node->getData(), fin);
 }
 

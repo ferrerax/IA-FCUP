@@ -5,6 +5,7 @@
  *      Author: quim
  */
 
+#include "tabuleiro.hh"
 #include "DFS.hh"
 
 DFS::DFS(no * node) {
@@ -28,9 +29,20 @@ no * DFS::pullTop() {
 
 
 void DFS::makeAndInsertDescendants(no * node) {
+	//debug
+	char debug[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0};
+	tabuleiro t_debug(debug);
+	//end debug
+
 	no ** childs = node->getChilds();
 	visitedNodes[node->getData()->getHash()] = true;
 	for (int i = 0; i < 4; i++){
+		//debug
+		if (tabuleiro::comparar_tabs((tabuleiro *)node->getData(),&t_debug)){ //debug
+				throw "S'ha empilat la solució";
+				return;
+		    }
+		//end debug
 		if (childs[i] != nullptr) {
 			queue.push(childs[i]);
 		}
