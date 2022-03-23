@@ -63,7 +63,7 @@ void no::notifyChildLeaf(no * childNode)
 
 bool no::isLeaf() {
 	if(this->valid_childs) {
-		int nchildren = 0;
+		//int nchildren = 0;
 		for (size_t i = 0; i < 4; i++)
 		{
 			if(this->childs[i] != nullptr) return false;

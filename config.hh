@@ -17,7 +17,7 @@
 #define MAX_DEPTH 100
 #endif
 
-//To choose heuristics. 0->pieces distance | 1->Manhattan distance
-#define HEURISTIC 0
+//To choose heuristics. Commented->pieces distance | Not Commented->Manhattan distanc//e
+//#define HEURISTIC
 
 #endif /* CONFIG_HH_ */
