@@ -16,6 +16,7 @@ no::no(no * parent, tabuleiro *t)
 
 no::~no()
 {
+	delete this->data;
 }
 
  no ** no::getChilds() {
