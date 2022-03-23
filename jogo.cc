@@ -7,6 +7,7 @@
 #include "IDFS.hh"
 #include "BFS.hh"
 #include "GS.hh"
+#include "AStar.hh"
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
@@ -116,8 +117,12 @@ no* Jogo::search(t_algorithm algorithm)
 		}
 		break;
 	case a_GULOSA:
-			A = new GS(root,fin);
-			sol = generalSearchAlgorithm(A);
+		A = new GS(root,fin);
+		sol = generalSearchAlgorithm(A);
+		break;
+	case a_A_ESTRELA:
+		A = new AStar(root, fin);
+		sol = generalSearchAlgorithm(A);
 		break;
 	default:
 		break;
@@ -137,5 +142,5 @@ no* Jogo::search(t_algorithm algorithm)
 
 	this->statistics.push_back(run_stats);
 
-	return sol
+	return sol;
 }
