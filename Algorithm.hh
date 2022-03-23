@@ -25,7 +25,7 @@ private:
 
 public:
 	Algorithm();
-	virtual ~Algorithm();
+	virtual ~Algorithm() = default;
 
 	virtual bool is_empty() = 0;
 	virtual no * pullTop() = 0; //Pulls and sets node as visited.

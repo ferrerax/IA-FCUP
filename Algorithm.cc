@@ -11,10 +11,6 @@ Algorithm::Algorithm() {
 	//solution = nullptr;
 }
 
-Algorithm::~Algorithm() {
-	// TODO Auto-generated destructor stub
-}
-
 bool Algorithm::is_empty() { //NO EDIT
 	return true;
 }

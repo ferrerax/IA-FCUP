@@ -1,5 +1,6 @@
 #include "tabuleiro.hh"
 #include "no.hh"
+#include "Algorithm.hh"
 
 typedef enum {
     a_DFS,
@@ -20,6 +21,7 @@ private:
     tabuleiro *fin;
 
     bool frontNodeIsSolution(no * node);
+    no * generalSearchAlgorithm(Algorithm * A);
 
 public:
     Jogo(char *, char *);

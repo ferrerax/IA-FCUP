@@ -8,9 +8,9 @@
 #include "tabuleiro.hh"
 #include "IDFS.hh"
 
-IDFS::IDFS(no * node) {
+IDFS::IDFS(no * node, int limit) {
 	stck.push(node);
-	max_depth = DEFAULT_DEPTH;
+	max_depth = limit;
 }
 
 IDFS::~IDFS() {
