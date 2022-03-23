@@ -72,11 +72,45 @@ int main(int argc, char *argv[])
 			jogo = new Jogo(ini_chars, fin_chars); //new game created.
 
 			//algorithms
-			execute_algorithm(jogo, a_DFS);
-			execute_algorithm(jogo, a_BFS);
-			execute_algorithm(jogo, a_IDFS);
-			execute_algorithm(jogo, a_GULOSA);
-			execute_algorithm(jogo, a_A_ESTRELA);
+			cout << endl << "***** DFS *****" << endl << endl;
+			try {
+				execute_algorithm(jogo, a_DFS);
+			}
+			catch(string &s){
+				cout << "Algorithm Timeout" << endl << endl;
+			}
+
+			cout << endl << "***** BFS *****" << endl << endl;
+			try {
+				execute_algorithm(jogo, a_BFS);
+			}
+			catch(string &s){
+				cout << "Algorithm Timeout" << endl << endl;
+			}
+
+			cout << endl << "***** IDFS *****" << endl << endl;
+			try {
+				execute_algorithm(jogo, a_IDFS);
+			}
+			catch(string &s){
+				cout << "Algorithm Timeout" << endl << endl;
+			}
+
+			cout << endl << "***** GULOSA *****" << endl << endl;
+			try {
+				execute_algorithm(jogo, a_GULOSA);
+			}
+			catch(string &s){
+				cout << "Algorithm Timeout" << endl << endl;
+			}
+
+			cout << endl << "***** A* *****" << endl << endl;
+			try {
+				execute_algorithm(jogo, a_A_ESTRELA);
+			}
+			catch(string &s){
+				cout << "Algorithm Timeout" << endl << endl;
+
 
 			}
 			delete jogo;
@@ -86,5 +120,5 @@ int main(int argc, char *argv[])
 		newfin.close(); //close the file object.
 	}
 
-    return 0;
+	return 0;
 }

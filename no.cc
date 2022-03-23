@@ -19,6 +19,7 @@ no::~no()
 	delete this->data;
 }
 
+
  no ** no::getChilds() {
 	if (not valid_childs) {    //create it if not created.
 		valid_childs = true;
@@ -67,6 +68,10 @@ void no::notifyChildLeaf(no * childNode)
 		delete this;
 	}
 	
+}
+
+no** no::getChildsNoCreate() {
+	return this->childs;
 }
 
 bool no::isLeaf() {

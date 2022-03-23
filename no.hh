@@ -22,6 +22,7 @@ public:
     ~no();
     void trackToRoot(list<no*>& list_out);
     no ** getChilds();
+    no ** getChildsNoCreate();
 
     tabuleiro* getData() const;
 

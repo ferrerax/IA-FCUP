@@ -78,8 +78,8 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 //Recursive delete tree
 void Jogo::deleteTree(no * node) {
 	for (int i = 0; i < 4; i++){
-		if(node->getChilds()[i] != nullptr){
-			deleteTree(node->getChilds()[i]);
+		if(node->getChildsNoCreate() and node->getChildsNoCreate()[i] != nullptr){
+			deleteTree(node->getChildsNoCreate()[i]);
 		}
 	}
 	if(node != root)  //we should not delete root node.
@@ -121,5 +121,6 @@ no* Jogo::search(t_algorithm algorithm)
 		break;
 	}
 
+	deleteTree(root);
 	return sol;
 }

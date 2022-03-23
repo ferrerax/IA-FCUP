@@ -21,6 +21,6 @@
 #define HEURISTIC
 
 //Timeout for algorithms in seconds
-#define TIMEOUT 10
+#define TIMEOUT 2
 
 #endif /* CONFIG_HH_ */
