@@ -22,6 +22,7 @@ private:
 
     bool frontNodeIsSolution(no * node);
     no * generalSearchAlgorithm(Algorithm * A);
+    void deleteTree(no * node);
 
 public:
     Jogo(char *, char *);

@@ -20,4 +20,7 @@
 //To choose heuristics. Commented->pieces distance | Not Commented->Manhattan distanc//e
 #define HEURISTIC
 
+//Timeout for algorithms in seconds
+#define TIMEOUT 10
+
 #endif /* CONFIG_HH_ */

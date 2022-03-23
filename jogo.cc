@@ -1,5 +1,6 @@
 #include "jogo.hh"
-#include<queue>
+#include <queue>
+#include <chrono>
 
 #include "Algorithm.hh"
 #include "DFS.hh"
@@ -19,6 +20,7 @@ Jogo::~Jogo()
 {
     delete ini;
     delete fin;
+    deleteTree(root);
 
     //todo: Ha de recorrer tot l'arbre i borrar tots els nodes
 }
@@ -47,10 +49,15 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 
 	no * node;
 	no * solution = nullptr;
-	static int i = 0;
+	clock_t timeout = clock()/CLOCKS_PER_SEC;
+
 
 	while (!A->is_empty()){
-		i++;
+		if( (clock()/CLOCKS_PER_SEC) - timeout > TIMEOUT ){
+			delete A;
+			deleteTree(root);
+			throw "Timeout";
+		}
 		node = A->pullTop();
 		if (frontNodeIsSolution(node)){
 			solution = node;
@@ -66,6 +73,17 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 
 	delete A;
     return solution;
+}
+
+//Recursive delete tree
+void Jogo::deleteTree(no * node) {
+	for (int i = 0; i < 4; i++){
+		if(node->getChilds()[i] != nullptr){
+			deleteTree(node->getChilds()[i]);
+		}
+	}
+	if(node != root)  //we should not delete root node.
+		delete node;
 }
 
 no* Jogo::search(t_algorithm algorithm)

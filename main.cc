@@ -10,13 +10,25 @@ using namespace std;
 
 Jogo *main_jogo;
 
+void execute_algorithm(Jogo * jogo, t_algorithm alg){
+	no * solution;
+
+	if ( (solution = jogo->search(alg)) == nullptr){
+		cout << "[!] There's no solution" << endl;
+	} else {
+		list<no*> path;
+		solution->trackToRoot(path);
+		cout << "Solved! Done in " << path.size() << " steps" << endl << endl;
+		//jogo->printSolution();
+	}
+}
+
 int main(int argc, char *argv[])
 {
 
 	fstream newini;
 	fstream newfin;
 	Jogo * jogo;
-	no * solution;
 
 	newini.open(argv[1],ios::in); //open initial configurations file.
 	newfin.open(argv[2],ios::in); //open final configurations file.
@@ -28,6 +40,7 @@ int main(int argc, char *argv[])
 		char fin_chars[16];
 
 		while(getline(newini, ini) && getline(newfin, fin)){
+			cout << endl << "[+] NEW CONFIGURATION" << endl;
 			cout << "Using initial table " << ini << "\n";
 			cout << "Using final table " << fin << "\n";
 
@@ -57,13 +70,14 @@ int main(int argc, char *argv[])
 			fin_chars[it] = (char) stoi(fin);
 
 			jogo = new Jogo(ini_chars, fin_chars); //new game created.
-			if ( (solution = jogo->search(a_GULOSA)) == nullptr){
-				cout << "[!] There's no solution" << endl;
-			} else {
-				list<no*> path;
-				solution->trackToRoot(path);
-				cout << "Solved! Done in " << path.size() << endl;
-				//jogo->printSolution();
+
+			//algorithms
+			execute_algorithm(jogo, a_DFS);
+			execute_algorithm(jogo, a_BFS);
+			execute_algorithm(jogo, a_IDFS);
+			execute_algorithm(jogo, a_GULOSA);
+			execute_algorithm(jogo, a_A_ESTRELA);
+
 			}
 			delete jogo;
 
