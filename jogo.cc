@@ -3,6 +3,8 @@
 
 #include "Algorithm.hh"
 #include "DFS.hh"
+#include "BFS.hh"
+
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
     ini  = new tabuleiro(ini_nums);
@@ -51,6 +53,9 @@ no* Jogo::search(t_algorithm algorithm)
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
 		A = new DFS(node);
+		break;
+	case a_BFS:
+		A = new BFS(node);
 		break;
 	default:
 		break;

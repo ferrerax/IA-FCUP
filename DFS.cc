@@ -9,7 +9,7 @@
 #include "DFS.hh"
 
 DFS::DFS(no * node) {
-	queue.push(node);
+	stck.push(node);
 }
 
 DFS::~DFS() {
@@ -17,12 +17,12 @@ DFS::~DFS() {
 }
 
 bool DFS::is_empty() {
-	return queue.empty();
+	return stck.empty();
 }
 
 no * DFS::pullTop() {
-	no * aux = queue.top();
-	queue.pop();
+	no * aux = stck.top();
+	stck.pop();
 	return aux;
 }
 
@@ -44,7 +44,7 @@ void DFS::makeAndInsertDescendants(no * node) {
 		    }
 		//end debug
 		if (childs[i] != nullptr and !visited(childs[i])) {
-			queue.push(childs[i]);
+			stck.push(childs[i]);
 		}
 	}
 }
