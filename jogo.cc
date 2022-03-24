@@ -3,6 +3,9 @@
 #include <chrono>
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
 
 #include "Algorithm.hh"
 #include "DFS.hh"
@@ -11,6 +14,10 @@
 #include "GS.hh"
 #include "AStar.hh"
 
+void sig_handler(int signum){
+
+	throw "Timeout";
+}
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
@@ -66,15 +73,11 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 
 	no * node;
 	no * solution = nullptr;
-	clock_t timeout = clock()/CLOCKS_PER_SEC;
 
+	signal(SIGALRM,sig_handler); // Register signal handler
+	alarm(2);
 
 	while (!A->is_empty()){
-		if( (clock()/CLOCKS_PER_SEC) - timeout > TIMEOUT ){
-			delete A;
-			deleteTree(root);
-			throw "Timeout";
-		}
 		node = A->pullTop();
 		if (frontNodeIsSolution(node)){
 			solution = node;

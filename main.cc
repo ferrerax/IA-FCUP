@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_DFS);
 			}
-			catch(string &s){
+			catch(const char* s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_BFS);
 			}
-			catch(string &s){
+			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_IDFS);
 			}
-			catch(string &s){
+			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_GULOSA);
 			}
-			catch(string &s){
+			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -120,10 +120,8 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_A_ESTRELA);
 			}
-			catch(string &s){
+			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
-
-
 			}
 			delete jogo;
 
