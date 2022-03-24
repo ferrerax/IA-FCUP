@@ -33,7 +33,7 @@ void AStar::makeAndInsertDescendants(no *node)
     //visitedNodes[node->getData()->getHash()] = true;
     for (int i = 0; i < 4; i++)
     {
-        if (childs[i] != nullptr and !visited(childs[i]))
+        if (childs[i] != nullptr /*and !visited(childs[i])*/)
         {
 
             // Function g: cost to reach the node
