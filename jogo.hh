@@ -36,6 +36,9 @@ private:
     tabuleiro *ini;
     tabuleiro *fin;
 
+    clock_t c_start;
+    clock_t c_end;
+
     bool frontNodeIsSolution(no * node);
     no * generalSearchAlgorithm(Algorithm * A);
     void deleteTree(no * node);

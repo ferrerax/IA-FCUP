@@ -19,11 +19,11 @@ class Algorithm {   //Abstract
 
 protected:
 	unordered_map<string,bool> visitedNodes; //keep track of visited nodes
+	int nodesGenerated;
 
 
 private:
 	//no * solution;
-	int nodesGenerated;
 
 public:
 	Algorithm();

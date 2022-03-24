@@ -43,6 +43,7 @@ void IDFS::makeAndInsertDescendants(no * node) {
 //		    }
 		//end debug
 		if (childs[i] != nullptr and childs[i]->getDepth() < max_depth and !visited(childs[i])) {
+			nodesGenerated++;
 			stck.push(childs[i]);
 		}
 	}

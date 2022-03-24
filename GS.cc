@@ -42,6 +42,7 @@ void GS::makeAndInsertDescendants(no * node) {
 			int h = childs[i]->getData()->getManhattanDistance(fin);
 #endif
 
+			nodesGenerated++;
 			q.push(pair<int,no*>(h,childs[i]));
 		}
 	}

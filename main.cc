@@ -78,6 +78,7 @@ int main(int argc, char *argv[])
 			}
 			catch(const char* s){
 				cout << "Algorithm Timeout" << endl << endl;
+				jogo->printStatistics();
 			}
 
 			cout << endl << "Erasing tree from memory..." << endl << endl;
@@ -90,6 +91,7 @@ int main(int argc, char *argv[])
 			}
 			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
+				jogo->printStatistics();
 			}
 
 			cout << endl << "Erasing tree from memory..." << endl << endl;
@@ -102,6 +104,7 @@ int main(int argc, char *argv[])
 			}
 			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
+				jogo->printStatistics();
 			}
 
 			cout << endl << "Erasing tree from memory..." << endl << endl;
@@ -114,6 +117,7 @@ int main(int argc, char *argv[])
 			}
 			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
+				jogo->printStatistics();
 			}
 
 			cout << endl << "Erasing tree from memory..." << endl << endl;
@@ -126,6 +130,7 @@ int main(int argc, char *argv[])
 			}
 			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
+				jogo->printStatistics();
 			}
 			cout << endl << "Erasing tree from memory..." << endl << endl;
 			delete jogo;

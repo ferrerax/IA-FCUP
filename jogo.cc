@@ -28,6 +28,8 @@ Jogo::Jogo(char *ini_nums, char *fin_nums)
     ini  = new tabuleiro(ini_nums);
     fin  = new tabuleiro(fin_nums);
     root = new no(nullptr,ini);
+    c_start = 0;
+    c_end = 0;
 
 	signal(SIGALRM, sig_handler);
 }
@@ -65,7 +67,7 @@ void Jogo::printSolution(list<no *> &path)
 void Jogo::printStatistics()
 {
 	printf("| Algorithm |  Time  | Nodes Gen. | Bytes | Solution | Depth |");
-	printf("| %9s |%5s|%5s|%5s|%5s|%5s|", this->statistics.al, statistics.time, statistics.total_stored_nodes, statistics.total_stored_bytes, statistics.finished, statistics.steps);
+	printf("| %9s |%5s|%5s|%5s|%5s|%5s|", this->statistics.al, statistics.time, statistics.total_stored_nodes, statistics.total_stored_bytes, statistics.finished, statistics.steps+1);
 }
 
 bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?
@@ -85,6 +87,15 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 		if(timeOutFlag) {
 			alarm(0);
 			timeOutFlag = false;
+
+			c_end = clock();
+
+			this->statistics.time 			  	 =	TIMEOUT;
+			this->statistics.total_stored_nodes  =	A->getNodesGenerated();
+			this->statistics.total_stored_bytes  =	A->getNodesGenerated() * (sizeof(no) + sizeof(tabuleiro));
+			this->statistics.finished			 =  false;
+			this->statistics.steps               =	0;
+
 			throw "Timeout";
 		}
 		node = A->pullTop();
@@ -136,7 +147,7 @@ no* Jogo::search(t_algorithm algorithm)
 
 	this->statistics = run_stats;
 
-	clock_t c_start = clock();
+	c_start = clock();
 
 	switch(algorithm){ //First node will be added.
 	case a_DFS:
@@ -168,7 +179,7 @@ no* Jogo::search(t_algorithm algorithm)
 		break;
 	}
 
-	clock_t c_end = clock();
+	c_end = clock();
 
 	this->statistics.time 			  	 =	1000.0 * (c_end - c_start) / CLOCKS_PER_SEC;
 	this->statistics.total_stored_nodes  =	A->getNodesGenerated();

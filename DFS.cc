@@ -42,6 +42,7 @@ void DFS::makeAndInsertDescendants(no * node) {
 //		    }
 		//end debug
 		if (childs[i] != nullptr and !visited(childs[i])) {
+			nodesGenerated++;
 			stck.push(childs[i]);
 		}
 	}
