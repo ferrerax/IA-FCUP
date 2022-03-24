@@ -9,6 +9,7 @@
 
 Algorithm::Algorithm() {
 	//solution = nullptr;
+	nodesGenerated = 0;
 }
 
 bool Algorithm::is_empty() { //NO EDIT

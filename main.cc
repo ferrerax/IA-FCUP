@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
+			cout << endl << "Erasing tree from memory..." << endl << endl;
 			delete jogo;
 			jogo = new Jogo(ini_chars, fin_chars);
 
@@ -91,6 +92,7 @@ int main(int argc, char *argv[])
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
+			cout << endl << "Erasing tree from memory..." << endl << endl;
 			delete jogo;
 			jogo = new Jogo(ini_chars, fin_chars);
 
@@ -102,6 +104,7 @@ int main(int argc, char *argv[])
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
+			cout << endl << "Erasing tree from memory..." << endl << endl;
 			delete jogo;
 			jogo = new Jogo(ini_chars, fin_chars);
 
@@ -113,6 +116,7 @@ int main(int argc, char *argv[])
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
+			cout << endl << "Erasing tree from memory..." << endl << endl;
 			delete jogo;
 			jogo = new Jogo(ini_chars, fin_chars);
 
@@ -123,6 +127,7 @@ int main(int argc, char *argv[])
 			catch(const char * s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
+			cout << endl << "Erasing tree from memory..." << endl << endl;
 			delete jogo;
 
 		}

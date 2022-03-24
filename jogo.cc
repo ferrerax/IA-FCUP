@@ -38,7 +38,6 @@ Jogo::~Jogo()
     delete fin;
     deleteTree(root);
 
-    //todo: Ha de recorrer tot l'arbre i borrar tots els nodes
 }
 
 bool Jogo::is_solvable() {
@@ -66,7 +65,7 @@ void Jogo::printSolution(list<no *> &path)
 void Jogo::printStatistics()
 {
 	printf("| Algorithm |  Time  | Nodes Gen. | Bytes | Solution | Depth |");
-	//printf("| %9s |%5s|%5s|%5s|", arg0, arg1, arg2, arg3);
+	printf("| %9s |%5s|%5s|%5s|%5s|%5s|", this->statistics.al, statistics.time, statistics.total_stored_nodes, statistics.total_stored_bytes, statistics.finished, statistics.steps);
 }
 
 bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?
@@ -94,11 +93,11 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 			break;
 		}
 		A->makeAndInsertDescendants(node); //Nodes created. Also marks node as visited.
-		if (node->isLeaf())
-		{
-			node->getParent()->notifyChildLeaf(node);
-			delete node;
-		}
+//		if (node->isLeaf())
+//		{
+//			node->getParent()->notifyChildLeaf(node);
+//			delete node;
+//		}
 	}
 	alarm(0);
 
