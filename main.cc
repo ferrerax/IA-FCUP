@@ -18,14 +18,14 @@ void execute_algorithm(Jogo * jogo, t_algorithm alg){
 	} else {
 		list<no*> path;
 		solution->trackToRoot(path);
-		cout << "Solved! Done in " << path.size() << " steps" << endl << endl;
-		//jogo->printSolution();
+		cout << "Solved! Done in " << path.size()-1 << " steps" << endl << endl;
+		jogo->printSolution(path);
+		jogo->printStatistics();
 	}
 }
 
 int main(int argc, char *argv[])
 {
-
 	fstream newini;
 	fstream newfin;
 	Jogo * jogo;
@@ -80,6 +80,9 @@ int main(int argc, char *argv[])
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
+			delete jogo;
+			jogo = new Jogo(ini_chars, fin_chars);
+
 			cout << endl << "***** BFS *****" << endl << endl;
 			try {
 				execute_algorithm(jogo, a_BFS);
@@ -87,6 +90,9 @@ int main(int argc, char *argv[])
 			catch(string &s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
+
+			delete jogo;
+			jogo = new Jogo(ini_chars, fin_chars);
 
 			cout << endl << "***** IDFS *****" << endl << endl;
 			try {
@@ -96,6 +102,9 @@ int main(int argc, char *argv[])
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
+			delete jogo;
+			jogo = new Jogo(ini_chars, fin_chars);
+
 			cout << endl << "***** GULOSA *****" << endl << endl;
 			try {
 				execute_algorithm(jogo, a_GULOSA);
@@ -103,6 +112,9 @@ int main(int argc, char *argv[])
 			catch(string &s){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
+
+			delete jogo;
+			jogo = new Jogo(ini_chars, fin_chars);
 
 			cout << endl << "***** A* *****" << endl << endl;
 			try {

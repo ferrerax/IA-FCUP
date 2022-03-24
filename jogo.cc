@@ -1,6 +1,8 @@
 #include "jogo.hh"
 #include <queue>
 #include <chrono>
+#include <iostream>
+#include <string>
 
 #include "Algorithm.hh"
 #include "DFS.hh"
@@ -8,6 +10,7 @@
 #include "BFS.hh"
 #include "GS.hh"
 #include "AStar.hh"
+
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
 {
@@ -37,13 +40,26 @@ bool Jogo::is_solvable() {
                 == ( (inv_f%2 == 0) == (blanc_row_f%2 == 1) );
 }
 
+void Jogo::printSolution(list<no *> &path)
+{
+	std::cout << "	SOLUTION PATH FOUND BY ALGORITHM " << std::to_string(this->statistics.al) << std::endl;
+	for( no * n : path) {
+		n->getData()->print_formatted();
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	
+}
+
+void Jogo::printStatistics()
+{
+	printf("| Algorithm |  Time  | Nodes Gen. | Bytes | Solution | Depth |");
+	//printf("| %9s |%5s|%5s|%5s|", arg0, arg1, arg2, arg3);
+}
+
 bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?
 
 	return tabuleiro::comparar_tabs((tabuleiro *)node->getData(), fin);
-}
-
-void Jogo::printSolution() {
-
 }
 
 no* Jogo::generalSearchAlgorithm(Algorithm *A) {
@@ -96,6 +112,17 @@ no* Jogo::search(t_algorithm algorithm)
 		return nullptr;
 	}
 
+	t_stat run_stats = {
+		algorithm,
+		-1,
+		0,
+		0,
+		0,
+		-1
+	};
+
+	this->statistics = run_stats;
+
 	clock_t c_start = clock();
 
 	switch(algorithm){ //First node will be added.
@@ -130,17 +157,15 @@ no* Jogo::search(t_algorithm algorithm)
 
 	clock_t c_end = clock();
 
-	deleteTree(root);
+	this->statistics.time 			  	 =	1000.0 * (c_end - c_start) / CLOCKS_PER_SEC;
+	this->statistics.total_stored_nodes  =	A->getNodesGenerated();
+	this->statistics.total_stored_bytes  =	A->getNodesGenerated() * (sizeof(no) + sizeof(tabuleiro));
+	this->statistics.finished			 =   true;
+	this->statistics.steps               =  sol->getDepth() - 1;
 
-	// Save statistics
-	t_stat run_stats = {
-		algorithm,
-		1000.0*(c_end - c_start) / CLOCKS_PER_SEC,
-		A->getNodesGenerated(),
-		A->getNodesGenerated() * (sizeof(no) + sizeof(tabuleiro))
-	};
+	//deleteTree(root);
 
-	this->statistics.push_back(run_stats);
+	// Update statistic
 
 	return sol;
 }

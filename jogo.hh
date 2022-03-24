@@ -1,3 +1,6 @@
+#ifndef __JOGO_H__
+#define __JOGO_H__
+
 #include "tabuleiro.hh"
 #include "no.hh"
 #include "Algorithm.hh"
@@ -16,6 +19,8 @@ struct t_stat {
     double time;
     int total_stored_nodes;
     size_t total_stored_bytes;
+    bool finished;
+    int steps;
 };
 
 class Jogo
@@ -23,7 +28,8 @@ class Jogo
 private:
     /* data */
 
-    std::vector<t_stat> statistics;
+    t_stat statistics;
+    char *algorithms_names[5] = {"DFS", "BFS", "IDFS", "A*", "GULOSA"};
 
     no * root;
 
@@ -41,6 +47,11 @@ public:
     ~Jogo();
 
     bool is_solvable();
-    void printSolution();
+    void printSolution(list<no *> &path);
+    void printStatistics();
+
+
     no* search(t_algorithm a);
 };
+
+#endif
