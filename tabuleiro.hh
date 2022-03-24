@@ -27,6 +27,7 @@ private:
 public:
     tabuleiro(char * numbs);
     ~tabuleiro();
+    inline bool operator==(const tabuleiro &rhs);
 
     char consulta_n(int n);
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);

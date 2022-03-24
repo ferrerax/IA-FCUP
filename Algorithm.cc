@@ -33,7 +33,7 @@ bool Algorithm::visited(no * node) {
 	//Tornar a fer el canvi.
 	no * n = (no *)node->getParent();
 	while(n->getParent()){
-		if (node->getData()->getHash() == n->getData()->getHash()){
+		if (node->getData() == n->getData()){
 			return true;
 		}
 		n = (no *)n->getParent();

@@ -29,7 +29,7 @@ no::~no()
 		valid_childs = true;
 
 		t = this->data->left();
-		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+		if (t and (not parent or t != parent->getData()) ){
 			this->childs[0] = new no(this,t);
 		}
 		else{
@@ -37,7 +37,7 @@ no::~no()
 		}
 
 		t = this->data->top();
-		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+		if (t and (not parent or t != parent->getData()) ){
 			this->childs[1] = new no(this,t);
 		}
 		else{
@@ -45,7 +45,7 @@ no::~no()
 		}
 
 		t = this->data->bot();
-		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+		if (t and (not parent or t != parent->getData()) ){
 			this->childs[2] = new no(this,t);
 		}
 		else{
@@ -53,7 +53,7 @@ no::~no()
 		}
 
 		t = this->data->right();
-		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+		if (t and (not parent or t != parent->getData()) ){
 			this->childs[3] = new no(this,t);
 		}
 		else{
