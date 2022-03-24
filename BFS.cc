@@ -35,7 +35,7 @@ void BFS::makeAndInsertDescendants(no * node) {
 	//end debug
 
 	no ** childs = node->getChilds();
-	visitedNodes[node->getData()->getHash()] = true;
+	//visitedNodes[node->getData()->getHash()] = true;
 	for (int i = 0; i < 4; i++){
 		//debug
 //		if (childs[i] != nullptr and tabuleiro::comparar_tabs((tabuleiro *)childs[i]->getData(),&t_debug)){ //debug
@@ -43,7 +43,7 @@ void BFS::makeAndInsertDescendants(no * node) {
 //				return;
 //		    }
 		//end debug
-		if (childs[i] != nullptr and !visited(childs[i])) {
+		if (childs[i] != nullptr /*and !visited(childs[i])*/) {
 			q.push(childs[i]);
 		}
 	}

@@ -30,7 +30,7 @@ no *AStar::pullTop()
 void AStar::makeAndInsertDescendants(no *node)
 {
     no **childs = node->getChilds();
-    visitedNodes[node->getData()->getHash()] = true;
+    //visitedNodes[node->getData()->getHash()] = true;
     for (int i = 0; i < 4; i++)
     {
         if (childs[i] != nullptr and !visited(childs[i]))
