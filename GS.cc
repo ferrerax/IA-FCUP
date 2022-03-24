@@ -36,7 +36,7 @@ void GS::makeAndInsertDescendants(no * node) {
 	for (int i = 0; i < 4; i++){
 		if (childs[i] != nullptr and !visited(childs[i])) {
 
-#ifndef HEURISTIC
+#if HEURISTIC == 1
 			int h = childs[i]->getData()->getNumberPieces(fin);
 #else
 			int h = childs[i]->getData()->getManhattanDistance(fin);

@@ -14,9 +14,13 @@
 #include "GS.hh"
 #include "AStar.hh"
 
+bool volatile timeOutFlag = false;
+
 void sig_handler(int signum){
 
-	throw "Timeout";
+	// throw "Timeout";
+	timeOutFlag = true;
+
 }
 
 Jogo::Jogo(char *ini_nums, char *fin_nums)
@@ -25,6 +29,7 @@ Jogo::Jogo(char *ini_nums, char *fin_nums)
     fin  = new tabuleiro(fin_nums);
     root = new no(nullptr,ini);
 
+	signal(SIGALRM, sig_handler);
 }
 
 Jogo::~Jogo()
@@ -74,10 +79,15 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 	no * node;
 	no * solution = nullptr;
 
-	signal(SIGALRM,sig_handler); // Register signal handler
-	alarm(2);
+	 // Register signal handler
+	alarm(TIMEOUT);
 
 	while (!A->is_empty()){
+		if(timeOutFlag) {
+			alarm(0);
+			timeOutFlag = false;
+			throw "Timeout";
+		}
 		node = A->pullTop();
 		if (frontNodeIsSolution(node)){
 			solution = node;
@@ -90,6 +100,7 @@ no* Jogo::generalSearchAlgorithm(Algorithm *A) {
 			delete node;
 		}
 	}
+	alarm(0);
 
 	delete A;
     return solution;

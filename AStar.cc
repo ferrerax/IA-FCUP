@@ -41,7 +41,7 @@ void AStar::makeAndInsertDescendants(no *node)
             // Therefore, for node n, g(n) is the depth of n
             int g = childs[i]->getDepth();
 
-#ifdef HEURISTIC
+#if HEURISTIC == 1
             int h = childs[i]->getData()->getNumberPieces(fin);
 #else
             int h = childs[i]->getData()->getManhattanDistance(fin);

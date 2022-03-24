@@ -17,10 +17,11 @@
 #define MAX_DEPTH 100
 #endif
 
-//To choose heuristics. Commented->pieces distance | Not Commented->Manhattan distanc//e
-#define HEURISTIC
+//To choose heuristics. 1->pieces distance | 0->Manhattan distance
+// #define HEURISTIC 1
+#define HEURISTIC 0
 
 //Timeout for algorithms in seconds
-#define TIMEOUT 2
+#define TIMEOUT 30
 
 #endif /* CONFIG_HH_ */
