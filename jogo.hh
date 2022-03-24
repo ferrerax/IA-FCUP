@@ -29,15 +29,13 @@ private:
     /* data */
 
     t_stat statistics;
-    char *algorithms_names[5] = {"DFS", "BFS", "IDFS", "A*", "GULOSA"};
+
 
     no * root;
 
     tabuleiro *ini;
     tabuleiro *fin;
 
-    clock_t c_start;
-    clock_t c_end;
 
     bool frontNodeIsSolution(no * node);
     no * generalSearchAlgorithm(Algorithm * A);
