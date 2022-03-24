@@ -34,7 +34,7 @@ void GS::makeAndInsertDescendants(no * node) {
 	no ** childs = node->getChilds();
 	//visitedNodes[node->getData()->getHash()] = true;
 	for (int i = 0; i < 4; i++){
-		if (childs[i] != nullptr /*and !visited(childs[i])*/) {
+		if (childs[i] != nullptr and !visited(childs[i])) {
 
 #if HEURISTIC == 1
 			int h = childs[i]->getData()->getNumberPieces(fin);
