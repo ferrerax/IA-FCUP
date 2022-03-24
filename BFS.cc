@@ -43,7 +43,7 @@ void BFS::makeAndInsertDescendants(no * node) {
 //				return;
 //		    }
 		//end debug
-		if (childs[i] != nullptr /*and !visited(childs[i])*/) {
+		if (childs[i] != nullptr/*and !visited(childs[i])*/) {
 			nodesGenerated++;
 			q.push(childs[i]);
 		}

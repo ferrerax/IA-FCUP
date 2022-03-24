@@ -24,4 +24,6 @@
 //Timeout for algorithms in seconds
 #define TIMEOUT 30
 
+
+
 #endif /* CONFIG_HH_ */

@@ -7,6 +7,8 @@
 
 using std::list;
 
+
+
 class no
 {
 private:
@@ -16,6 +18,8 @@ private:
     no * childs[4]; //Child array
     bool valid_childs;
     int depth;
+
+    //debug
 
 public:
     no(no * parent, tabuleiro *t);

@@ -1,5 +1,6 @@
 #include "no.hh"
 
+
 no::no(no * parent, tabuleiro *t)
 {
     this->data   = t;
@@ -12,6 +13,7 @@ no::no(no * parent, tabuleiro *t)
     	depth = parent->depth + 1;
     }
 
+
 }
 
 no::~no()
@@ -21,13 +23,45 @@ no::~no()
 
 
  no ** no::getChilds() {
-	if (not valid_childs) {    //create it if not created.
+	 tabuleiro * t;
+
+	 if (not valid_childs) {    //create it if not created.
 		valid_childs = true;
-		this->childs[0] = this->data->left()  ? new no((no*)this,(tabuleiro *)this->data->left())  : nullptr;
-		this->childs[1] = this->data->top()   ? new no((no*)this,(tabuleiro *)this->data->top())   : nullptr;
-		this->childs[2] = this->data->bot()   ? new no((no*)this,(tabuleiro *)this->data->bot())   : nullptr;
-		this->childs[3] = this->data->right() ? new no((no*)this,(tabuleiro *)this->data->right()) : nullptr;
+
+		t = this->data->left();
+		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+			this->childs[0] = new no(this,t);
+		}
+		else{
+			this->childs[0] = nullptr;
+		}
+
+		t = this->data->top();
+		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+			this->childs[1] = new no(this,t);
+		}
+		else{
+			this->childs[1] = nullptr;
+		}
+
+		t = this->data->bot();
+		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+			this->childs[2] = new no(this,t);
+		}
+		else{
+			this->childs[2] = nullptr;
+		}
+
+		t = this->data->right();
+		if (t and (not parent or t->getHash() != parent->getData()->getHash()) ){
+			this->childs[3] = new no(this,t);
+		}
+		else{
+			this->childs[3] = nullptr;
+		}
 	}
+
+
 	return this->childs; //controlled aliasing
 }
 

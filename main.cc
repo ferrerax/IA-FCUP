@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "jogo.hh"
+#include "config.hh"
 
 using namespace std;
 
@@ -87,6 +88,7 @@ int main(int argc, char *argv[])
 
 			cout << endl << "***** BFS *****" << endl << endl;
 			try {
+				nodes = 0;
 				execute_algorithm(jogo, a_BFS);
 			}
 			catch(const char * s){
