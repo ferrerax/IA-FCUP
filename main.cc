@@ -72,19 +72,19 @@ int main(int argc, char *argv[])
 			jogo = new Jogo(ini_chars, fin_chars); //new game created.
 
 			//algorithms
-//			cout << endl << "***** DFS *****" << endl << endl;
-//			try {
-//				execute_algorithm(jogo, a_DFS);
-//			}
-//			catch(string &s){
-//				cout << "Algorithm Timeout" << endl << endl;
-//			}
+			cout << endl << "***** DFS *****" << endl << endl;
+			try {
+				execute_algorithm(jogo, a_DFS);
+			}
+			catch(const char *){
+				cout << "Algorithm Timeout" << endl << endl;
+			}
 
 			cout << endl << "***** BFS *****" << endl << endl;
 			try {
 				execute_algorithm(jogo, a_BFS);
 			}
-			catch(string &s){
+			catch(const char *){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_IDFS);
 			}
-			catch(string &s){
+			catch(const char *){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_GULOSA);
 			}
-			catch(string &s){
+			catch(const char *){
 				cout << "Algorithm Timeout" << endl << endl;
 			}
 
@@ -108,10 +108,8 @@ int main(int argc, char *argv[])
 			try {
 				execute_algorithm(jogo, a_A_ESTRELA);
 			}
-			catch(string &s){
+			catch(const char *){
 				cout << "Algorithm Timeout" << endl << endl;
-
-
 			}
 			delete jogo;
 
