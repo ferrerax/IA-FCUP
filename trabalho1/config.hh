@@ -18,8 +18,8 @@
 #endif
 
 //To choose heuristics. 1->pieces distance | 0->Manhattan distance
-// #define HEURISTIC 1
-#define HEURISTIC 0
+#define HEURISTIC 1
+//#define HEURISTIC 0
 
 //Timeout for algorithms in seconds
 #define TIMEOUT 30
