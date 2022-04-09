@@ -27,17 +27,6 @@ bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
     
 }
 
-inline bool tabuleiro::operator==(const tabuleiro& rhs){
-    for (int i = 0; i < N_NUMEROS; i++)
-    {
-        if (this->matriu[i] != rhs.matriu[i])
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 int tabuleiro::busca_blanc(){
         for(int i = 0; i < N_NUMEROS; i++){
             if (matriu[i] == 0)
