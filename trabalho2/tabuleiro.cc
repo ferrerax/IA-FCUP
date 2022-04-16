@@ -101,8 +101,8 @@ void tabuleiro::print()
     
 }
 
-bool tabuleiro::makeMove(int col) {  //changes tabuleiro
-
+bool tabuleiro::makeMove(int col, int player) {  //changes tabuleiro
+//Ha de checquejar si aquest moviment es pot fer o no: poder ja esta la columna plena.S
 }
 
 void tabuleiro::print_formatted()
