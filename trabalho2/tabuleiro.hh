@@ -30,6 +30,8 @@ public:
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
 //    int busca_blanc();
 
+    bool makeMove(int col, int player);
+
     string getHash();
 
     void print();

@@ -5,12 +5,13 @@
 
 using namespace std;
 
-tabuleiro::tabuleiro(char *numbs) {
-    memcpy(matriu, numbs, N_NUMEROS);
-}
+//tabuleiro::tabuleiro(char *numbs) {
+//    memcpy(matriu, numbs, N_NUMEROS);
+//}
 
 tabuleiro::~tabuleiro()
 {
+    memset(matriu, '-', N_NUMEROS);
     
 }
 
@@ -26,6 +27,8 @@ bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
     return true;
     
 }
+
+
 
 //int tabuleiro::busca_blanc(){
 //        for(int i = 0; i < N_NUMEROS; i++){
@@ -96,6 +99,10 @@ void tabuleiro::print()
     }
     cout << endl;
     
+}
+
+bool tabuleiro::makeMove(int col, int player) {  //changes tabuleiro
+//Ha de checquejar si aquest moviment es pot fer o no: poder ja esta la columna plena.S
 }
 
 void tabuleiro::print_formatted()
