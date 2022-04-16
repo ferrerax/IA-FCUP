@@ -37,3 +37,7 @@
 .vscode
 /Debug/
 *.pdf
+.project
+/.metadata/
+jogo
+jogo15
