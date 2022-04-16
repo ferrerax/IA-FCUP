@@ -1,4 +1,4 @@
-TARGET ?= a.out
+TARGET ?= jogo
 SRC_DIRS ?= .
 
 SRCS := $(shell find $(SRC_DIRS) -name "*.cc" -or -name "*.c" -or -name "*.s")

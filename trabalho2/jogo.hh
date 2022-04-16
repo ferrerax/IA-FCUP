@@ -2,7 +2,6 @@
 #define __JOGO_H__
 
 #include "tabuleiro.hh"
-#include "Algorithm.hh"
 #include <vector>
 
 typedef enum {
@@ -13,7 +12,7 @@ typedef enum {
 } t_player;
 
 struct t_stat {
-    t_algorithm al;
+    t_player p;
     double time;
     int total_stored_nodes;
     size_t total_stored_bytes;
@@ -29,7 +28,7 @@ private:
     t_stat statistics;
 
 
-    no * root;
+    // no * root;
 
     tabuleiro *t;
 
@@ -43,7 +42,7 @@ public:
     Jogo(t_player, t_player);
     ~Jogo();
 
-    void printSolution(list<no *> &path);
+    //void printSolution(list<no *> &path);
     void printStatistics();
 
 

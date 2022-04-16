@@ -7,12 +7,6 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "Algorithm.hh"
-#include "DFS.hh"
-#include "IDFS.hh"
-#include "BFS.hh"
-#include "GS.hh"
-#include "AStar.hh"
 
 bool volatile timeOutFlag = false;
 
@@ -38,7 +32,7 @@ Jogo::~Jogo()
 
 }
 
-void Jogo::printSolution(list<no *> &path)
+/* void Jogo::printSolution(list<no *> &path)
 {
 	std::cout << "	SOLUTION PATH FOUND BY ALGORITHM " << std::to_string(this->statistics.al) << std::endl;
 	for( no * n : path) {
@@ -47,13 +41,13 @@ void Jogo::printSolution(list<no *> &path)
 	}
 	std::cout << std::endl;
 	
-}
+} */
 
 void Jogo::printStatistics()
 {
-	printf("| Algorithm |  Time  | Nodes Gen. | Bytes | Solution | Depth |");
+	printf("| Player |  Time  | Nodes Gen. | Bytes | Solution | Depth |");
 	std::cout << std::endl;
-	std::cout << "|" << this->statistics.al << "|" << statistics.time;
+	std::cout << "|" << this->statistics.p << "|" << statistics.time;
 	std::cout << "|" << statistics.total_stored_nodes << "|" << statistics.total_stored_bytes;
 	std::cout << "|" << statistics.finished << "|" << statistics.steps+1 << std::endl;
 }

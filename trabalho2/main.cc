@@ -9,11 +9,18 @@
 
 using namespace std;
 
+void Usage()
+{
+	cout << "Usage: ./jogo player_1 player_2" << endl;
+	cout << "	Player options: User | MCTS | MiniMax | AlphaBeta" << endl;
+	exit(1);
+}
+
 int main(int argc, char *argv[])
 {
 
 	t_player opt_p1, opt_p2;
-	Jogo j;
+	Jogo *j;
 
 	if(argc < 3) {
 		Usage();
@@ -47,14 +54,8 @@ int main(int argc, char *argv[])
 
 	j = new Jogo(opt_p1, opt_p2);
 
-	
+
 	
 
 	return 0;
-}
-
-void Usage() {
-	cout << "Usage: " << string(argv[0]) << "player_1 player_2" << endl;
-	cout << "	Player options: User | MCTS | MiniMax | AlphaBeta" << endl;
-	exit(1);
 }
