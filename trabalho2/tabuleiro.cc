@@ -9,7 +9,7 @@ using namespace std;
 //    memcpy(matriu, numbs, N_NUMEROS);
 //}
 
-tabuleiro::~tabuleiro()
+tabuleiro::tabuleiro()
 {
     memset(matriu, '-', N_NUMEROS);
     
@@ -26,6 +26,10 @@ bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
     }
     return true;
     
+}
+
+int tabuleiro::checkWinner() {
+    return 0;
 }
 
 

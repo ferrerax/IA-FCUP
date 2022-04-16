@@ -8,6 +8,8 @@
 #include <signal.h>
 
 
+#include "user.hh"
+
 bool volatile timeOutFlag = false;
 
 void sig_handler(int signum){
@@ -19,7 +21,9 @@ void sig_handler(int signum){
 
 Jogo::Jogo(t_player p1, t_player p2)
 {
-    
+    t = new tabuleiro();
+	ap1 = p1;
+	ap2 = p2;
     // root = new no(nullptr,ini);
 
 	signal(SIGALRM, sig_handler);
@@ -45,11 +49,58 @@ Jogo::~Jogo()
 
 void Jogo::printStatistics()
 {
-	printf("| Player |  Time  | Nodes Gen. | Bytes | Solution | Depth |");
+	printf("| Player |  Time  | Nodes Gen. | Bytes | Depth |");
 	std::cout << std::endl;
 	std::cout << "|" << this->statistics.p << "|" << statistics.time;
 	std::cout << "|" << statistics.total_stored_nodes << "|" << statistics.total_stored_bytes;
-	std::cout << "|" << statistics.finished << "|" << statistics.steps+1 << std::endl;
+	std::cout << "|" << statistics.steps+1 << std::endl;
+}
+
+void Jogo::play() {
+	int turn = 1;
+
+	switch (this->ap1)
+	{ 
+	case p_USER:
+		p1 = new userPlayer();
+		break;
+	case p_MCTS:
+		
+		break;
+	case p_MM:
+		
+		break;
+	case p_AB:
+		
+		break;
+	default:
+		break;
+	}
+
+	switch (this->ap2)
+	{
+	case p_USER:
+		p2 = new userPlayer();
+		break;
+	case p_MCTS:
+
+		break;
+	case p_MM:
+
+		break;
+	case p_AB:
+
+		break;
+	default:
+		break;
+	}
+
+	while(!t->checkWinner()) {
+		t->print_formatted();
+		if(turn == 1) {
+
+		}
+	}
 }
 
 /* bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?

@@ -24,8 +24,7 @@ private:
 //    tabuleiro(char *nums, t_dir dir);
 
 public:
-    tabuleiro(char * numbs);
-    ~tabuleiro();
+    tabuleiro();
 
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
 //    int busca_blanc();
@@ -36,6 +35,8 @@ public:
 
     void print();
     void print_formatted();
+
+    int checkWinner();
 
 //    int get_inversions();
 
