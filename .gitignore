@@ -39,5 +39,5 @@
 *.pdf
 .project
 /.metadata/
-jogo
+**/jogo
 jogo15
