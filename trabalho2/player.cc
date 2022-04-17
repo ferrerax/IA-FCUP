@@ -12,7 +12,7 @@ Player::Player() {
 
 }
 
-Player::~Player() {
-	// TODO Auto-generated destructor stub
-}
+//Player::~Player() {
+//	// TODO Auto-generated destructor stub
+//}
 

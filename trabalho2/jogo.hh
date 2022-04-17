@@ -26,7 +26,7 @@ private:
     /* data */
     
     t_player ap1, ap2;
-    Player p1, p2;
+    Player *p1, *p2;
 
     t_stat statistics;
 

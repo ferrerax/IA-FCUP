@@ -15,7 +15,7 @@ public:
 	Player();
 	virtual ~Player() = default;
 
-	virtual int playRound(tabuleiro * t);    //returns column moved NOT changes tabulairo.
+	virtual int playRound(tabuleiro * t) = 0;    //returns column moved NOT changes tabulairo.
 
 };
 

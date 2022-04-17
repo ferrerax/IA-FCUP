@@ -9,8 +9,9 @@
 #define USER_HH_
 
 #include "tabuleiro.hh"
+#include "player.hh"
 
-class userPlayer {
+class userPlayer : public Player{
 public:
 	userPlayer();
 	virtual ~userPlayer();
