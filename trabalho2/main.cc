@@ -53,9 +53,8 @@ int main(int argc, char *argv[])
 		Usage();
 
 	j = new Jogo(opt_p1, opt_p2);
-
-
 	
+	j->play();
 
 	return 0;
 }

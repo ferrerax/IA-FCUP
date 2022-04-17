@@ -28,8 +28,8 @@ bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
     
 }
 
-int tabuleiro::checkWinner() {
-    return 0;
+bool tabuleiro::checkWinner() {  //Es una funcio que ha de mirar si al colocar la nova pessa s'ha o no guanyat el joc.
+    return false;
 }
 
 
@@ -107,6 +107,7 @@ void tabuleiro::print()
 
 bool tabuleiro::makeMove(int col, int player) {  //changes tabuleiro
 //Ha de checquejar si aquest moviment es pot fer o no: poder ja esta la columna plena.S
+	return true;
 }
 
 void tabuleiro::print_formatted()

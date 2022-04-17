@@ -22,10 +22,7 @@ void sig_handler(int signum){
 Jogo::Jogo(t_player p1, t_player p2)
 {
 
-	if ( (p1 < 0 or p1 > 3) or (p2 < 0 or p2 > 3) ) {  //bad input
-		std::cout << "[!] Bad Input. It must be a number from 0 to 3" << std::endl;
-		throw "Bad input";
-	}
+
 
     t = new tabuleiro();
 	ap1 = p1;
@@ -102,13 +99,15 @@ void Jogo::printStatistics()
 
 void Jogo::play() {
 	int turn = 1;
+	bool game_finish = false;
 
-
-	while(!t->checkWinner()) {
-		t->print_formatted();
+	while(not game_finish) {
+//		t->print_formatted();  //Aixo ho fa una altre classe
 		if(turn == 1) {
 
 		}
+
+		game_finish = t->checkWinner();
 	}
 }
 

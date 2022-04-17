@@ -36,7 +36,7 @@ public:
     void print();
     void print_formatted();
 
-    int checkWinner();
+    bool checkWinner();
 
 //    int get_inversions();
 
