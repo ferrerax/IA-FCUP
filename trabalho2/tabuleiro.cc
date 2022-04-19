@@ -266,4 +266,6 @@ int tabuleiro::calcUtility() {
 }
 
 void tabuleiro::getOptions(tabuleiro *t_array[]) {
+
+//Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
 }
