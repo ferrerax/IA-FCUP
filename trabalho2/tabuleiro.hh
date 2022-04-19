@@ -21,7 +21,8 @@ class tabuleiro
 private:
     /* data */
     char matriu[N_NUMEROS];
-//    tabuleiro(char *nums, t_dir dir);
+    int punts[4] = {0,10,50,512};  //Punctuation.
+
 
 public:
     tabuleiro();
@@ -36,7 +37,7 @@ public:
     void print();
     void print_formatted();
 
-    bool checkWinner();
+    int checkWinner();
 
 //    int get_inversions();
 

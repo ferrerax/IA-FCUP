@@ -13,6 +13,19 @@ tabuleiro::tabuleiro()
 {
     memset(matriu, '-', N_NUMEROS);
     
+    //debug
+
+    char matriu_aux[] = {
+    		'x','o','x','x','o','x','x',
+			'x','x','b','o','x','o','x',
+			'x','o','b','o','o','x','b',
+			'o','o','b','o','o','o','b',
+			'x','x','b','b','o','x','b',
+			'x','o','b','b','b','o','b'
+    };
+
+    memcpy(matriu,matriu_aux,sizeof(matriu_aux));
+
 }
 
 bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
@@ -28,8 +41,110 @@ bool tabuleiro::comparar_tabs(tabuleiro *a, tabuleiro *b)
     
 }
 
-bool tabuleiro::checkWinner() {  //Es una funcio que ha de mirar si al colocar la nova pessa s'ha o no guanyat el joc.
-    return false;
+
+
+int tabuleiro::checkWinner() {
+	int winner = 0;
+	int sum = 0;
+	int cont;
+	char token;
+
+	//Lines
+	for (int i = 0; i < N_ROW*N_COLUMN; i++){  	//recorre tota la matriu
+		token = this->matriu[i];
+		if ( (i+3)%N_COLUMN ){ 					//Estem mirant lultim segment
+			i += 3;  							//Canvi de fila
+		}
+		cont = 1;									//Contem primer token
+		for (int k = 1; k < 4; k++){			//Mirem el segment a veure que passa.
+			if(this->matriu[i+k] == token){		//Seguim amb token igual
+				cont++;
+			} else if (this->matriu[i+k] == '-') { //esta be contar espais blancs, anem be.
+				continue;
+			} else {							//En un mateix segment conviuen x i o. Cal sumar 0 al resultat.
+				cont = 0;						//Buidem el compte i sortim.
+				break;
+			}
+		}
+		if(token == 'x'){
+			sum += this->punts[cont];
+		} else {
+			sum -= this->punts[cont];
+		}
+
+	}
+
+	//Columns
+	for (int j = 0; j < N_COLUMN; j++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
+		for (int i = 0; i < N_ROW-3; i++){  	//recorre tota la matriu
+			cont = 1;
+			token = this->matriu[i*N_COLUMN+j];
+			for (int k = 0; k < 4; k++){
+				if(this->matriu[(i+k)*N_COLUMN+j] == token){		//Seguim amb token igual
+					cont++;
+				} else if (this->matriu[(i+k)*N_COLUMN+j] == '-') { //esta be contar espais blancs, anem be.
+					continue;
+				} else {							//En un mateix segment conviuen x i o. Cal sumar 0 al resultat.
+					cont = 0;						//Buidem el compte i sortim.
+					break;
+				}
+			}
+			if(token == 'x'){
+				sum += this->punts[cont];
+			} else {
+				sum -= this->punts[cont];
+			}
+
+		}
+
+	//Diagonal
+	for (int i = 0; i < N_COLUMN-3; i++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
+			for (int j = 0; j < N_ROW-3; j++){  	//recorre tota la matriu
+				cont = 1;
+				token = this->matriu[i*N_COLUMN+j];
+				for (int k = 0; k < 4; k++){
+					if(this->matriu[(i+k)*N_COLUMN+j+k] == token){		//Seguim amb token igual
+						cont++;
+					} else if (this->matriu[(i+k)*N_COLUMN+j+k] == '-') { //esta be contar espais blancs, anem be.
+						continue;
+					} else {							//En un mateix segment conviuen x i o. Cal sumar 0 al resultat.
+						cont = 0;						//Buidem el compte i sortim.
+						break;
+					}
+				}
+				if(token == 'x'){
+					sum += this->punts[cont];
+				} else {
+					sum -= this->punts[cont];
+				}
+
+			}
+
+	//Antidiagonal
+	for (int i = 0; i < N_COLUMN-3; i++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
+			for (int j = 3; j < N_ROW; j++){  	//recorre tota la matriu
+				cont = 1;
+				token = this->matriu[i*N_COLUMN+j];
+				for (int k = 0; k < 4; k++){
+					if(this->matriu[(i+k)*N_COLUMN+j-k] == token){		//Seguim amb token igual
+						cont++;
+					} else if (this->matriu[(i+k)*N_COLUMN+j-k] == '-') { //esta be contar espais blancs, anem be.
+						continue;
+					} else {							//En un mateix segment conviuen x i o. Cal sumar 0 al resultat.
+						cont = 0;						//Buidem el compte i sortim.
+						break;
+					}
+				}
+				if(token == 'x'){
+					sum += this->punts[cont];
+				} else {
+					sum -= this->punts[cont];
+				}
+
+			}
+
+
+	return winner;
 }
 
 

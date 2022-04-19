@@ -99,15 +99,15 @@ void Jogo::printStatistics()
 
 void Jogo::play() {
 	int turn = 1;
-	bool game_finish = false;
+	int winner = 0; //Recollira el guanyador, retornara 1 o dos en funcio de qui guanya.
 
-	while(not game_finish) {
+	while(not (winner = t->checkWinner()) ) {
 //		t->print_formatted();  //Aixo ho fa una altre classe
 		if(turn == 1) {
 
 		}
 
-		game_finish = t->checkWinner();
+
 	}
 }
 
