@@ -17,11 +17,11 @@ tabuleiro::tabuleiro()
 
     char matriu_aux[] = {
     		'x','o','x','x','o','x','x',
-			'x','x','b','o','x','o','x',
-			'x','o','b','o','o','x','b',
-			'o','o','b','o','o','o','b',
-			'x','x','b','b','o','x','b',
-			'x','o','b','b','b','o','b'
+			'x','x','-','o','x','o','x',
+			'x','o','-','o','o','x','-',
+			'o','o','-','o','o','o','-',
+			'x','x','-','-','o','x','-',
+			'x','o','-','-','-','o','-'
     };
 
     memcpy(matriu,matriu_aux,sizeof(matriu_aux));
@@ -51,12 +51,15 @@ int tabuleiro::checkWinner() {
 
 	//Lines
 	for (int i = 0; i < N_ROW*N_COLUMN; i++){  	//recorre tota la matriu
+
 		token = this->matriu[i];
-		if ( (i+3)%N_COLUMN ){ 					//Estem mirant lultim segment
-			i += 3;  							//Canvi de fila
-		}
-		cont = 1;									//Contem primer token
+		cont = token != '-' ? 1 : 0;									//Contem primer token
 		for (int k = 1; k < 4; k++){			//Mirem el segment a veure que passa.
+			if (token == '-' and token != this->matriu[i+k]){
+				token = this->matriu[i+k];
+			} else if (token == '-') {
+				continue;
+			}
 			if(this->matriu[i+k] == token){		//Seguim amb token igual
 				cont++;
 			} else if (this->matriu[i+k] == '-') { //esta be contar espais blancs, anem be.
@@ -72,14 +75,23 @@ int tabuleiro::checkWinner() {
 			sum -= this->punts[cont];
 		}
 
+		if ( (i+4)%N_COLUMN == 0 and i != 0){ 					//Estem mirant lultim segment
+			i += 3;  							//Canvi de fila
+		}
 	}
+
 
 	//Columns
 	for (int j = 0; j < N_COLUMN; j++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
 		for (int i = 0; i < N_ROW-3; i++){  	//recorre tota la matriu
-			cont = 1;
 			token = this->matriu[i*N_COLUMN+j];
-			for (int k = 0; k < 4; k++){
+			cont = token != '-' ? 1 : 0;									//Contem primer token
+			for (int k = 1; k < 4; k++){
+				if (token == '-' and token != this->matriu[(i+k)*N_COLUMN+j]){
+					token = this->matriu[(i+k)*N_COLUMN+j];
+				} else if (token == '-') {
+					continue;
+				}
 				if(this->matriu[(i+k)*N_COLUMN+j] == token){		//Seguim amb token igual
 					cont++;
 				} else if (this->matriu[(i+k)*N_COLUMN+j] == '-') { //esta be contar espais blancs, anem be.
@@ -97,12 +109,20 @@ int tabuleiro::checkWinner() {
 
 		}
 
+	//debug
+	//sum = 0;
+
 	//Diagonal
-	for (int i = 0; i < N_COLUMN-3; i++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
-			for (int j = 0; j < N_ROW-3; j++){  	//recorre tota la matriu
-				cont = 1;
+	for (int i = 0; i < N_ROW-3; i++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
+			for (int j = 0; j < N_COLUMN-3; j++){  	//recorre tota la matriu
 				token = this->matriu[i*N_COLUMN+j];
-				for (int k = 0; k < 4; k++){
+				cont = token != '-' ? 1 : 0;									//Contem primer token
+				for (int k = 1; k < 4; k++){
+					if (token == '-' and token != this->matriu[(i+k)*N_COLUMN+j+k]){
+						token = this->matriu[(i+k)*N_COLUMN+j+k];
+					} else if (token == '-') {
+						continue;
+					}
 					if(this->matriu[(i+k)*N_COLUMN+j+k] == token){		//Seguim amb token igual
 						cont++;
 					} else if (this->matriu[(i+k)*N_COLUMN+j+k] == '-') { //esta be contar espais blancs, anem be.
@@ -121,11 +141,16 @@ int tabuleiro::checkWinner() {
 			}
 
 	//Antidiagonal
-	for (int i = 0; i < N_COLUMN-3; i++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
-			for (int j = 3; j < N_ROW; j++){  	//recorre tota la matriu
-				cont = 1;
+	for (int i = 0; i < N_ROW-3; i++)			//Aqui ho faig mes facil. ja optimitzarem si volem, fa palot.
+			for (int j = 3; j < N_COLUMN; j++){  	//recorre tota la matriu
 				token = this->matriu[i*N_COLUMN+j];
-				for (int k = 0; k < 4; k++){
+				cont = token != '-' ? 1 : 0;									//Contem primer token
+				for (int k = 1; k < 4; k++){
+					if (token == '-' and token != this->matriu[(i+k)*N_COLUMN+j-k]){
+						token = this->matriu[(i+k)*N_COLUMN+j-k];
+					} else if (token == '-') {
+						continue;
+					}
 					if(this->matriu[(i+k)*N_COLUMN+j-k] == token){		//Seguim amb token igual
 						cont++;
 					} else if (this->matriu[(i+k)*N_COLUMN+j-k] == '-') { //esta be contar espais blancs, anem be.

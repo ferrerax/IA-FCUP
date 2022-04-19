@@ -21,7 +21,7 @@ class tabuleiro
 private:
     /* data */
     char matriu[N_NUMEROS];
-    int punts[4] = {0,10,50,512};  //Punctuation.
+    int punts[5] = {0,1,10,50,512};  //Punctuation.
 
 
 public:
