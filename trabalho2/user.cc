@@ -11,9 +11,9 @@
 using namespace std;
 
 
-userPlayer::userPlayer() {
+userPlayer::userPlayer(char token) {
 	// TODO Auto-generated constructor stub
-
+	this->token = token;
 }
 
 userPlayer::~userPlayer() {
@@ -26,7 +26,7 @@ int userPlayer::playRound(tabuleiro *t) {
 
 	cout << "[+] Current Table:" << endl << endl;
 	t->print_formatted();
-	cout << "Users move (number between 0 - " << N_COLUMN-1 << " indicating column):";
+	cout << "Users move for player " << this->token << " (number between 0 - " << N_COLUMN-1 << " indicating column):";
 	cin >> num;
 	cout << endl;
 

@@ -13,4 +13,7 @@
 #define N_COLUMN	7
 #define N_NUMEROS N_ROW*N_COLUMN
 
+#define MINIMAX_MAX_UTILITY 100000000
+#define MINIMAX_DEPTH 3
+
 #endif /* CONFIG_HH_ */

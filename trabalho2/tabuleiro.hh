@@ -23,7 +23,7 @@ private:
     char matriu[N_NUMEROS];
     int punts[5] = {0,1,10,50,512};  //Punctuation.
 
-
+    int calcUtility();
 
 
 public:
@@ -35,6 +35,8 @@ public:
     bool makeMove(int col, char player);
 
     string getHash();
+    int getUtility();
+    void getOptions(tabuleiro * t_array[]);
 
     void print();
     void print_formatted();

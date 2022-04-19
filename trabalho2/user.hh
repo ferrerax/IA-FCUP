@@ -13,7 +13,7 @@
 
 class userPlayer : public Player{
 public:
-	userPlayer();
+	userPlayer(char token);
 	virtual ~userPlayer();
 
 	int playRound(tabuleiro * t);    //returns column moved. NOT changes tabuleiro.

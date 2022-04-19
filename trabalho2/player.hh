@@ -11,6 +11,9 @@
 #include "tabuleiro.hh"
 
 class Player {  //Abstract
+
+protected:
+	char token;
 public:
 	Player();
 	virtual ~Player() = default;
