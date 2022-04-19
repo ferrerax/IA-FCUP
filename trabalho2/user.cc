@@ -26,11 +26,11 @@ int userPlayer::playRound(tabuleiro *t) {
 
 	cout << "[+] Current Table:" << endl << endl;
 	t->print_formatted();
-	cout << "Users move (number between 0 - " << N_COLUMN << " indicating column):";
+	cout << "Users move (number between 0 - " << N_COLUMN-1 << " indicating column):";
 	cin >> num;
 	cout << endl;
 
-	num = num < N_COLUMN and num > 0 ? num : -1;  //Checking user input.
+	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking user input.
 
 	return num;
 }

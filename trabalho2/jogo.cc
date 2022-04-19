@@ -97,17 +97,44 @@ void Jogo::printStatistics()
 	std::cout << "|" << statistics.steps+1 << std::endl;
 }
 
+void Jogo::round(Player * p,char token){
+	int pos;
+
+	pos = p->playRound(this->t);
+	while(pos == -1){
+		std::cout << "[!] BAD COLUMN. Column out of range" << std::endl;
+		pos = p->playRound(this->t);
+	}
+	while(not t->makeMove(pos, token)){
+		std::cout << "[!] BAD COLUMN. Column is full" << std::endl;
+	}
+}
+
 void Jogo::play() {
 	int turn = 1;
 	int winner = 0; //Recollira el guanyador, retornara 1 o dos en funcio de qui guanya.
 
-	while(not (winner = t->checkWinner()) ) {
-//		t->print_formatted();  //Aixo ho fa una altre classe
+	while(true){
 		if(turn == 1) {
-
+			t->print_formatted();  //Aixo ho fa una altre classe
 		}
 
+		//Player 1 round
+		round(p1,'x');
+		if ( (winner = t->checkWinner()) ){ //Pot millorar-se
+			break;
+		}
 
+		//Player 2 round
+		round(p2,'o');
+		if ( (winner = t->checkWinner()) ){
+			break;
+		}
+	}
+	if (winner == 1){
+		std::cout << "[+] X WON" << std::endl;
+	} else if (winner == 2){
+		std::cout << "[+] O WON" << std::endl;
 	}
 }
 

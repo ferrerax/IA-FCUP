@@ -38,6 +38,7 @@ private:
     //bool frontNodeIsSolution(no * node);
     //no * generalSearchAlgorithm(Algorithm * A);
     //void deleteTree(no * node);
+    void round(Player * p, char token);
 
 
 public:

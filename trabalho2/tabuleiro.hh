@@ -1,7 +1,7 @@
 #ifndef __TABULEIRO_H__
 #define __TABULEIRO_H__
 
-#include "tabuleiro.hh"
+//#include "tabuleiro.hh"
 
 #include <string>
 
@@ -24,13 +24,15 @@ private:
     int punts[5] = {0,1,10,50,512};  //Punctuation.
 
 
+
+
 public:
     tabuleiro();
 
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
 //    int busca_blanc();
 
-    bool makeMove(int col, int player);
+    bool makeMove(int col, char player);
 
     string getHash();
 
