@@ -36,7 +36,7 @@ public:
 
     string getHash();
     int getUtility();
-    void getOptions(tabuleiro * t_array[]);
+    void getOptions(tabuleiro * t_array[], char player);
 
     void print();
     void print_formatted();

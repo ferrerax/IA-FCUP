@@ -9,6 +9,7 @@
 
 
 #include "user.hh"
+#include "minimax.hh"
 
 bool volatile timeOutFlag = false;
 
@@ -33,13 +34,13 @@ Jogo::Jogo(t_player p1, t_player p2)
 		switch (this->ap1)
 	{ 
 	case p_USER:
-		this->p1 = new userPlayer();
+		this->p1 = new userPlayer('x');
 		break;
 	case p_MCTS:
 		
 		break;
 	case p_MM:
-		
+		this->p1 = new minimaxPlayer('x');
 		break;
 	case p_AB:
 		
@@ -51,13 +52,13 @@ Jogo::Jogo(t_player p1, t_player p2)
 	switch (this->ap2)
 	{
 	case p_USER:
-		this->p2 = new userPlayer();
+		this->p2 = new userPlayer('o');
 		break;
 	case p_MCTS:
 
 		break;
 	case p_MM:
-
+		this->p1 = new minimaxPlayer('o');
 		break;
 	case p_AB:
 

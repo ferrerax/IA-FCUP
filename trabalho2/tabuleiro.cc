@@ -265,7 +265,16 @@ int tabuleiro::calcUtility() {
 
 }
 
-void tabuleiro::getOptions(tabuleiro *t_array[]) {
+void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 
 //Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
+
+	for (int i = 0; i < N_COLUMN; i++){
+		t_array[i] = new tabuleiro();  				//Creo nou tabuleiro
+		memcpy(t_array[i],this,sizeof(tabuleiro));	//Copio el tabuleiro actual
+		if(not t_array[i]->makeMove(i, player)){	//Mirem que es pugui fer el moviment
+			delete t_array[i];						//No es pot fer el moviment aixi que buidem memoria i posem un nullet.
+			t_array[i] = nullptr;
+		}
+	}
 }

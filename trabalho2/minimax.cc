@@ -29,14 +29,14 @@ int minimaxPlayer::r_minimax(tabuleiro *t, int depth, char player) {
 	int value = is_maximizing(depth,player) ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
 
 	if (depth < MINIMAX_DEPTH){
-		t->getOptions(options); //Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
-		if (is_maximizing(depth, player)){
+		t->getOptions(options,player);
+		if (is_maximizing(depth, player)){  //mes eficient que tenir els ifs dins del for.
 			for (int i = 0; i < N_COLUMN; i++){
-				value = MAX(value,r_minimax(t, depth, player));
+				value = options[i] ? MAX(value,r_minimax(options[i], depth+1, player)) : value;
 			}
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
-				value = MIN(value,r_minimax(t, depth, player));
+				value = options[i] ? MIN(value,r_minimax(options[i], depth+1, player)) : value;
 			}
 		}
 	}
