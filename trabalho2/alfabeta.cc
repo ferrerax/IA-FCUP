@@ -42,7 +42,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 			}
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
-				if ( options[i] and (aux = MIN(value,r_alfabeta(options[i], 1, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY, true)) ) < value ){
+				if ( options[i] and (aux = MIN(value,r_alfabeta(options[i], 1, true, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) < value ){
 					value = aux;
 					best_move = i;
 					delete options[i];
@@ -66,7 +66,7 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int depth, bool maximize, int alfa,
 		if (maximize){  //mes eficient que tenir els ifs dins del for.
 			for (int i = 0; i < N_COLUMN; i++){
 				if(options[i]){
-					value = MAX(value,r_alfabeta(options[i], depth+1, alfa, beta, not maximize)); //tracto fill
+					value = MAX(value,r_alfabeta(options[i], depth+1, not maximize, alfa, beta)); //tracto fill
 					delete options[i];
 					if (value >= beta){
 						break;
@@ -78,7 +78,7 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int depth, bool maximize, int alfa,
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
 				if (options[i]){
-					value = MIN(value,r_alfabeta(options[i], depth+1, alfa, beta, not maximize)); //borro fill
+					value = MIN(value,r_alfabeta(options[i], depth+1, not maximize, alfa, beta)); //borro fill
 					delete options[i];
 					if (value <= alfa){
 						break;
