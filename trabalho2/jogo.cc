@@ -117,10 +117,10 @@ void Jogo::play() {
 	int winner = 0; //Recollira el guanyador, retornara 1 o dos en funcio de qui guanya.
 
 	while(true){
-		if(turn == 1) {
-			t->print_formatted();  //Aixo ho fa una altre classe
-		}
-
+//		if(turn == 1) {
+//			t->print_formatted();  //Aixo ho fa una altre classe
+//		}
+		std::cout << "-------- ROUND " << turn << " --------" << std::endl;
 		//Player 1 round
 		round(p1,'x');
 		if ( (winner = t->checkWinner()) ){ //Pot millorar-se
