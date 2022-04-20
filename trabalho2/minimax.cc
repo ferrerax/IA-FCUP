@@ -57,9 +57,11 @@ int minimaxPlayer::first_minimax(tabuleiro *t, char player) {
 int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
 	tabuleiro * options[N_COLUMN];
 	static int best_move;
+	int util;
 	int value = maximize ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
 
-	if (depth < MINIMAX_DEPTH){
+	util = t->getUtility();  	//Estem sempre calculant la utility i aixo es lent.
+	if (depth < MINIMAX_DEPTH and util != 512 and util != -512){
 		t->getOptions(options,maximize ? 'x' : 'o');
 		if (maximize){  //mes eficient que tenir els ifs dins del for.
 			for (int i = 0; i < N_COLUMN; i++){
@@ -68,6 +70,7 @@ int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
 					delete options[i];
 				}
 			}
+			return value;
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
 				if (options[i]){
@@ -75,10 +78,10 @@ int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
 					delete options[i];
 				}
 			}
+			return value;
 		}
 	}
 
-	int util = t->getUtility();
 
 	return util;
 
