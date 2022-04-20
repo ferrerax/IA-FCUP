@@ -67,11 +67,11 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int depth, bool maximize, int alfa,
 			for (int i = 0; i < N_COLUMN; i++){
 				if(options[i]){
 					value = MAX(value,r_alfabeta(options[i], depth+1, alfa, beta, not maximize)); //tracto fill
-					alfa = MAX(value,alfa);
 					delete options[i];
-					if (beta > alfa){
+					if (value >= beta){
 						break;
 					}
+					alfa = MAX(value,alfa);
 				}
 			}
 			return value;
@@ -79,11 +79,11 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int depth, bool maximize, int alfa,
 			for (int i = 0; i < N_COLUMN; i++){
 				if (options[i]){
 					value = MIN(value,r_alfabeta(options[i], depth+1, alfa, beta, not maximize)); //borro fill
-					beta = MIN(value,alfa);
 					delete options[i];
-					if (beta > alfa){
+					if (value <= alfa){
 						break;
 					}
+					beta = MIN(value,alfa);
 				}
 			}
 			return value;
