@@ -23,6 +23,7 @@ private:
     char matriu[N_NUMEROS];
     int punts[5] = {0,1,10,50,512};  //Punctuation.
 
+    tabuleiro(tabuleiro * t);			//Clona.
     int calcUtility();
 
 

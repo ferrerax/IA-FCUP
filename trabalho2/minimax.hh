@@ -14,7 +14,8 @@
 class minimaxPlayer : public Player{
 
 private:
-	int r_minimax(tabuleiro * t, int depth, char player);
+	int r_minimax(tabuleiro * t, int depth, bool maximize);
+	int first_minimax(tabuleiro *t, char player);
 	bool is_maximizing(int depth,char player);
 
 public:

@@ -58,7 +58,7 @@ Jogo::Jogo(t_player p1, t_player p2)
 
 		break;
 	case p_MM:
-		this->p1 = new minimaxPlayer('o');
+		this->p2 = new minimaxPlayer('o');
 		break;
 	case p_AB:
 

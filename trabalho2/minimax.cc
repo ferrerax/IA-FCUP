@@ -24,36 +24,72 @@ minimaxPlayer::~minimaxPlayer() {
 	// TODO Auto-generated destructor stub
 }
 
-int minimaxPlayer::r_minimax(tabuleiro *t, int depth, char player) {
-	tabuleiro * options[N_COLUMN];
-	int value = is_maximizing(depth,player) ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
 
-	if (depth < MINIMAX_DEPTH){
+int minimaxPlayer::first_minimax(tabuleiro *t, char player) {
+	tabuleiro * options[N_COLUMN];
+	int best_move;
+	int aux;
+	int value = player == 'x' ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
+
 		t->getOptions(options,player);
-		if (is_maximizing(depth, player)){  //mes eficient que tenir els ifs dins del for.
+		if (player == 'x'){
 			for (int i = 0; i < N_COLUMN; i++){
-				value = options[i] ? MAX(value,r_minimax(options[i], depth+1, player)) : value;
+				if ( (aux = MAX(value,r_minimax(options[i], 1, false)) ) < value ){
+					value = aux;
+					best_move = i;
+					delete options[i];
+				}
 			}
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
-				value = options[i] ? MIN(value,r_minimax(options[i], depth+1, player)) : value;
+				if ( (aux = MIN(value,r_minimax(options[i], 1, true)) ) < value ){
+					value = aux;
+					best_move = i;
+					delete options[i];
+				}
+			}
+		}
+
+	return best_move;
+
+}
+
+int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
+	tabuleiro * options[N_COLUMN];
+	static int best_move;
+	int value = maximize ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
+
+	if (depth < MINIMAX_DEPTH){
+		t->getOptions(options,maximize ? 'x' : 'o');
+		if (maximize){  //mes eficient que tenir els ifs dins del for.
+			for (int i = 0; i < N_COLUMN; i++){
+				if(options[i]){
+					value = MAX(value,r_minimax(options[i], depth+1, not maximize)); //tracto fill
+					delete options[i];
+				}
+			}
+		} else {
+			for (int i = 0; i < N_COLUMN; i++){
+				if (options[i]){
+					value = MIN(value,r_minimax(options[i], depth+1, not maximize)); //borro fill
+					delete options[i];
+				}
 			}
 		}
 	}
-	if (depth != 0){
-		delete t;
-	}
 
-	return t->getUtility();
+	int util = t->getUtility();
+
+	return util;
 
 }
 
 bool minimaxPlayer::is_maximizing(int depth, char player) {
 	bool res = false;
 	if (player == 'x'){
-		res = depth%2 != 0; //ha de maximitzar les profunditats parells
+		res = true;
 	} else {
-		res = depth%2 == 0; //ha de maximitzar les profunditats imparells
+		res = false;
 	}
 	return res;
 }
@@ -65,7 +101,7 @@ int minimaxPlayer::playRound(tabuleiro *t) {
 	cout << "[+] Current Table:" << endl << endl;
 	t->print_formatted();
 
-	num = r_minimax(t,0,this->token);
+	num = first_minimax(t,this->token);
 
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking minimax input.
 
