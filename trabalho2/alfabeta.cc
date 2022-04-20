@@ -109,8 +109,6 @@ int alfabetaPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
-	cout << "[+] Current Table:" << endl << endl;
-	t->print_formatted();
 
 	num = first_alfabeta(t,this->token);
 

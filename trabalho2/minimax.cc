@@ -101,12 +101,10 @@ int minimaxPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
-	cout << "[+] Current Table:" << endl << endl;
-	t->print_formatted();
 
 	num = first_minimax(t,this->token);
-
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking minimax input.
+
 
 	return num;
 }

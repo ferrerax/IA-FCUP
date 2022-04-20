@@ -102,6 +102,7 @@ void Jogo::printStatistics()
 void Jogo::round(Player * p,char token){
 	int pos;
 
+	std::cout << token << " moves:" << std::endl;
 	pos = p->playRound(this->t);
 	while(pos == -1){
 		std::cout << "[!] BAD COLUMN. Column out of range" << std::endl;
@@ -110,12 +111,19 @@ void Jogo::round(Player * p,char token){
 	while(not t->makeMove(pos, token)){
 		std::cout << "[!] BAD COLUMN. Column is full" << std::endl;
 	}
+
+	std::cout << "[+] Table after move:" << std::endl << std::endl;
+	t->print_formatted();
+
 }
 
 void Jogo::play() {
 	int turn = 0;
 	int winner = 0; //Recollira el guanyador, retornara 1 o dos en funcio de qui guanya.
 
+
+	std::cout << "STARTING NEW MATCH" << std::endl << std::endl;
+	t->print_formatted();
 	while(true){
 //		if(turn == 1) {
 //			t->print_formatted();  //Aixo ho fa una altre classe

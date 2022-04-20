@@ -29,6 +29,9 @@ int userPlayer::playRound(tabuleiro *t) {
 	cout << "Users move for player " << this->token << " (number between 0 - " << N_COLUMN-1 << " indicating column):";
 	cin >> num;
 	cout << endl;
+	cout << "[+] New Table:" << endl << endl;
+	t->print_formatted();
+	cout << endl;
 
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking user input.
 
