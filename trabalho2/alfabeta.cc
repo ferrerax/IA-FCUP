@@ -83,7 +83,7 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int depth, bool maximize, int alfa,
 					if (value <= alfa){
 						break;
 					}
-					beta = MIN(value,alfa);
+					beta = MIN(value,beta);
 				}
 			}
 			return value;
