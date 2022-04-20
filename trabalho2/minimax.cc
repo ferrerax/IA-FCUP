@@ -34,7 +34,7 @@ int minimaxPlayer::first_minimax(tabuleiro *t, char player) {
 		t->getOptions(options,player);
 		if (player == 'x'){
 			for (int i = 0; i < N_COLUMN; i++){
-				if ( (aux = MAX(value,r_minimax(options[i], 1, false)) ) > value ){
+				if (options[i] and (aux = MAX(value,r_minimax(options[i], 1, false)) ) > value ){
 					value = aux;
 					best_move = i;
 					delete options[i];
@@ -42,7 +42,7 @@ int minimaxPlayer::first_minimax(tabuleiro *t, char player) {
 			}
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
-				if ( (aux = MIN(value,r_minimax(options[i], 1, true)) ) < value ){
+				if (options[i] and (aux = MIN(value,r_minimax(options[i], 1, true)) ) < value ){
 					value = aux;
 					best_move = i;
 					delete options[i];
