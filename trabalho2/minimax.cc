@@ -107,6 +107,7 @@ int minimaxPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
+	this->turns_played++;
 	double c_start = clock();
 	num = first_minimax(t,this->token);
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking minimax input.
