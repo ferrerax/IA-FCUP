@@ -151,7 +151,6 @@ bool tabuleiro::makeMove(int col, char player) {  //changes tabuleiro
 		if(matriu[i*N_COLUMN+col] == '-'){
 			matriu[i*N_COLUMN+col] = player;
 			mov = i*N_COLUMN+col;
-			updateMoves();
 			return true;
 		}
 	}
@@ -361,7 +360,7 @@ std::vector<int> tabuleiro::getMoves() {
 
 	for (int col = 0; col < N_COLUMN; ++col)
 	{
-		if (matriu[(N_ROW-1) + (N_ROW*col)] == '-')
+		if (matriu[(N_ROW*col)] == '-')
 		{
 			moves.push_back(col);
 		}
@@ -379,6 +378,7 @@ void tabuleiro::updateMoves()
 {
 	if(mov / N_COLUMN == 0) {
 		moves.erase(std::remove(moves.begin(), moves.end(), mov%N_COLUMN), moves.end());
+		//std::remove(moves.begin(), moves.end(), mov % N_COLUMN);
 	}
 }
 
