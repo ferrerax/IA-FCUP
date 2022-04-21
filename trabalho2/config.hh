@@ -16,6 +16,6 @@
 #define MINIMAX_MAX_UTILITY 100000000
 #define MINIMAX_DEPTH 2
 
-#define ALFABETA_DEPTH 8
+#define ALFABETA_DEPTH 10
 
 #endif /* CONFIG_HH_ */
