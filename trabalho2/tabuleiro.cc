@@ -105,8 +105,9 @@ int tabuleiro::getUtility() {
 
 int tabuleiro::calcUtility() {
 
-	int sum, total_sum = 0;
-	int cont;
+	int sum = 0;
+	int total_sum = 0;
+	int cont = 0;
 	char token;
 
 	//Lines
