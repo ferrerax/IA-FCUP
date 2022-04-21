@@ -17,7 +17,9 @@ using namespace std;
 minimaxPlayer::minimaxPlayer(char token) {
 	// TODO Auto-generated constructor stub
 	this->token = token;
-
+	this->nodes = 0;
+	this->time = 0;
+	this->turns_played = 0;
 }
 
 minimaxPlayer::~minimaxPlayer() {

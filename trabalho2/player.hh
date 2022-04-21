@@ -14,6 +14,10 @@ class Player {  //Abstract
 
 protected:
 	char token;
+	float time;
+	int turns_played;
+	int nodes;
+
 public:
 	Player();
 	virtual ~Player() = default;
