@@ -64,6 +64,70 @@ int tabuleiro::checkWinner() {
 	return winner;
 }
 
+bool tabuleiro::lastMovementWon(char lastPlayer)
+{
+
+	int last_col = this->mov % N_COLUMN;
+	int last_row = this->mov / N_COLUMN;
+
+	// X X X X
+	int left = 0, right = 0;
+	for (int col = last_col - 1; col >= 0 && matriu[last_row*N_COLUMN + col] == lastPlayer; --col)
+		left++;
+	for (int col = last_col + 1; col < N_COLUMN && matriu[last_row*N_COLUMN + col] == lastPlayer; ++col)
+		right++;
+	if (left + 1 + right >= 4)
+	{
+		return true;
+	}
+
+	// X
+	// X
+	// X
+	// X
+	int up = 0, down = 0;
+	for (int row = last_row - 1; row >= 0 && matriu[row*N_COLUMN + last_col] == lastPlayer; --row)
+		up++;
+	for (int row = last_row + 1; row < N_ROW && matriu[row*N_COLUMN + last_col] == lastPlayer; ++row)
+		down++;
+	if (up + 1 + down >= 4)
+	{
+		return true;
+	}
+
+	// X
+	//  X
+	//   X
+	//    X
+	up = 0;
+	down = 0;
+	for (int row = last_row - 1, col = last_col - 1; row >= 0 && col >= 0 && matriu[row*N_COLUMN + col] == lastPlayer; --row, --col)
+		up++;
+	for (int row = last_row + 1, col = last_col + 1; row < N_ROW && col < N_COLUMN && matriu[row*N_COLUMN + col] == lastPlayer; ++row, ++col)
+		down++;
+	if (up + 1 + down >= 4)
+	{
+		return true;
+	}
+
+	//    X
+	//   X
+	//  X
+	// X
+	up = 0;
+	down = 0;
+	for (int row = last_row + 1, col = last_col - 1; row < N_ROW && col >= 0 && matriu[row*N_COLUMN + col] == lastPlayer; ++row, --col)
+		up++;
+	for (int row = last_row - 1, col = last_col + 1; row >= 0 && col < N_COLUMN && matriu[row*N_COLUMN + col] == lastPlayer; --row, ++col)
+		down++;
+	if (up + 1 + down >= 4)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 
 
 string tabuleiro::getHash() {
@@ -86,11 +150,12 @@ bool tabuleiro::makeMove(int col, char player) {  //changes tabuleiro
 		if(matriu[i*N_COLUMN+col] == '-'){
 			matriu[i*N_COLUMN+col] = player;
 			mov = i*N_COLUMN+col;
+			updateMoves();
 			return true;
 		}
 	}
-	moves = getMoves();
-	return false;   //Movement coudln't be done.
+	
+	 return false;   //Movement coudln't be done.
 }
 
 void tabuleiro::print_formatted()
@@ -309,10 +374,17 @@ int tabuleiro::getNumberMoves()
 	return moves.size();
 }
 
+void tabuleiro::updateMoves()
+{
+	if(mov / N_COLUMN == 0) {
+		moves.erase(std::remove(moves.begin(), moves.end(), mov%N_COLUMN), moves.end());
+	}
+}
+
 int tabuleiro::simulateMove()
 {
-	std::uniform_int_distribution<int> dist(0, moves.size() - 1);
-	return moves[dist(*randomEng)];
+	//std::uniform_int_distribution<int> dist(0, moves.size() - 1);
+	return moves[rand() % moves.size()];
 }
 
 tabuleiro::tabuleiro(tabuleiro * t) {

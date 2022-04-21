@@ -1,5 +1,7 @@
 #include "mcts.hh"
 
+#include <iostream>
+
 MCTSPlayer::MCTSPlayer(char token)
 {
     this->token = token;
@@ -18,8 +20,13 @@ int MCTSPlayer::search(tabuleiro *t, int iterations)
 
     for (int i = 0; i < iterations; ++i)
     {
+        #ifdef DEBUG
+        std::cout << "ITERATION: " << i << std::endl; 
+        #endif
         doIteration(t, rootNode);
-
+        #ifdef DEBUG
+        std::cout << std::endl << std::endl << std::endl;
+        #endif
     }
 
     int score = 0, move = -1;
@@ -54,18 +61,35 @@ void MCTSPlayer::doIteration(tabuleiro *rootState, TreeNode *root)
     char lastPlayer = node->getPlayerMoved();
 
     int i = 0;
-    while (state->getNumberMoves() != 0 && abs(state->getUtility()) != 512 && i < 20)
+    while (state->getNumberMoves() != 0 && !state->lastMovementWon(lastPlayer))
     {
-        
-        state->makeMove(state->simulateMove(), invertPlayer(lastPlayer));
+        int sim = state->simulateMove();
+        state->makeMove(sim, invertPlayer(lastPlayer));
         lastPlayer = invertPlayer(lastPlayer);
-        i++;
+        ++i;
+
+        #ifdef DEBUG
+        std::cout << "Simulation step " << i << "; Simulated move: " << sim << std::endl;
+        state->print_formatted();
+        std::cout << "Remaining possible moves: " << std::endl;
+        for (size_t i = 0; i < state->getMoves().size(); i++)
+        {
+           std::cout << state->getMoves()[i] << " ";
+        }
+        
+        std::cout << std::endl;
+        #endif
     }
+
+    int utility = state->getUtility();
+    #ifdef DEBUG
+    std::cout << "Utilitty of simulation: " << utility << std::endl;
+    #endif
 
     // Backpropagate
     while (node != nullptr)
     {
-        node->update(state->getUtility());
+        node->update(utility);
         node = node->getParent();
     }
 }
@@ -76,7 +100,7 @@ TreeNode *MCTSPlayer::select(std::vector<TreeNode *> *children)
     double cValue = 0;
     for (size_t i = 0; i < (*children).size(); i++)
     {
-        double v = (*children)[i]->calcUCB1Value();
+        double v = (*children)[i]->calcUCB1Value(token);
          if (v > cValue)
         {
             nw = (*children)[i];
