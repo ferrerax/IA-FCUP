@@ -33,7 +33,7 @@ class TreeNode {
         char getPlayerMoved();
         int getScore();
 
-        double calcUCB1Value();
+        double calcUCB1Value(char p);
         void update(double result);
         int selectUntriedMove();
         TreeNode *addChild(int move, tabuleiro *state, char player);

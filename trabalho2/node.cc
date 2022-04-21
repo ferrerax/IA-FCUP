@@ -34,11 +34,12 @@ int TreeNode::getScore()
     return score;
 }
 
-double TreeNode::calcUCB1Value()
+double TreeNode::calcUCB1Value(char p)
 {
     if(parent == nullptr) throw "calculant UCT del root";
     int nChildren = this->childNodes.size() > 0 ? this->childNodes.size() : 1;
-    return (score / nChildren) + constant * sqrt((2 * log(parent->visits)) / visits);
+    return p == 'x' ? (score / nChildren) + constant * sqrt((2 * log(parent->visits)) / visits)
+                    : (score / nChildren) - constant * sqrt((2 * log(parent->visits)) / visits);
 }
 
 void TreeNode::update(double result)

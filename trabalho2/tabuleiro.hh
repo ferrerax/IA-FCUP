@@ -51,6 +51,7 @@ public:
     int getMov();  //Obtenir el moviment que ha creat aquest tab.
     std::vector<int> getMoves();
     int getNumberMoves();
+    void updateMoves();
     int simulateMove();
 
         void
@@ -58,6 +59,7 @@ public:
     void print_formatted();
 
     int checkWinner();
+    bool lastMovementWon(char lastPlayer); // Funcio simplificada per trobar si s'ha acabat la partida a partir de l'ultim moviment nomes
 
 //    int get_inversions();
 
