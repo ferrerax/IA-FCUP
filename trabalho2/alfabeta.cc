@@ -71,7 +71,7 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int util, int depth, bool maximize,
 	int value = maximize ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
 
 	if (depth < ALFABETA_DEPTH and util != 512 and util != -512){
-		if (maximize){  //mes eficient que tenir els ifs dins del for.
+		if (maximize){
 			t->getOptionsMapMax(max_map,maximize ? 'x' : 'o');
 			auto iter = max_map.begin();
 			while(iter != max_map.end()){
@@ -100,8 +100,6 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int util, int depth, bool maximize,
 			return value;
 		}
 	}
-
-
 	return util;
 
 }

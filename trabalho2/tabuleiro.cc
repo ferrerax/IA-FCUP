@@ -105,7 +105,8 @@ int tabuleiro::getUtility() {
 
 int tabuleiro::calcUtility() {
 
-	int sum, total_sum = 0;
+	int sum = 0;
+	int total_sum = 0;
 	int cont;
 	char token;
 
@@ -289,10 +290,11 @@ void tabuleiro::getOptionsMapMax(
 
 	for (int i = 0; i < N_COLUMN; i++){
 		aux = new tabuleiro(this);
-		if(not aux->makeMove(i, player)){
+		if(aux->makeMove(i, player)){
+			m[aux->getUtility()] = aux;
+		} else {
 			delete aux;
 		}
-		m[aux->getUtility()] = aux;
 	}
 }
 
@@ -302,9 +304,10 @@ void tabuleiro::getOptionsMapMin(std::map<int, tabuleiro*> &m, char player) {
 
 	for (int i = 0; i < N_COLUMN; i++){
 		aux = new tabuleiro(this);
-		if(not aux->makeMove(i, player)){
+		if(aux->makeMove(i, player)){
+			m[aux->getUtility()] = aux;
+		} else {
 			delete aux;
 		}
-		m[aux->getUtility()] = aux;
 	}
 }
