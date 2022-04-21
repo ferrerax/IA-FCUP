@@ -93,11 +93,15 @@ Jogo::~Jogo()
 
 void Jogo::printStatistics()
 {
-	printf("| Player |  Time  | Nodes Gen. | Bytes | Depth |");
+	printf("| Player |  Time  | Nodes Gen. |");
 	std::cout << std::endl;
-	std::cout << "|" << this->statistics.p << "|" << statistics.time;
-	std::cout << "|" << statistics.total_stored_nodes << "|" << statistics.total_stored_bytes;
-	std::cout << "|" << statistics.steps+1 << std::endl;
+	std::cout << "|" << "Player 1" << "|" << p1->getMeanTime();
+	std::cout << "|" << p1->getMeanNodes() << "|" << std::endl << std::endl;
+
+	printf("| Player |  Time  | Nodes Gen. |");
+	std::cout << std::endl;
+	std::cout << "|" << "Player2" << "|" << p2->getMeanTime();
+	std::cout << "|" << p2->getMeanNodes() << "|" << std::endl << std::endl;
 }
 
 void Jogo::round(Player * p,char token){
@@ -148,6 +152,8 @@ void Jogo::play() {
 	} else if (winner == 2){
 		std::cout << "[+] O WON" << std::endl;
 	}
+
+	printStatistics();
 }
 
 /* bool Jogo::frontNodeIsSolution(no * node) { //El node que se'ns mostra és el resultat?

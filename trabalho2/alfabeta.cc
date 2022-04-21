@@ -41,6 +41,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		t->getOptionsMapMax(max_map,player);
 		auto iter = max_map.begin();
 		while(iter != max_map.end()){
+			this->nodes++;
 			if ( (aux = MAX(value,r_alfabeta(iter->second, iter->first, 1, false, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) > value ){
 				value = aux;
 				best_move = iter->second->getMov()%N_COLUMN;
@@ -52,6 +53,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		t->getOptionsMapMin(min_map,player);
 		auto iter = min_map.begin();
 		while(iter != min_map.end()){
+			this->nodes++;
 			if ( (aux = MIN(value,r_alfabeta(iter->second, iter->first, 1, true, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) < value ){
 				value = aux;
 				best_move = iter->second->getMov()%N_COLUMN;
@@ -76,6 +78,7 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int util, int depth, bool maximize,
 			t->getOptionsMapMax(max_map,maximize ? 'x' : 'o');
 			auto iter = max_map.begin();
 			while(iter != max_map.end()){
+				this->nodes++;
 				value = MAX(value,r_alfabeta(iter->second, iter->first, depth+1, not maximize, alfa, beta)); //tracto fill
 				delete iter->second;
 				if (value >= beta){
@@ -90,6 +93,7 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int util, int depth, bool maximize,
 			t->getOptionsMapMin(min_map,maximize ? 'x' : 'o');
 			auto iter = min_map.begin();
 			while(iter != min_map.end()){
+				this->nodes++;
 				value = MIN(value,r_alfabeta(iter->second, iter->first, depth+1, not maximize, alfa, beta));
 				delete iter->second;
 				if (value <= alfa){
@@ -119,6 +123,7 @@ int alfabetaPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
+	this->turns_played++;
 	double c_start = clock();
 	num = first_alfabeta(t,this->token);
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking alfabeta input.
