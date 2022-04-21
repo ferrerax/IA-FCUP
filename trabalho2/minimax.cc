@@ -17,7 +17,9 @@ using namespace std;
 minimaxPlayer::minimaxPlayer(char token) {
 	// TODO Auto-generated constructor stub
 	this->token = token;
-
+	this->nodes = 0;
+	this->time = 0;
+	this->turns_played = 0;
 }
 
 minimaxPlayer::~minimaxPlayer() {
@@ -35,6 +37,7 @@ int minimaxPlayer::first_minimax(tabuleiro *t, char player) {
 		if (player == 'x'){
 			for (int i = 0; i < N_COLUMN; i++){
 				if (options[i] and (aux = MAX(value,r_minimax(options[i], 1, false)) ) > value ){
+					this->nodes++;
 					value = aux;
 					best_move = i;
 					delete options[i];
@@ -43,6 +46,7 @@ int minimaxPlayer::first_minimax(tabuleiro *t, char player) {
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
 				if (options[i] and (aux = MIN(value,r_minimax(options[i], 1, true)) ) < value ){
+					this->nodes++;
 					value = aux;
 					best_move = i;
 					delete options[i];
@@ -66,6 +70,7 @@ int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
 		if (maximize){  //mes eficient que tenir els ifs dins del for.
 			for (int i = 0; i < N_COLUMN; i++){
 				if(options[i]){
+					this->nodes++;
 					value = MAX(value,r_minimax(options[i], depth+1, not maximize)); //tracto fill
 					delete options[i];
 				}
@@ -74,6 +79,7 @@ int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
 		} else {
 			for (int i = 0; i < N_COLUMN; i++){
 				if (options[i]){
+					this->nodes++;
 					value = MIN(value,r_minimax(options[i], depth+1, not maximize)); //borro fill
 					delete options[i];
 				}
@@ -87,23 +93,24 @@ int minimaxPlayer::r_minimax(tabuleiro *t, int depth, bool maximize) {
 
 }
 
-bool minimaxPlayer::is_maximizing(int depth, char player) {
-	bool res = false;
-	if (player == 'x'){
-		res = true;
-	} else {
-		res = false;
-	}
-	return res;
-}
+//bool minimaxPlayer::is_maximizing(int depth, char player) {
+//	bool res = false;
+//	if (player == 'x'){
+//		res = true;
+//	} else {
+//		res = false;
+//	}
+//	return res;
+//}
 
 int minimaxPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
-
+	double c_start = clock();
 	num = first_minimax(t,this->token);
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking minimax input.
+	this->time += 1000.0 * (clock() - c_start)/CLOCKS_PER_SEC;
 
 
 	return num;

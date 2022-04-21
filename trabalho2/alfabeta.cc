@@ -19,6 +19,9 @@ using namespace std;
 alfabetaPlayer::alfabetaPlayer(char token) {
 	// TODO Auto-generated constructor stub
 	this->token = token;
+	this->nodes = 0;
+	this->time = 0;
+	this->turns_played = 0;
 
 }
 
@@ -116,8 +119,10 @@ int alfabetaPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
+	double c_start = clock();
 	num = first_alfabeta(t,this->token);
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking alfabeta input.
+	this->time += 1000.0 * (clock() - c_start)/CLOCKS_PER_SEC;
 
 	return num;
 }

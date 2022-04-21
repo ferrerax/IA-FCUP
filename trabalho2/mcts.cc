@@ -1,10 +1,14 @@
 #include "mcts.hh"
 
 #include <iostream>
+#include <algorithm>
 
 MCTSPlayer::MCTSPlayer(char token)
 {
     this->token = token;
+	this->nodes = 0;
+	this->time = 0;
+	this->turns_played = 0;
 }
 
 int MCTSPlayer::playRound(tabuleiro *t)

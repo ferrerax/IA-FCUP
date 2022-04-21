@@ -1,4 +1,5 @@
 #include "node.hh"
+#include <bits/stdc++.h>
 
 TreeNode::TreeNode(int move, TreeNode *parent, tabuleiro *state, double constant, char playerMoved) 
     : score(0), visits(0), parent(parent), state(state), move(move), constant(constant), playerMoved(playerMoved)
@@ -57,7 +58,7 @@ int TreeNode::selectUntriedMove()
 TreeNode* TreeNode::addChild(int move, tabuleiro *state, char player)
 {
     TreeNode * n = new TreeNode(move, this, state, constant, player);
-    untriedMoves.erase(remove(untriedMoves.begin(), untriedMoves.end(), move), untriedMoves.end());
+    untriedMoves.erase(std::remove(untriedMoves.begin(), untriedMoves.end(), move), untriedMoves.end());
     childNodes.push_back(n);
     return n;
 }
