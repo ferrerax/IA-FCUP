@@ -16,6 +16,13 @@ char Player::opponentToken() {
 	return token == 'x' ? 'o' : 'x';
 }
 
+float Player::getMeanTime() {
+	return this->time/(double)this->turns_played;
+}
+
+int Player::getMeanNodes() {
+	return this->nodes/this->turns_played;
+}
 //Player::~Player() {
 //	// TODO Auto-generated destructor stub
 //}

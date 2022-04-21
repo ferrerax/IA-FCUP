@@ -119,8 +119,10 @@ int alfabetaPlayer::playRound(tabuleiro *t) {
 
 	int num; //error
 
+	double c_start = clock();
 	num = first_alfabeta(t,this->token);
 	num = num < N_COLUMN and num >= 0 ? num : -1;  //Checking alfabeta input.
+	this->time += 1000.0 * (clock() - c_start)/CLOCKS_PER_SEC;
 
 	return num;
 }

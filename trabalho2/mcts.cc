@@ -1,6 +1,7 @@
 #include "mcts.hh"
 
 #include <iostream>
+#include <algorithm>
 
 MCTSPlayer::MCTSPlayer(char token)
 {

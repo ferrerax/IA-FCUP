@@ -14,7 +14,7 @@ class Player {  //Abstract
 
 protected:
 	char token;
-	float time;
+	double time;
 	int turns_played;
 	int nodes;
 
@@ -24,6 +24,10 @@ public:
 
 	virtual int playRound(tabuleiro * t) = 0;    //returns column moved NOT changes tabulairo.
 	char opponentToken();
+
+	float getMeanTime();
+	int getMeanNodes();
+
 };
 
 #endif /* PLAYER_HH_ */
