@@ -12,6 +12,10 @@ Player::Player() {
 
 }
 
+char Player::opponentToken() {
+	return token == 'x' ? 'o' : 'x';
+}
+
 //Player::~Player() {
 //	// TODO Auto-generated destructor stub
 //}

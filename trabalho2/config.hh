@@ -18,4 +18,6 @@
 
 #define ALFABETA_DEPTH 7
 
+#define MCTS_ITERATIONS 10000
+
 #endif /* CONFIG_HH_ */

@@ -3,6 +3,8 @@
 #include<string.h>
 #include <cmath>
 
+#include <vector>
+
 using namespace std;
 
 //tabuleiro::tabuleiro(char *numbs) {
@@ -26,6 +28,11 @@ tabuleiro::tabuleiro()
 //    };
 //
 //    memcpy(matriu,matriu_aux,sizeof(matriu_aux));
+
+	std::random_device rndDevice;
+	randomEng = new std::mt19937(rndDevice());
+
+	moves = getMoves();
 
 }
 
@@ -82,6 +89,7 @@ bool tabuleiro::makeMove(int col, char player) {  //changes tabuleiro
 			return true;
 		}
 	}
+	moves = getMoves();
 	return false;   //Movement coudln't be done.
 }
 
@@ -281,8 +289,38 @@ void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 	}
 }
 
+std::vector<int> tabuleiro::getMoves() {
+	std::vector<int> moves;
+	moves.reserve(N_COLUMN);
+
+	for (int col = 0; col < N_COLUMN; ++col)
+	{
+		if (matriu[(N_ROW-1) + (N_ROW*col)] == '-')
+		{
+			moves.push_back(col);
+		}
+	}
+
+	return moves;
+}
+
+int tabuleiro::getNumberMoves()
+{
+	return moves.size();
+}
+
+int tabuleiro::simulateMove()
+{
+	std::uniform_int_distribution<int> dist(0, moves.size() - 1);
+	return moves[dist(*randomEng)];
+}
+
 tabuleiro::tabuleiro(tabuleiro * t) {
 	memcpy(matriu,t->matriu,sizeof(matriu));
+	moves = t->getMoves();
+
+	std::random_device rndDevice;
+	randomEng = new std::mt19937(rndDevice());
 	mov = 0;
 }
 

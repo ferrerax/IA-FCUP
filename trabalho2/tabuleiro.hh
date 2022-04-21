@@ -5,6 +5,8 @@
 
 #include <string>
 #include <map>
+#include <vector>
+#include <random>
 
 #include "config.hh"
 
@@ -26,12 +28,15 @@ private:
     int mov;
     int punts[5] = {0,1,10,50,512};  //Punctuation.
 
-    tabuleiro(tabuleiro * t);			//Clona.
+    std::vector<int> moves;
+    std::mt19937 *randomEng;
+
     int calcUtility();
 
 
 public:
     tabuleiro();
+    tabuleiro(tabuleiro *t); // Clona.
 
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
 //    int busca_blanc();
@@ -44,8 +49,12 @@ public:
     void getOptionsMapMax(std::multimap<int,tabuleiro *,std::greater<int>> &m, char player);
     void getOptionsMapMin(std::multimap<int,tabuleiro *> &m, char player);
     int getMov();  //Obtenir el moviment que ha creat aquest tab.
+    std::vector<int> getMoves();
+    int getNumberMoves();
+    int simulateMove();
 
-    void print();
+        void
+        print();
     void print_formatted();
 
     int checkWinner();
