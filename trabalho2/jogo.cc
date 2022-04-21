@@ -10,6 +10,7 @@
 
 #include "user.hh"
 #include "minimax.hh"
+#include "mcts.hh"
 
 bool volatile timeOutFlag = false;
 
@@ -37,7 +38,7 @@ Jogo::Jogo(t_player p1, t_player p2)
 		this->p1 = new userPlayer('x');
 		break;
 	case p_MCTS:
-		
+		this->p1 = new MCTSPlayer('x');
 		break;
 	case p_MM:
 		this->p1 = new minimaxPlayer('x');
@@ -55,7 +56,7 @@ Jogo::Jogo(t_player p1, t_player p2)
 		this->p2 = new userPlayer('o');
 		break;
 	case p_MCTS:
-
+		this->p2 = new MCTSPlayer('o');
 		break;
 	case p_MM:
 		this->p2 = new minimaxPlayer('o');

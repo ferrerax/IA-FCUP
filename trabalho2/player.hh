@@ -19,7 +19,7 @@ public:
 	virtual ~Player() = default;
 
 	virtual int playRound(tabuleiro * t) = 0;    //returns column moved NOT changes tabulairo.
-
+	char opponentToken();
 };
 
 #endif /* PLAYER_HH_ */

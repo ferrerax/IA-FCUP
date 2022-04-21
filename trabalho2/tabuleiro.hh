@@ -4,6 +4,8 @@
 //#include "tabuleiro.hh"
 
 #include <string>
+#include <vector>
+#include <random>
 
 #include "config.hh"
 
@@ -23,12 +25,15 @@ private:
     char matriu[N_NUMEROS];
     int punts[5] = {0,1,10,50,512};  //Punctuation.
 
-    tabuleiro(tabuleiro * t);			//Clona.
+    std::vector<int> moves;
+    std::mt19937 *randomEng;
+
     int calcUtility();
 
 
 public:
     tabuleiro();
+    tabuleiro(tabuleiro *t); // Clona.
 
     static bool comparar_tabs(tabuleiro *a, tabuleiro *b);
 //    int busca_blanc();
@@ -38,8 +43,12 @@ public:
     string getHash();
     int getUtility();
     void getOptions(tabuleiro * t_array[], char player);
+    std::vector<int> getMoves();
+    int getNumberMoves();
+    int simulateMove();
 
-    void print();
+        void
+        print();
     void print_formatted();
 
     int checkWinner();
