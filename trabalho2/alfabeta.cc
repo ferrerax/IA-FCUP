@@ -40,7 +40,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		while(iter != max_map.end()){
 			if ( (aux = MAX(value,r_alfabeta(iter->second, iter->first, 1, false, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) > value ){
 				value = aux;
-				best_move = iter->second->getMov();
+				best_move = iter->second->getMov()%N_COLUMN;
 				delete iter->second;
 			}
 			iter++;
@@ -51,7 +51,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		while(iter != min_map.end()){
 			if ( (aux = MIN(value,r_alfabeta(iter->second, iter->first, 1, true, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) < value ){
 				value = aux;
-				best_move = iter->second->getMov();
+				best_move = iter->second->getMov()%N_COLUMN;
 				delete iter->second;
 			}
 			iter++;

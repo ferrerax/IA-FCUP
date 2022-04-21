@@ -78,6 +78,7 @@ bool tabuleiro::makeMove(int col, char player) {  //changes tabuleiro
 	for (int i = N_ROW - 1; i >= 0; i--){
 		if(matriu[i*N_COLUMN+col] == '-'){
 			matriu[i*N_COLUMN+col] = player;
+			mov = i*N_COLUMN+col;
 			return true;
 		}
 	}
@@ -291,7 +292,6 @@ void tabuleiro::getOptionsMapMax(std::multimap<int, tabuleiro*, std::greater<int
 
 	for (int i = 0; i < N_COLUMN; i++){
 		aux = new tabuleiro(this);
-		aux->mov = i;
 		if(aux->makeMove(i, player)){
 			m.insert(make_pair(aux->getUtility(),aux));
 		} else {
