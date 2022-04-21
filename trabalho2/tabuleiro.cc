@@ -12,6 +12,7 @@ using namespace std;
 tabuleiro::tabuleiro()
 {
     memset(matriu, '-', N_NUMEROS);
+    mov = 0;
     
     //debug
 
@@ -268,7 +269,7 @@ int tabuleiro::calcUtility() {
 
 void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 
-//Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
+	//Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
 
 	for (int i = 0; i < N_COLUMN; i++){
 		t_array[i] = new tabuleiro(this);  			//Creo nou tabuleiro
@@ -281,4 +282,39 @@ void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 
 tabuleiro::tabuleiro(tabuleiro * t) {
 	memcpy(matriu,t->matriu,sizeof(matriu));
+	mov = 0;
+}
+
+void tabuleiro::getOptionsMapMax(std::multimap<int, tabuleiro*, std::greater<int> > &m, char player) {
+
+	tabuleiro * aux;
+
+	for (int i = 0; i < N_COLUMN; i++){
+		aux = new tabuleiro(this);
+		aux->mov = i;
+		if(aux->makeMove(i, player)){
+			m.insert(make_pair(aux->getUtility(),aux));
+		} else {
+			delete aux;
+		}
+	}
+}
+
+void tabuleiro::getOptionsMapMin(std::multimap<int, tabuleiro*> &m, char player) {
+
+	tabuleiro * aux;
+
+	for (int i = 0; i < N_COLUMN; i++){
+		aux = new tabuleiro(this);
+		aux->mov = i;
+		if(aux->makeMove(i, player)){
+			m.insert(make_pair(aux->getUtility(),aux));
+		} else {
+			delete aux;
+		}
+	}
+}
+
+int tabuleiro::getMov() {
+	return this->mov;
 }
