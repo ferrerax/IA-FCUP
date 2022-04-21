@@ -4,8 +4,10 @@
 //#include "tabuleiro.hh"
 
 #include <string>
+#include <map>
 
 #include "config.hh"
+
 
 using std::string;
 
@@ -38,6 +40,8 @@ public:
     string getHash();
     int getUtility();
     void getOptions(tabuleiro * t_array[], char player);
+    void getOptionsMapMax(std::map<int,tabuleiro *,std::greater<int>> &m, char player);
+    void getOptionsMapMin(std::map<int,tabuleiro *> &m, char player);
 
     void print();
     void print_formatted();

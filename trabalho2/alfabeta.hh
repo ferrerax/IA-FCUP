@@ -14,7 +14,7 @@
 class alfabetaPlayer : public Player{
 
 private:
-	int r_alfabeta(tabuleiro * t, int depth, bool maximize, int alfa, int beta);
+	int r_alfabeta(tabuleiro * t, int util, int depth, bool maximize, int alfa, int beta);
 	int first_alfabeta(tabuleiro *t, char player);
 	bool is_maximizing(int depth,char player);
 

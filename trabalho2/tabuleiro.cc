@@ -267,7 +267,7 @@ int tabuleiro::calcUtility() {
 
 void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 
-//Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
+	//Cal implementar. ha de retornar tots els possibles moviments (OJO QUE HI HA MOVIMENTS QUE NO ES PODEN FER SI LES COLUMNES ESTAN PLENES!!!!)
 
 	for (int i = 0; i < N_COLUMN; i++){
 		t_array[i] = new tabuleiro(this);  			//Creo nou tabuleiro
@@ -280,4 +280,31 @@ void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 
 tabuleiro::tabuleiro(tabuleiro * t) {
 	memcpy(matriu,t->matriu,sizeof(matriu));
+}
+
+void tabuleiro::getOptionsMapMax(
+		std::map<int, tabuleiro*, std::greater<int> > &m, char player) {
+
+	tabuleiro * aux;
+
+	for (int i = 0; i < N_COLUMN; i++){
+		aux = new tabuleiro(this);
+		if(not aux->makeMove(i, player)){
+			delete aux;
+		}
+		m[aux->getUtility()] = aux;
+	}
+}
+
+void tabuleiro::getOptionsMapMin(std::map<int, tabuleiro*> &m, char player) {
+
+	tabuleiro * aux;
+
+	for (int i = 0; i < N_COLUMN; i++){
+		aux = new tabuleiro(this);
+		if(not aux->makeMove(i, player)){
+			delete aux;
+		}
+		m[aux->getUtility()] = aux;
+	}
 }
