@@ -38,7 +38,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		t->getOptionsMapMax(max_map,player);
 		auto iter = max_map.begin();
 		while(iter != max_map.end()){
-			if ( (aux = MAX(value,r_alfabeta(iter->second, iter->first, 1, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY, false)) ) >= value ){
+			if ( (aux = MAX(value,r_alfabeta(iter->second, iter->first, 1, false, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) >= value ){
 				value = aux;
 				best_move = i;
 				delete iter->second;
