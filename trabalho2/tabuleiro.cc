@@ -12,6 +12,7 @@ using namespace std;
 tabuleiro::tabuleiro()
 {
     memset(matriu, '-', N_NUMEROS);
+    mov = 0;
     
     //debug
 
@@ -107,7 +108,7 @@ int tabuleiro::calcUtility() {
 
 	int sum = 0;
 	int total_sum = 0;
-	int cont;
+	int cont = 0;
 	char token;
 
 	//Lines
@@ -281,33 +282,39 @@ void tabuleiro::getOptions(tabuleiro *t_array[], char player) {
 
 tabuleiro::tabuleiro(tabuleiro * t) {
 	memcpy(matriu,t->matriu,sizeof(matriu));
+	mov = 0;
 }
 
-void tabuleiro::getOptionsMapMax(
-		std::map<int, tabuleiro*, std::greater<int> > &m, char player) {
+void tabuleiro::getOptionsMapMax(std::multimap<int, tabuleiro*, std::greater<int> > &m, char player) {
 
 	tabuleiro * aux;
 
 	for (int i = 0; i < N_COLUMN; i++){
 		aux = new tabuleiro(this);
+		aux->mov = i;
 		if(aux->makeMove(i, player)){
-			m[aux->getUtility()] = aux;
+			m.insert(make_pair(aux->getUtility(),aux));
 		} else {
 			delete aux;
 		}
 	}
 }
 
-void tabuleiro::getOptionsMapMin(std::map<int, tabuleiro*> &m, char player) {
+void tabuleiro::getOptionsMapMin(std::multimap<int, tabuleiro*> &m, char player) {
 
 	tabuleiro * aux;
 
 	for (int i = 0; i < N_COLUMN; i++){
 		aux = new tabuleiro(this);
+		aux->mov = i;
 		if(aux->makeMove(i, player)){
-			m[aux->getUtility()] = aux;
+			m.insert(make_pair(aux->getUtility(),aux));
 		} else {
 			delete aux;
 		}
 	}
+}
+
+int tabuleiro::getMov() {
+	return this->mov;
 }

@@ -28,23 +28,22 @@ alfabetaPlayer::~alfabetaPlayer() {
 
 
 int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
-	map<int,tabuleiro *> min_map;
-	map<int,tabuleiro *,greater<int>> max_map;
+	multimap<int,tabuleiro *> min_map;
+	multimap<int,tabuleiro *,greater<int>> max_map;
 	int best_move;
-	int aux,i = 0;
+	int aux = 0;
 	int value = player == 'x' ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
 
 	if (player == 'x'){
 		t->getOptionsMapMax(max_map,player);
 		auto iter = max_map.begin();
 		while(iter != max_map.end()){
-			if ( (aux = MAX(value,r_alfabeta(iter->second, iter->first, 1, false, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) >= value ){
+			if ( (aux = MAX(value,r_alfabeta(iter->second, iter->first, 1, false, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) > value ){
 				value = aux;
-				best_move = i;
+				best_move = iter->second->getMov();
 				delete iter->second;
 			}
 			iter++;
-			i++;
 		}
 	} else {
 		t->getOptionsMapMin(min_map,player);
@@ -52,11 +51,10 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		while(iter != min_map.end()){
 			if ( (aux = MIN(value,r_alfabeta(iter->second, iter->first, 1, true, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) < value ){
 				value = aux;
-				best_move = i;
+				best_move = iter->second->getMov();
 				delete iter->second;
 			}
 			iter++;
-			i++;
 		}
 	}
 
@@ -65,8 +63,8 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 }
 
 int alfabetaPlayer::r_alfabeta(tabuleiro *t, int util, int depth, bool maximize, int alfa, int beta) {
-	map<int,tabuleiro *> min_map;
-	map<int,tabuleiro *,greater<int>> max_map;
+	multimap<int,tabuleiro *> min_map;
+	multimap<int,tabuleiro *,greater<int>> max_map;
 	static int best_move;
 	int value = maximize ? -MINIMAX_MAX_UTILITY : MINIMAX_MAX_UTILITY;
 
@@ -104,15 +102,15 @@ int alfabetaPlayer::r_alfabeta(tabuleiro *t, int util, int depth, bool maximize,
 
 }
 
-bool alfabetaPlayer::is_maximizing(int depth, char player) {
-	bool res = false;
-	if (player == 'x'){
-		res = true;
-	} else {
-		res = false;
-	}
-	return res;
-}
+//bool alfabetaPlayer::is_maximizing(int depth, char player) {
+//	bool res = false;
+//	if (player == 'x'){
+//		res = true;
+//	} else {
+//		res = false;
+//	}
+//	return res;
+//}
 
 int alfabetaPlayer::playRound(tabuleiro *t) {
 

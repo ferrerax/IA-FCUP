@@ -23,6 +23,7 @@ class tabuleiro
 private:
     /* data */
     char matriu[N_NUMEROS];
+    int mov;
     int punts[5] = {0,1,10,50,512};  //Punctuation.
 
     tabuleiro(tabuleiro * t);			//Clona.
@@ -40,8 +41,9 @@ public:
     string getHash();
     int getUtility();
     void getOptions(tabuleiro * t_array[], char player);
-    void getOptionsMapMax(std::map<int,tabuleiro *,std::greater<int>> &m, char player);
-    void getOptionsMapMin(std::map<int,tabuleiro *> &m, char player);
+    void getOptionsMapMax(std::multimap<int,tabuleiro *,std::greater<int>> &m, char player);
+    void getOptionsMapMin(std::multimap<int,tabuleiro *> &m, char player);
+    int getMov();  //Obtenir el moviment que ha creat aquest tab.
 
     void print();
     void print_formatted();
