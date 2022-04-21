@@ -65,6 +65,7 @@ void MCTSPlayer::doIteration(tabuleiro *rootState, TreeNode *root)
     {
         int sim = state->simulateMove();
         state->makeMove(sim, invertPlayer(lastPlayer));
+        state->updateMoves();
         lastPlayer = invertPlayer(lastPlayer);
         ++i;
 
@@ -96,6 +97,7 @@ void MCTSPlayer::doIteration(tabuleiro *rootState, TreeNode *root)
 
 TreeNode *MCTSPlayer::select(std::vector<TreeNode *> *children)
 {
+    /*
     TreeNode *nw;
     double cValue = 0;
     for (size_t i = 0; i < (*children).size(); i++)
@@ -106,9 +108,15 @@ TreeNode *MCTSPlayer::select(std::vector<TreeNode *> *children)
             nw = (*children)[i];
             cValue = v;
         }
-    }
+    } */
 
-    return nw;
+    std::vector<TreeNode *> potentialChild(*children);
+
+    sort(begin(potentialChild), end(potentialChild), [this](TreeNode *x, TreeNode *y)
+         { return x->calcUCB1Value(this->token) > y->calcUCB1Value(this->token); });
+    return token == 'x' ? potentialChild[0] : potentialChild.back();
+
+    //return nw;
 }
 
 char MCTSPlayer::invertPlayer(char t)
