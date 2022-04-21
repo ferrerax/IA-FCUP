@@ -34,7 +34,7 @@ int alfabetaPlayer::first_alfabeta(tabuleiro *t, char player) {
 		t->getOptions(options,player);
 		if (player == 'x'){
 			for (int i = 0; i < N_COLUMN; i++){
-				if ( options[i] and (aux = MAX(value,r_alfabeta(options[i], 1, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY, false)) ) >= value ){
+				if ( options[i] and (aux = MAX(value,r_alfabeta(options[i], 1, false, -MINIMAX_MAX_UTILITY, MINIMAX_MAX_UTILITY)) ) >= value ){
 					value = aux;
 					best_move = i;
 					delete options[i];
