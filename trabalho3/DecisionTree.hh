@@ -16,4 +16,7 @@ private:
 public:
     DecisionTree(/* args */);
     ~DecisionTree();
+
+    void print_representation();
+    void store_tree();
 };

@@ -100,9 +100,22 @@ int main(int argc, char *argv[])
 }
 
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
+	string classif;
+	if(examples.empty()) return plurality_value(parent_examples);
+	else if((classif = same_classification(examples)) != "") {
 
-
+	}
+	else if(attributes.empty()) return plurality_value(examples);
+	else {
+		
+	}
 	return nullptr;
+
+}
+
+string same_classification(dataset_t examples) {
+
+	return "";
 }
 
 DecisionTree *plurality_value(dataset_t examples) {
