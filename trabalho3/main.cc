@@ -55,13 +55,10 @@ vector<void *> read_csv(string file)
 	    // Open an existing file
 	    fin.open(file, ios::in);
 
-	    vector<void*> result;
-	    vector<string> row;
+	    vector<vector<ValueType>> result;
 	    string line, word, temp;
 
 	    while (fin >> temp) {
-
-	        row.clear();
 
 	        getline(fin, line);   	//Erasing first line.
 	        getline(fin, line);		//Reading first line of data.
@@ -73,8 +70,7 @@ vector<void *> read_csv(string file)
 
 	        	switch(get_type(word)){
 	        		case FLOAT:
-	        			result.push_back(new vector<float>);
-	        			((v_float)result[0]).push_back(stof(word));
+	        			result.push_back(vector<Value>)
 	        			break;
 	        		case INT:
 	        			result.push_back(new vector<int>);

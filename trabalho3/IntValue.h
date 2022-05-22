@@ -17,6 +17,9 @@ private:
 public:
 	IntValue();
 	virtual ~IntValue();
+
+	virtual int getValue() = 0;
+	virtual void setValue(int value) = 0;
 };
 
 #endif /* INTVALUE_H_ */

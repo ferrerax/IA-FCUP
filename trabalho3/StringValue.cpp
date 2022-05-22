@@ -8,8 +8,7 @@
 #include "StringValue.h"
 
 StringValue::StringValue() {
-	// TODO Auto-generated constructor stub
-
+	value = "";
 }
 
 StringValue::~StringValue() {

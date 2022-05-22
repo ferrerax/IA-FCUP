@@ -8,8 +8,7 @@
 #include "ValueType.h"
 
 ValueType::ValueType() {
-	// TODO Auto-generated constructor stub
-
+	type = nullptr;
 }
 
 ValueType::~ValueType() {
