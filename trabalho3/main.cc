@@ -6,17 +6,14 @@
 #include <regex>
 #include <vector>
 
+#include "ValueType.h"
+
 using namespace std;
 
 typedef vector<int> 	v_int;
 typedef vector<float> 	v_float;
 typedef vector<string> 	v_string;
 
-typedef enum {
-	STRING,
-	INT,
-	FLOAT
-} types_t;
 
 
 void Usage()
