@@ -9,15 +9,21 @@
 #define STRINGVALUE_H_
 
 #include "ValueType.h"
+#include <string>
+
+using namespace std;
 
 class StringValue: public ValueType {
 
 private:
-	float value;
+	string value;
 
 public:
 	StringValue();
 	virtual ~StringValue();
+
+	virtual string getValue() = 0;
+	virtual void setValue(string value) = 0;
 };
 
 #endif /* STRINGVALUE_H_ */

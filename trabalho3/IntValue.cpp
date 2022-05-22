@@ -8,8 +8,8 @@
 #include "IntValue.h"
 
 IntValue::IntValue() {
-	// TODO Auto-generated constructor stub
 
+	value = 0;
 }
 
 IntValue::~IntValue() {

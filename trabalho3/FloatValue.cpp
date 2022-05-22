@@ -1,5 +1,5 @@
 /*
- * FloatValue.cpp
+ * FloatValue.cp
  *
  *  Created on: 22 May 2022
  *      Author: madmarx
@@ -8,8 +8,8 @@
 #include "FloatValue.h"
 
 FloatValue::FloatValue() {
-	// TODO Auto-generated constructor stub
 
+	value = 0.0;
 }
 
 FloatValue::~FloatValue() {
