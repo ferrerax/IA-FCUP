@@ -16,10 +16,16 @@ private:
 
 public:
 	IntValue();
+	IntValue(int in);
 	virtual ~IntValue();
 
-	virtual int getValue() = 0;
-	virtual void setValue(int value) = 0;
+	int getValue() const {
+		return value;
+	}
+
+	void setValue(int value) {
+		this->value = value;
+	}
 };
 
 #endif /* INTVALUE_H_ */

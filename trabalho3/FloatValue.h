@@ -17,11 +17,17 @@ private:
 
 public:
 	FloatValue();
+	FloatValue(float in);
+
 	virtual ~FloatValue();
 
-	virtual float getValue() = 0;
+	float getValue() const {
+		return value;
+	}
 
-	virtual void setValue(float value) = 0;
+	void setValue(float value) {
+		this->value = value;
+	}
 };
 
 #endif /* FLOATVALUE_H_ */

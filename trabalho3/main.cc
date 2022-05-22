@@ -7,6 +7,9 @@
 #include <vector>
 
 #include "ValueType.h"
+#include "FloatValue.h"
+#include "IntValue.h"
+#include "StringValue.h"
 #include "DecisionTree.hh"
 #include "Attribute.hh"
 
@@ -58,30 +61,33 @@ vector<void *> read_csv(string file)
 	    vector<vector<ValueType>> result;
 	    string line, word, temp;
 
+	    //First time
+
+	    getline(fin, line);   	//Erasing first line.
+	    getline(fin, line);		//Reading first line of data.
+
+	    // used for breaking words
+	    stringstream s(line);
+
+	    while (getline(s, word, ',')) {			//Setting values and types
+	    	vector<ValueType> aux;
+	    	switch(get_type(word)){
+	    	case FLOAT:
+	    		aux.push_back((ValueType)FloatValue((float)atof((char *)word)));
+	    		result.push_back(aux);
+	    		break;
+	    	case INT:
+	    		aux.push_back((ValueType)IntValue(atoi((char*)word)));
+	    		result.push_back(aux);
+	    		break;
+	    	case STRING:
+	    		aux.push_back((ValueType)StringValue(word));
+	    		result.push_back(aux);
+	    		break;
+	    	}
+	    }
+
 	    while (fin >> temp) {
-
-	        getline(fin, line);   	//Erasing first line.
-	        getline(fin, line);		//Reading first line of data.
-
-	        // used for breaking words
-	        stringstream s(line);
-
-	        while (getline(s, word, ',')) {
-
-	        	switch(get_type(word)){
-	        		case FLOAT:
-	        			result.push_back(vector<Value>)
-	        			break;
-	        		case INT:
-	        			result.push_back(new vector<int>);
-	        			((v_int)result[0]).push_back(stoi(word));
-	        			break;
-	        		case STRING:
-	        			result.push_back(new vector<string>);
-	        			((v_string)result[0]).push_back(word);
-	        			break;
-	        	}
-	        }
 
 	    }
 	return result;

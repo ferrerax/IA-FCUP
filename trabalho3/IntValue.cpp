@@ -12,6 +12,10 @@ IntValue::IntValue() {
 	value = 0;
 }
 
+IntValue::IntValue(int in) {
+	value = in;
+}
+
 IntValue::~IntValue() {
 	// TODO Auto-generated destructor stub
 }

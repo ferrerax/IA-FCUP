@@ -11,6 +11,10 @@ StringValue::StringValue() {
 	value = "";
 }
 
+StringValue::StringValue(string s) {
+	value = s;
+}
+
 StringValue::~StringValue() {
 	// TODO Auto-generated destructor stub
 }

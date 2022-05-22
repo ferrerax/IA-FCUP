@@ -20,10 +20,16 @@ private:
 
 public:
 	StringValue();
+	StringValue(string s);
 	virtual ~StringValue();
 
-	virtual string getValue() = 0;
-	virtual void setValue(string value) = 0;
+	const string& getValue() const {
+		return value;
+	}
+
+	void setValue(const string &value) {
+		this->value = value;
+	}
 };
 
 #endif /* STRINGVALUE_H_ */
