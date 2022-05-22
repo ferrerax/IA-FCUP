@@ -1,0 +1,12 @@
+# Adversarial Games
+
+## Compilation
+```
+make CC=g++
+```
+
+## Running
+```
+./jogo player1 player2
+```
+where player1-2 can be one of the following: MiniMax, AlphaBeta, MCTS, User.
