@@ -1,5 +1,7 @@
-#include<string>
+#include <string>
 #include "ValueType.h"
+
+using namespace std;
 
 typedef struct {
     string name;

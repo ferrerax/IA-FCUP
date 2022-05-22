@@ -73,11 +73,11 @@ vector<vector<ValueType>> read_csv(string file)
 	    	vector<ValueType> aux;
 	    	switch(get_type(word)){
 	    	case FLOAT:
-	    		aux.push_back((ValueType)FloatValue((float)atof((char *)word)));
+	    		aux.push_back((ValueType)FloatValue((float)stof(word)));
 	    		result.push_back(aux);
 	    		break;
 	    	case INT:
-	    		aux.push_back((ValueType)IntValue(atoi((char*)word)));
+	    		aux.push_back((ValueType)IntValue(stoi(word)));
 	    		result.push_back(aux);
 	    		break;
 	    	case STRING:
@@ -93,10 +93,10 @@ vector<vector<ValueType>> read_csv(string file)
 	    	while (getline(s, word, ',')) {			//Setting values and types
 	    		switch(get_type(word)){
 	    		case FLOAT:
-	    			result[i].push_back((ValueType)FloatValue((float)atof((char *)word)));
+	    			result[i].push_back((ValueType)FloatValue((float)stof(word)));
 	    			break;
 	    		case INT:
-	    			result[i].push_back((ValueType)IntValue((int)atoi((char *)word)));
+	    			result[i].push_back((ValueType)IntValue((int)stoi(word)));
 	    			break;
 	    		case STRING:
 	    			result[i].push_back((ValueType)StringValue(word));
@@ -111,16 +111,16 @@ vector<vector<ValueType>> read_csv(string file)
 
 
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
-	string classif;
-	if(examples.empty()) return plurality_value(parent_examples);
-	else if((classif = same_classification(examples)) != "") {
-
-	}
-	else if(attributes.empty()) return plurality_value(examples);
-	else {
-		
-	}
-	return nullptr;
+//	string classif;
+//	if(examples.empty()) return plurality_value(parent_examples);
+//	else if((classif = same_classification(examples)) != "") {
+//
+//	}
+//	else if(attributes.empty()) return plurality_value(examples);
+//	else {
+//x
+//	}
+//	return nullptr;
 
 }
 
