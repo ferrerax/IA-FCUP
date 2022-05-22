@@ -7,6 +7,8 @@
 #include <vector>
 
 #include "ValueType.h"
+#include "DecisionTree.hh"
+#include "Attribute.hh"
 
 using namespace std;
 
@@ -14,7 +16,9 @@ typedef vector<int> 	v_int;
 typedef vector<float> 	v_float;
 typedef vector<string> 	v_string;
 
+typedef vector<vector<ValueType>> dataset_t;
 
+vector<attribute_t> att_list;
 
 void Usage()
 {
@@ -93,4 +97,18 @@ int main(int argc, char *argv[])
 	
 
 	return 0;
+}
+
+DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
+
+
+	return nullptr;
+}
+
+DecisionTree *plurality_value(dataset_t examples) {
+
+}
+
+float importance(attribute_t a, dataset_t examples) {
+
 }
