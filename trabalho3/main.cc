@@ -50,7 +50,7 @@ types_t get_type(string s){
 	return result;
 }
 
-vector<void *> read_csv(string file)
+vector<vector<ValueType>> read_csv(string file)
 {
 	// File pointer
 	    fstream fin;
@@ -69,7 +69,7 @@ vector<void *> read_csv(string file)
 	    // used for breaking words
 	    stringstream s(line);
 
-	    while (getline(s, word, ',')) {			//Setting values and types
+	    while (getline(s, word, ',')) {			//Setting values and types. TODO: missings
 	    	vector<ValueType> aux;
 	    	switch(get_type(word)){
 	    	case FLOAT:
@@ -87,19 +87,28 @@ vector<void *> read_csv(string file)
 	    	}
 	    }
 
-	    while (fin >> temp) {
+	    int i = 0; //vector iterator
 
+	    while (fin >> temp) {
+	    	while (getline(s, word, ',')) {			//Setting values and types
+	    		switch(get_type(word)){
+	    		case FLOAT:
+	    			result[i].push_back((ValueType)FloatValue((float)atof((char *)word)));
+	    			break;
+	    		case INT:
+	    			result[i].push_back((ValueType)IntValue((int)atoi((char *)word)));
+	    			break;
+	    		case STRING:
+	    			result[i].push_back((ValueType)StringValue(word));
+	    			break;
+	    		}
+	    		i = (i+1)%result.size();
+	    	}
 	    }
 	return result;
 }
 
-int main(int argc, char *argv[])
-{
-	cout << "Hola" << endl;
-	
 
-	return 0;
-}
 
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
 	string classif;
@@ -126,4 +135,12 @@ DecisionTree *plurality_value(dataset_t examples) {
 
 float importance(attribute_t a, dataset_t examples) {
 
+}
+
+int main(int argc, char *argv[])
+{
+	cout << "Hola" << endl;
+
+
+	return 0;
 }
