@@ -26,7 +26,6 @@ vector<attribute_t> att_list;
 void Usage()
 {
 	std::cout << "Usage: ./trabalho3 <file.csv>" << std::endl;
-	//std::cout << "	Player options: User | MCTS | MiniMax | AlphaBeta" << std::endl;
 	exit(1);
 }
 
@@ -131,6 +130,7 @@ int main(int argc, char *argv[])
 	//Falta fer check de l'input.
 
 	read_csv(argv[1]);
+
 
 
 	return 0;
