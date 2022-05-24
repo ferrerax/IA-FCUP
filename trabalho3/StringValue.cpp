@@ -8,10 +8,12 @@
 #include "StringValue.hh"
 
 StringValue::StringValue() {
+	type = STRING;
 	value = "";
 }
 
 StringValue::StringValue(string s) {
+	type = STRING;
 	value = s;
 }
 

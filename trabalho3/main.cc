@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <regex>
 #include <vector>
+#include <utility>
 
 #include "DecisionTree.hh"
 #include "Attribute.hh"
@@ -18,8 +19,7 @@ using namespace std;
 typedef vector<int> 	v_int;
 typedef vector<float> 	v_float;
 typedef vector<string> 	v_string;
-
-typedef vector<vector<ValueType>> dataset_t;
+typedef vector< pair< types_t, vector<string> > > dataset_t;
 
 vector<attribute_t> att_list;
 
@@ -34,13 +34,14 @@ types_t get_type(string s){
 
 	types_t result;
 
-	if(regex_match(s, regex("[+-]?([0-9]*[.])?[0-9]+")))
-	{
-		result = FLOAT;
-	}
-	else if(regex_match(s, regex("^[0-9]*$")))
+
+	if(regex_match(s, regex("^[0-9]*$")))
 	{
 		result = INT;
+	}
+	else if(regex_match(s, regex("[+-]?([0-9]*[.])?[0-9]+")))
+	{
+		result = FLOAT;
 	}
 	else
 	{
@@ -50,7 +51,7 @@ types_t get_type(string s){
 	return result;
 }
 
-vector<vector<ValueType>> read_csv(string file)
+dataset_t read_csv(string file)
 {
 	// File pointer
 	    fstream fin;
@@ -58,7 +59,7 @@ vector<vector<ValueType>> read_csv(string file)
 	    // Open an existing file
 	    fin.open(file, ios::in);
 
-	    vector<vector<ValueType>> result;
+	    dataset_t result;
 	    string line, word, temp;
 
 	    //First time
@@ -70,38 +71,26 @@ vector<vector<ValueType>> read_csv(string file)
 	    stringstream s(line);
 
 	    while (getline(s, word, ',')) {			//Setting values and types. TODO: missings
-	    	vector<ValueType> aux;
 	    	switch(get_type(word)){
 	    	case FLOAT:
-	    		aux.push_back((ValueType)FloatValue((float)stof(word)));
-	    		result.push_back(aux);
+	    		result.push_back(make_pair(FLOAT, vector<string>()));
 	    		break;
 	    	case INT:
-	    		aux.push_back((ValueType)IntValue(stoi(word)));
-	    		result.push_back(aux);
+	    		result.push_back(make_pair(INT, vector<string>()));
 	    		break;
 	    	case STRING:
-	    		aux.push_back((ValueType)StringValue(word));
-	    		result.push_back(aux);
+	    		result.push_back(make_pair(STRING, vector<string>()));
 	    		break;
 	    	}
 	    }
 
 	    int i = 0; //vector iterator
 
-	    while (fin >> temp) {
-	    	while (getline(s, word, ',')) {			//Setting values and types
-	    		switch(get_type(word)){
-	    		case FLOAT:
-	    			result[i].push_back((ValueType)FloatValue((float)stof(word)));
-	    			break;
-	    		case INT:
-	    			result[i].push_back((ValueType)IntValue((int)stoi(word)));
-	    			break;
-	    		case STRING:
-	    			result[i].push_back((ValueType)StringValue(word));
-	    			break;
-	    		}
+	    while (!fin.eof()) {
+	    	getline(fin, line);
+	    	stringstream f(line);
+	    	while (getline(f, word, ',')) {			//Setting values and types
+				result[i].second.push_back(word);
 	    		i = (i+1)%result.size();
 	    	}
 	    }
@@ -139,7 +128,9 @@ float importance(attribute_t a, dataset_t examples) {
 
 int main(int argc, char *argv[])
 {
-	cout << "Hola" << endl;
+	//Falta fer check de l'input.
+
+	read_csv(argv[1]);
 
 
 	return 0;

@@ -15,10 +15,9 @@ typedef enum {
 	NO_TYPE
 } types_t;
 
-
 class ValueType {
 
-private:
+protected:
 	types_t type;
 
 public:

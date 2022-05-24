@@ -8,11 +8,12 @@
 #include "IntValue.hh"
 
 IntValue::IntValue() {
-
-	value = 0;
+	type 	= INT;
+	value 	= 0;
 }
 
 IntValue::IntValue(int in) {
+	type = INT;
 	value = in;
 }
 
