@@ -1,5 +1,8 @@
 
-#include<vector>
+#ifndef DESTREE_H_
+#define DESTREE_H_
+
+#include <vector>
 #include "Attribute.hh"
 
 class DecisionTree
@@ -20,3 +23,5 @@ public:
     void print_representation();
     void store_tree();
 };
+
+#endif

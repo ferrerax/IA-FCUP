@@ -5,7 +5,7 @@
  *      Author: madmarx
  */
 
-#include "FloatValue.h"
+#include "FloatValue.hh"
 
 FloatValue::FloatValue() {
 

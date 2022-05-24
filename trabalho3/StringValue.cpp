@@ -5,7 +5,7 @@
  *      Author: madmarx
  */
 
-#include "StringValue.h"
+#include "StringValue.hh"
 
 StringValue::StringValue() {
 	value = "";

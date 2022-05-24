@@ -5,11 +5,11 @@
  *      Author: madmarx
  */
 
-#ifndef STRINGVALUE_H_
-#define STRINGVALUE_H_
+#ifndef STRINGVALUE_HH_
+#define STRINGVALUE_HH_
 
-#include "ValueType.h"
 #include <string>
+#include "ValueType.hh"
 
 using namespace std;
 
@@ -32,4 +32,4 @@ public:
 	}
 };
 
-#endif /* STRINGVALUE_H_ */
+#endif /* STRINGVALUE_HH_ */

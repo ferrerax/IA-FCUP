@@ -6,12 +6,12 @@
 #include <regex>
 #include <vector>
 
-#include "ValueType.h"
-#include "FloatValue.h"
-#include "IntValue.h"
-#include "StringValue.h"
 #include "DecisionTree.hh"
 #include "Attribute.hh"
+#include "FloatValue.hh"
+#include "IntValue.hh"
+#include "StringValue.hh"
+#include "ValueType.hh"
 
 using namespace std;
 

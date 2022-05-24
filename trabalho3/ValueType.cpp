@@ -5,10 +5,10 @@
  *      Author: madmarx
  */
 
-#include "ValueType.h"
+#include "ValueType.hh"
 
 ValueType::ValueType() {
-	type = nullptr;
+	type = NO_TYPE;
 }
 
 ValueType::~ValueType() {

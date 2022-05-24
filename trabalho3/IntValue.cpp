@@ -5,7 +5,7 @@
  *      Author: madmarx
  */
 
-#include "IntValue.h"
+#include "IntValue.hh"
 
 IntValue::IntValue() {
 

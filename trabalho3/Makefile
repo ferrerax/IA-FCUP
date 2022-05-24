@@ -1,7 +1,7 @@
 TARGET ?= trabalho3
 SRC_DIRS ?= .
 
-SRCS := $(shell find $(SRC_DIRS) -name "*.cc" -or -name "*.c" -or -name "*.s")
+SRCS := $(shell find $(SRC_DIRS) -name "*.cc" -or -name "*.cpp" -or -name "*.s")
 OBJS := $(addsuffix .o,$(basename $(SRCS)))
 DEPS := $(OBJS:.o=.d)
 

@@ -5,10 +5,10 @@
  *      Author: madmarx
  */
 
-#ifndef FLOATVALUE_H_
-#define FLOATVALUE_H_
+#ifndef FLOATVALUE_HH_
+#define FLOATVALUE_HH_
 
-#include "ValueType.h"
+#include "ValueType.hh"
 
 class FloatValue: public ValueType {
 
@@ -30,4 +30,4 @@ public:
 	}
 };
 
-#endif /* FLOATVALUE_H_ */
+#endif /* FLOATVALUE_HH_ */

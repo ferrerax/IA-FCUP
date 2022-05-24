@@ -5,10 +5,10 @@
  *      Author: madmarx
  */
 
-#ifndef INTVALUE_H_
-#define INTVALUE_H_
+#ifndef INTVALUE_HH_
+#define INTVALUE_HH_
 
-#include "ValueType.h"
+#include "ValueType.hh"
 
 class IntValue: public ValueType {
 private:
@@ -28,4 +28,4 @@ public:
 	}
 };
 
-#endif /* INTVALUE_H_ */
+#endif /* INTVALUE_HH_ */

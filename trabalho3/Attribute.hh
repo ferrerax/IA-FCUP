@@ -1,5 +1,9 @@
+
+#ifndef ATTRIBUTE_H_
+#define ATTRIBUTE_H_
+
 #include <string>
-#include "ValueType.h"
+#include "ValueType.hh"
 
 using namespace std;
 
@@ -8,3 +12,5 @@ typedef struct {
     types_t type;
     int index;
 } attribute_t;
+
+#endif

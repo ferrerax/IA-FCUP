@@ -5,13 +5,14 @@
  *      Author: madmarx
  */
 
-#ifndef VALUETYPE_H_
-#define VALUETYPE_H_
+#ifndef VALUETYPE_HH_
+#define VALUETYPE_HH_
 
 typedef enum {
 	STRING,
 	INT,
-	FLOAT
+	FLOAT,
+	NO_TYPE
 } types_t;
 
 
@@ -25,4 +26,4 @@ public:
 	virtual ~ValueType();
 };
 
-#endif /* VALUETYPE_H_ */
+#endif /* VALUETYPE_HH_ */
