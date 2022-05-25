@@ -1,5 +1,7 @@
 #include "DecisionTree.hh"
 #include<string>
+#include<stack>
+
 using namespace std;
 
 DecisionTree::DecisionTree(string branch, DecisionTree *parent)
@@ -74,6 +76,66 @@ void DecisionTree::print_representation(ostream &os, string tab)
     }
     
 
+}
+
+void DecisionTree::assignAttributeIndexes(dataset_t &examples, vector<attribute_t> at_list)
+{
+    auto aux = at_list;
+    stack<DecisionTree *> stack;
+    stack.push(this);
+    DecisionTree *node;
+
+    while (!stack.empty())
+    {
+        node = stack.top();
+        stack.pop();
+
+        if (node->type == ATTRIBUTE_NODE)
+        {
+            for (auto &&a : aux)
+            {
+                if (node->attribute.name == a.name)
+                    node->attribute.index = a.index;
+            }
+            for (size_t i = 0; i < node->children.size(); i++)
+            {
+                stack.push(children[i]);
+            }
+        }
+    }
+}
+
+
+
+vector<string> DecisionTree::classify(dataset_t &examples, vector<attribute_t> at_list)
+{
+    vector<string> result;
+    result.reserve(examples[0].second.size());
+
+    // First, connect the tree attributes with dataset column indexes
+    this->assignAttributeIndexes(examples, at_list);
+
+    vector<string> aux_example;
+    for (size_t i = 0; i < examples[0].second.size(); i++)
+    {
+        for (size_t j = 0; j < examples.size(); j++)
+        {
+            aux_example.clear();
+            aux_example.push_back(examples[j].second[i]);
+            result.push_back(evaluate(aux_example));
+        }
+    }
+    return result;
+}
+
+string DecisionTree::evaluate(vector<string> ex)
+{
+    if(type == LEAF_NODE) return classValue;
+    for (auto &&child : children)
+    {
+        if(child->branchValue == ex[attribute.index])
+            return child->evaluate(ex);
+    }
 }
 
 void DecisionTree::addChild(DecisionTree * c, string branch) {
