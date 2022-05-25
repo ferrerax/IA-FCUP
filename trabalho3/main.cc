@@ -7,6 +7,7 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <map>
 
 #include "DecisionTree.hh"
 #include "Attribute.hh"
@@ -62,7 +63,7 @@ types_t get_type(string s){
 	return result;
 }
 
-dataset_t read_csv(string file, vector<string> & indexes, bool & id)
+dataset_t read_csv(string file, vector<attribute_t> & attributes, bool & id)
 {
 	// File pointer
 	    fstream fin;
@@ -78,34 +79,43 @@ dataset_t read_csv(string file, vector<string> & indexes, bool & id)
 
 	    getline(fin, line);
 	    s = stringstream(line);
-	    while(getline(s,word,',')){
+		int index_atts = 0;
+		while(getline(s,word,',')){
 	    	if(word == "ID"){
 	    		id = true;
 	    	}
-	    	indexes.push_back(word);
+			attribute_t at;
+			at.name = word;
+			at.index = index_atts;
+	    	attributes.push_back(at);
+			index_atts++;
 	    }
 
 	    getline(fin, line);		//Reading first line of data.
 
 	    // used for breaking words
 	    s = stringstream(line);
-
+		index_atts = 0;
 	    while (getline(s, word, ',')) {			//Setting values and types. TODO: missings
 	    	vector<string> aux;
 	    	switch(get_type(word)){
 	    	case FLOAT:
 	    		aux.push_back(word);
 	    		result.push_back(make_pair(FLOAT, aux));
+				attributes[index_atts].type = FLOAT;
 	    		break;
 	    	case INT:
 	    		aux.push_back(word);
 	    		result.push_back(make_pair(INT, aux));
-	    		break;
+				attributes[index_atts].type = INT;
+				break;
 	    	case STRING:
 	    		aux.push_back(word);
 	    		result.push_back(make_pair(STRING, aux));
-	    		break;
+				attributes[index_atts].type = STRING;
+				break;
 	    	}
+			index_atts++;
 	    }
 
 	    int i = 0; //vector iterator
@@ -123,12 +133,27 @@ dataset_t read_csv(string file, vector<string> & indexes, bool & id)
 
 string same_classification(dataset_t examples)
 {
-
-	return "";
+	if(std::adjacent_find(examples.back().second.begin(), examples.back().second.end(), std::not_equal_to<string>()) == examples.back().second.end()) {
+		return examples.back().second.front();
+	} else return "";
 }
 
 DecisionTree *plurality_value(dataset_t examples)
 {
+	set<string> s = set<string>(examples.back().second.begin(), examples.back().second.end());
+	int max = 0;
+	string className;
+	for (auto &&c : s)
+	{
+		int count = std::count(examples.back().second.begin(), examples.back().second.end(), c);
+		if(count > max) {
+			max = count;
+			className = c;
+		}
+	}
+	
+	return new DecisionTree(attribute_t(), className, LEAF_NODE);
+	
 }
 
 float importance(attribute_t a, dataset_t examples)
@@ -139,11 +164,11 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 	string classif;
 	if(examples.empty()) return plurality_value(parent_examples);
 	else if((classif = same_classification(examples)) != "") {
-
+		return new DecisionTree(attribute_t(), classif, LEAF_NODE);
 	}
 	else if(attributes.empty()) return plurality_value(examples);
 	else {
-
+		
 	}
 	return nullptr;
 }
@@ -154,7 +179,7 @@ int main(int argc, char *argv[])
 
 	if(string(argv[1]).find("learn") != string::npos)
 	{
-		vector<string> attr_names;
+		vector<attribute_t> attr_names;
 		bool id;
 		dataset_t dataset = read_csv(argv[2], attr_names, id);
 		Importance importance = Importance(dataset, id);
