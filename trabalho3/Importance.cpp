@@ -8,6 +8,7 @@
 
 #include <unordered_map>
 #include <map>
+#include <algorithm>
 
 #include "Importance.hh"
 
@@ -30,8 +31,8 @@ int Importance::get_max_importance() {
 
 	dataset_entropy = get_entropy(this->classes);
 
-	for (int i = id ? 1: 0; i < dataset.size(); i++){
-		info_gain = dataset_entropy-get_gain(dataset[i].second);
+	for (int i = id ? 1: 0; i < dataset.size()-1; i++){
+		info_gain = dataset_entropy-get_gain(dataset[i].first, dataset[i].second);
 		if (info_gain > max){
 			max = info_gain;
 			result = i;
@@ -69,10 +70,21 @@ double Importance::get_entropy(vector<string> v) {
 	return entropy;
 }
 
-double Importance::get_gain(vector<string> v) {
+double Importance::get_gain(types_t type, const vector<string> & v) {
 
-	double gain = 0, pi;
+	double gain = 0, pi, split_point;
 	unordered_map<string,pair<int,vector<string>>> map;
+
+	if(type == INT){
+		vector<int> vec;
+		for (string s : v){
+			vec.push_back(atoi(s));
+		}
+		sort(v.begin(), v.end());
+		split_point = v;
+	}
+	else if(type == FLOAT) {
+	}
 
 	for (int i = 0; i < this->size; i++){
 		map[v[i]].second.push_back(classes[i]);
