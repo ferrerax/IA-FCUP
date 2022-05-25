@@ -54,6 +54,7 @@ double Importance::get_entropy(vector<string> v) {
 
 	int num_elems;
 	set<string> elems;
+	double size = (double)v.size();
 	double entropy = 0;
 	double pi;
 
@@ -61,8 +62,7 @@ double Importance::get_entropy(vector<string> v) {
 	elems = split_elems(v);
 
 	for (string s : elems){
-		int a = (double)count(v.begin(), v.end(), s);
-		pi = (double)count(v.begin(), v.end(), s)/this->size;
+		pi = (double)count(v.begin(), v.end(), s)/size;
 		entropy -= pi * log2(pi);
 	}
 
@@ -71,7 +71,7 @@ double Importance::get_entropy(vector<string> v) {
 
 double Importance::get_gain(vector<string> v) {
 
-	double gain = 0, aux_gain = 0, pi;
+	double gain = 0, pi;
 	unordered_map<string,pair<int,vector<string>>> map;
 
 	for (int i = 0; i < this->size; i++){
