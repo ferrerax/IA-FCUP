@@ -118,9 +118,7 @@ DecisionTree *plurality_value(dataset_t examples) {
 
 }
 
-float importance(attribute_t a, dataset_t examples) {
 
-}
 
 int main(int argc, char *argv[])
 {
