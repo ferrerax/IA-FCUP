@@ -21,11 +21,13 @@ DecisionTree::DecisionTree(attribute_t at, string classname, node_t type) {
 
 DecisionTree::DecisionTree(istream &is)
 {
+    string prev_tab = "", tab;
     for (std::string buff; std::getline(is, buff); )
     {
         const auto lineBegin = buff.find_first_not_of(' '); // index to ignore leading spaces
+        tab = buff.substr(0, lineBegin);
         const auto sep = buff.find(' ', lineBegin);
-        string f_token;
+        string f_token; 
         if(sep == string::npos) {
             f_token = buff.substr(lineBegin);
         } else {
@@ -47,6 +49,7 @@ DecisionTree::DecisionTree(istream &is)
                 string count = s_token.substr(s_token.find('(')+1, s_token.size()-s_token.find('(')-2);
                 child->setCount(stoul(count));
                 this->addChild(child, f_token.substr(0, f_token.size()-1));
+                prev_tab = tab;
             } else {
                 DecisionTree *child = new DecisionTree(is);
                 this->addChild(child, f_token.substr(0, f_token.size()-1));
