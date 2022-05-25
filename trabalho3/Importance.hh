@@ -33,7 +33,7 @@ private:
 	set<string> split_elems(vector<string> v);
 	double get_entropy(vector<string> v);
 	double get_dataset_entropy();
-	double get_gain(vector<string> v);
+	double get_gain(types_t type, vector<string> v);
 
 
 public:

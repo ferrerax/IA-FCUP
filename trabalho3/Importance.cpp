@@ -8,6 +8,7 @@
 
 #include <unordered_map>
 #include <map>
+#include <algorithm>
 
 #include "Importance.hh"
 
@@ -30,8 +31,8 @@ int Importance::get_max_importance() {
 
 	dataset_entropy = get_entropy(this->classes);
 
-	for (int i = id ? 1: 0; i < dataset.size(); i++){
-		info_gain = dataset_entropy-get_gain(dataset[i].second);
+	for (int i = id ? 1: 0; i < dataset.size()-1; i++){
+		info_gain = dataset_entropy-get_gain(dataset[i].first, dataset[i].second);
 		if (info_gain > max){
 			max = info_gain;
 			result = i;
@@ -54,6 +55,7 @@ double Importance::get_entropy(vector<string> v) {
 
 	int num_elems;
 	set<string> elems;
+	double size = (double)v.size();
 	double entropy = 0;
 	double pi;
 
@@ -61,18 +63,28 @@ double Importance::get_entropy(vector<string> v) {
 	elems = split_elems(v);
 
 	for (string s : elems){
-		int a = (double)count(v.begin(), v.end(), s);
-		pi = (double)count(v.begin(), v.end(), s)/this->size;
+		pi = (double)count(v.begin(), v.end(), s)/size;
 		entropy -= pi * log2(pi);
 	}
 
 	return entropy;
 }
 
-double Importance::get_gain(vector<string> v) {
+double Importance::get_gain(types_t type, const vector<string> & v) {
 
-	double gain = 0, aux_gain = 0, pi;
+	double gain = 0, pi, split_point;
 	unordered_map<string,pair<int,vector<string>>> map;
+
+	if(type == INT){
+		vector<int> vec;
+		for (string s : v){
+			vec.push_back(atoi(s));
+		}
+		sort(v.begin(), v.end());
+		split_point = v;
+	}
+	else if(type == FLOAT) {
+	}
 
 	for (int i = 0; i < this->size; i++){
 		map[v[i]].second.push_back(classes[i]);
