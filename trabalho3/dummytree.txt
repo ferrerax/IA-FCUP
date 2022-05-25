@@ -1,0 +1,13 @@
+<attribute1>
+    value1_1:
+        <attribute2>
+            value2_1: class1 (1)
+            value2_2: class2 (2)
+    value1_2: class3 (3)
+    value1_3:
+        <attribute3>
+            value3_1:
+               <attribute4>
+                   value4_1: class4 (4)
+                   value4_2: class2 (5)
+            value3_2: class3 (6)

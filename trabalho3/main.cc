@@ -6,6 +6,7 @@
 #include <regex>
 #include <vector>
 #include <utility>
+#include <iostream>
 
 #include "DecisionTree.hh"
 #include "Attribute.hh"
@@ -20,9 +21,22 @@ typedef vector< pair< types_t, vector<string> > > dataset_t;
 
 vector<attribute_t> att_list;
 
+char *getCmdOption(char **begin, char **end, const std::string &option)
+{
+	char **itr = std::find(begin, end, option);
+	if (itr != end && ++itr != end)
+	{
+		return *itr;
+	}
+	return 0;
+}
+
 void Usage()
 {
-	std::cout << "Usage: ./trabalho3 <file.csv>" << std::endl;
+	std::cout << "Usage: ./trabalho3 command <file.csv> [<tree.txt>]" << std::endl;
+	std::cout << "Commands:" << endl <<
+				 "    learn: creates a decision tree from dataset <file.csv>" << endl <<
+				 "    test:  imports the decision tree in <tree.txt> and tests with the <file.csv> dataset" << endl;
 	exit(1);
 }
 
@@ -93,32 +107,31 @@ dataset_t read_csv(string file)
 	return result;
 }
 
-
-
-DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
-//	string classif;
-//	if(examples.empty()) return plurality_value(parent_examples);
-//	else if((classif = same_classification(examples)) != "") {
-//
-//	}
-//	else if(attributes.empty()) return plurality_value(examples);
-//	else {
-//x
-//	}
-//	return nullptr;
-
-}
-
-string same_classification(dataset_t examples) {
+string same_classification(dataset_t examples)
+{
 
 	return "";
 }
 
-DecisionTree *plurality_value(dataset_t examples) {
-
+DecisionTree *plurality_value(dataset_t examples)
+{
 }
 
-float importance(attribute_t a, dataset_t examples) {
+float importance(attribute_t a, dataset_t examples)
+{
+}
+
+DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
+	string classif;
+	if(examples.empty()) return plurality_value(parent_examples);
+	else if((classif = same_classification(examples)) != "") {
+
+	}
+	else if(attributes.empty()) return plurality_value(examples);
+	else {
+
+	}
+	return nullptr;
 
 }
 
@@ -126,7 +139,20 @@ int main(int argc, char *argv[])
 {
 	//Falta fer check de l'input.
 
-	read_csv(argv[1]);
+	if(string(argv[1]).find("learn") != string::npos)
+	{
+		read_csv(argv[2]);
+	}
+	else if (string(argv[1]).find("test") != string::npos) {
+		cout << "Testing with decision tree in " << string(argv[3]) << endl;
+
+		ifstream treeFile;
+		treeFile.open(argv[3]);
+		DecisionTree * tree = new DecisionTree(treeFile);
+
+		cout << "Tree read." << endl << endl;
+		tree->print_representation(std::cout);
+	}
 
 
 
