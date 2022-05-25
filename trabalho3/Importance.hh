@@ -27,6 +27,7 @@ private:
 	vector< pair< types_t,vector<string> > >  dataset;
 	double size;    //number of elements in dataset.
 	vector<string> classes;
+	bool id;
 
 	int get_num_elems(vector<string> v);
 	set<string> split_elems(vector<string> v);
@@ -36,7 +37,7 @@ private:
 
 
 public:
-	Importance(vector< pair< types_t,vector<string> > > & examples);
+	Importance(vector< pair< types_t,vector<string> > > & examples, bool id);
 	virtual ~Importance();
 
 	int get_max_importance();

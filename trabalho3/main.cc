@@ -10,6 +10,7 @@
 #include "DecisionTree.hh"
 #include "Attribute.hh"
 #include "ValueType.hh"
+#include "Importance.hh"
 
 using namespace std;
 
@@ -47,10 +48,11 @@ types_t get_type(string s){
 	return result;
 }
 
-dataset_t read_csv(string file)
+dataset_t read_csv(string file, vector<string> & indexes, bool & id)
 {
 	// File pointer
 	    fstream fin;
+	    stringstream s;
 
 	    // Open an existing file
 	    fin.open(file, ios::in);
@@ -60,22 +62,34 @@ dataset_t read_csv(string file)
 
 	    //First time
 
-	    getline(fin, line);   	//Erasing first line.
+	    getline(fin, line);
+	    s = stringstream(line);
+	    while(getline(s,word,',')){
+	    	if(word == "ID"){
+	    		id = true;
+	    	}
+	    	indexes.push_back(word);
+	    }
+
 	    getline(fin, line);		//Reading first line of data.
 
 	    // used for breaking words
-	    stringstream s(line);
+	    s = stringstream(line);
 
 	    while (getline(s, word, ',')) {			//Setting values and types. TODO: missings
+	    	vector<string> aux;
 	    	switch(get_type(word)){
 	    	case FLOAT:
-	    		result.push_back(make_pair(FLOAT, vector<string>()));
+	    		aux.push_back(word);
+	    		result.push_back(make_pair(FLOAT, aux));
 	    		break;
 	    	case INT:
-	    		result.push_back(make_pair(INT, vector<string>()));
+	    		aux.push_back(word);
+	    		result.push_back(make_pair(INT, aux));
 	    		break;
 	    	case STRING:
-	    		result.push_back(make_pair(STRING, vector<string>()));
+	    		aux.push_back(word);
+	    		result.push_back(make_pair(STRING, aux));
 	    		break;
 	    	}
 	    }
@@ -124,7 +138,11 @@ int main(int argc, char *argv[])
 {
 	//Falta fer check de l'input.
 
-	read_csv(argv[1]);
+	vector<string> attr_names;
+	bool id;
+	dataset_t dataset = read_csv(argv[1],attr_names,id);
+	Importance importance = Importance(dataset,id);
+	int i = importance.get_max_importance();
 
 
 

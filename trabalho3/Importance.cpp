@@ -13,11 +13,12 @@
 
 using namespace std;
 
-Importance::Importance(vector< pair< types_t,vector<string> > > & dataset) {
+Importance::Importance(vector< pair< types_t,vector<string> > > & dataset, bool id) {
 
 	this->dataset 	= dataset;
 	this->size 		= dataset[0].second.size();
 	this->classes	= this->dataset[this->dataset.size()-1].second;
+	this->id 		= id;
 }
 
 int Importance::get_max_importance() {
@@ -29,7 +30,7 @@ int Importance::get_max_importance() {
 
 	dataset_entropy = get_entropy(this->classes);
 
-	for (int i = 0; i < dataset.size(); i++){
+	for (int i = id ? 1: 0; i < dataset.size(); i++){
 		info_gain = dataset_entropy-get_gain(dataset[i].second);
 		if (info_gain > max){
 			max = info_gain;
@@ -60,6 +61,7 @@ double Importance::get_entropy(vector<string> v) {
 	elems = split_elems(v);
 
 	for (string s : elems){
+		int a = (double)count(v.begin(), v.end(), s);
 		pi = (double)count(v.begin(), v.end(), s)/this->size;
 		entropy -= pi * log2(pi);
 	}
