@@ -14,6 +14,8 @@ typedef enum {
     LEAF_NODE
 } node_t;
 
+typedef vector<pair<types_t, vector<string>>> dataset_t;
+
 class DecisionTree
 {
 private:
@@ -34,6 +36,10 @@ public:
     ~DecisionTree();
 
     void print_representation(ostream &os, string tab = "");
+
+    void assignAttributeIndexes(dataset_t &examples, vector<attribute_t> at_list);
+    vector<string> classify(dataset_t &examples, vector<attribute_t> at_list);
+    string evaluate(vector<string> ex);
 
     void addChild(DecisionTree * c, string branch);
 
