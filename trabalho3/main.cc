@@ -200,7 +200,11 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
 
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples, bool id_row) {
 	string classif;
-	if(examples[0].second.empty()) return plurality_value(parent_examples);
+	if(examples[0].second.empty()) {
+		DecisionTree * dt = plurality_value(parent_examples);
+		dt->setCount(0);
+		return dt;
+	}
 	else if((classif = same_classification(examples)) != "") {
 		DecisionTree *dt = new DecisionTree(attribute_t(), classif, LEAF_NODE);
 		dt->setCount(examples[0].second.size());
