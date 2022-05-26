@@ -14,6 +14,10 @@
 #include <set>
 #include <math.h>
 #include <algorithm>
+#include <unordered_map>
+#include <map>
+#include <algorithm>
+
 
 #include "ValueType.hh"
 
@@ -25,15 +29,16 @@ class Importance {
 
 private:
 	vector< pair< types_t,vector<string> > >  dataset;
+	unordered_map<string,pair<int,vector<string>>> importance_map;
 	double size;    //number of elements in dataset.
 	vector<string> classes;
 	bool id;
+	double split_point;
 
 	int get_num_elems(vector<string> v);
 	set<string> split_elems(vector<string> v);
 	double get_entropy(vector<string> v);
-	double get_dataset_entropy();
-	double get_gain(types_t type, vector<string> v);
+	double get_gain(types_t type, const vector<string> & v);
 
 
 public:
@@ -41,6 +46,7 @@ public:
 	virtual ~Importance();
 
 	int get_max_importance();
+	pair<double,vector<string>> get_discretization(int it);
 };
 
 #endif /* IMPORTANCE_HH_ */

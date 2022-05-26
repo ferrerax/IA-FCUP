@@ -6,9 +6,6 @@
  */
 
 
-#include <unordered_map>
-#include <map>
-#include <algorithm>
 
 #include "Importance.hh"
 
@@ -16,10 +13,12 @@ using namespace std;
 
 Importance::Importance(vector< pair< types_t,vector<string> > > & dataset, bool id) {
 
-	this->dataset 	= dataset;
-	this->size 		= dataset[0].second.size();
-	this->classes	= this->dataset[this->dataset.size()-1].second;
-	this->id 		= id;
+	this->dataset 			= dataset;
+	this->importance_map 	= unordered_map<string,pair<int,vector<string>>>();
+	this->size 				= dataset[0].second.size();
+	this->classes			= this->dataset[this->dataset.size()-1].second;
+	this->id 				= id;
+	this->split_point		= 0;
 }
 
 int Importance::get_max_importance() {
@@ -72,27 +71,43 @@ double Importance::get_entropy(vector<string> v) {
 
 double Importance::get_gain(types_t type, const vector<string> & v) {
 
-	double gain = 0, pi, split_point;
-	unordered_map<string,pair<int,vector<string>>> map;
+	double gain = 0, pi;
 
 	if(type == INT){
 		vector<int> vec;
 		for (string s : v){
-			vec.push_back(atoi(s));
+			vec.push_back(stoi(s));
 		}
-		sort(v.begin(), v.end());
-		split_point = v;
+		sort(vec.begin(), vec.end());
+		split_point = vec[vec.size()/2];
 	}
 	else if(type == FLOAT) {
+		vector<double> vec;
+		for (string s : v){
+			vec.push_back(stof(s));
+		}
+		sort(vec.begin(), vec.end());
+		split_point = vec[vec.size()/2];
 	}
 
 	for (int i = 0; i < this->size; i++){
-		map[v[i]].second.push_back(classes[i]);
-		map[v[i]].first++;
+		if(type == INT) {
+			string value = stoi(v[i]) > (int)split_point ? "<":">";
+			importance_map[value].second.push_back(classes[i]);
+			importance_map[value].first++;
+		}
+		else if (type == FLOAT){
+			string value = stof(v[i]) > split_point ? "<":">";
+			importance_map[value].second.push_back(classes[i]);
+			importance_map[value].first++;
+		} else {
+			importance_map[v[i]].second.push_back(classes[i]);
+			importance_map[v[i]].first++;
+		}
 	}
 
-	for (pair<string,pair<int,vector<string>>> i : map){
-		pi = ((double)map[i.first].first/size);		//value in total values
+	for (pair<string,pair<int,vector<string>>> i : importance_map){
+		pi = ((double)importance_map[i.first].first/size);		//value in total values
 		gain += pi*get_entropy(i.second.second);
 	}
 
@@ -103,4 +118,10 @@ Importance::~Importance() {
 	// TODO Auto-generated destructor stub
 }
 
+pair<double, vector<string> > Importance::get_discretization(int it) {
 
+	if (it >= dataset.size()){
+		return make_pair(0, vector<string>());
+	}
+	return make_pair(this->split_point, dataset[it].second);
+}
