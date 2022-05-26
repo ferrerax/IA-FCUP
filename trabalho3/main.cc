@@ -33,10 +33,9 @@ char *getCmdOption(char **begin, char **end, const std::string &option)
 
 void Usage()
 {
-	std::cout << "Usage: ./trabalho3 command <file.csv> [<tree.txt>]" << std::endl;
-	std::cout << "Commands:" << endl <<
-				 "    learn: creates a decision tree from dataset <file.csv>" << endl <<
-				 "    test:  imports the decision tree in <tree.txt> and tests with the <file.csv> dataset" << endl;
+	std::cout << "Usage: ./trabalho3  <file.csv> [-c <class.csv>]" << std::endl;
+	std::cout << "Options:" << endl <<
+				 "    -c after inducing a decision tree, tries to classify the dataset in <class.csv>" << endl;
 	exit(1);
 }
 
@@ -249,6 +248,8 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 int main(int argc, char *argv[])
 {
 
+	if(string(argv[1]) == "-h") Usage();
+	if(argc == 1 || argc == 3) Usage();
 
 	vector<attribute_t> attr_names;
 	bool id;
@@ -273,16 +274,21 @@ int main(int argc, char *argv[])
 	dt->print_representation(cout);
 
 
-//Clasification Phase
+	if(argc > 3 && string(argv[2]) == "-c"){
 
-	cout << endl << "Testing with decision tree with file " << string(argv[2]) << endl;
-	dataset = read_csv(argv[2], attr_names, id);
-	if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
-	vector<string> classifications = dt->classify(dataset, attr_names);
+	//Clasification Phase
 
-	for (int i = 0; i < classifications.size(); i++){
-		cout << dataset[0].second[i] << " --> " << classifications[i] << endl;
+		cout << endl << "Testing with decision tree with file " << string(argv[3]) << endl;
+		dataset = read_csv(argv[3], attr_names, id);
+		if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
+		vector<string> classifications = dt->classify(dataset, attr_names);
+
+		for (int i = 0; i < classifications.size(); i++){
+			cout << string(dataset[0].second[i]) << " --> " << string(classifications[i]) << endl;
+		}
 	}
+
+
 
 
 //	ifstream treeFile;
