@@ -29,6 +29,9 @@ private:
     string branchValue;
     node_t type; // 0 -> attribute, 1 -> class
 
+    pair<int, bool> parseDiscretizedValue(string v);
+    string evaluate(vector<string> ex);
+
 public:
     DecisionTree(string branch, DecisionTree *parent);
     DecisionTree(attribute_t at, string classname, node_t type);
@@ -39,7 +42,6 @@ public:
 
     void assignAttributeIndexes(dataset_t &examples, vector<attribute_t> at_list);
     vector<string> classify(dataset_t &examples, vector<attribute_t> at_list);
-    string evaluate(vector<string> ex);
 
     void addChild(DecisionTree * c, string branch);
 

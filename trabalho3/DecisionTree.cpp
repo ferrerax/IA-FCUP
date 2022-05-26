@@ -136,8 +136,16 @@ string DecisionTree::evaluate(vector<string> ex)
     if(type == LEAF_NODE) return classValue;
     for (auto &&child : children)
     {
-        if(child->branchValue == ex[attribute.index])
-            return child->evaluate(ex);
+        if(this->type == STRING) {
+            if(child->branchValue == ex[attribute.index])
+                return child->evaluate(ex);
+        } else {
+            pair<int, bool> cat = parseDiscretizedValue(child->branchValue);
+            if ((cat.first && stof(ex[attribute.index]) > cat.second) || !cat.first && stof(ex[attribute.index]) <= cat.second)
+            {
+                return child->evaluate(ex);
+            }
+        }
     }
 }
 
@@ -158,4 +166,12 @@ void DecisionTree::setBranch(string branchName) {
 void DecisionTree::setCount(int count)
 {
     countClassification = count;
+}
+pair<int, bool> DecisionTree::parseDiscretizedValue(string v)
+{
+    if(v.front() == '>') {
+        return make_pair(stoi(v.substr(1)), true);
+    } else {
+        return make_pair(stoi(v.substr(2)), false);
+    }
 }
