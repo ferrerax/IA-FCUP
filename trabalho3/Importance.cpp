@@ -30,11 +30,11 @@ int Importance::get_max_importance() {
 
 	dataset_entropy = get_entropy(this->classes);
 
-	for (attribute_t attr : attributes){
-		info_gain = dataset_entropy-get_gain(dataset[attr.index].first, dataset[attr.index].second);
+	for (size_t i = 0; i < attributes.size(); i++){
+		info_gain = dataset_entropy-get_gain(dataset[attributes[i].index].first, dataset[attributes[i].index].second);
 		if (info_gain > max){
 			max = info_gain;
-			result = attr.index;
+			result = i;
 		}
 	}
 
