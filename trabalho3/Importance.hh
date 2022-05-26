@@ -50,7 +50,7 @@ public:
 	virtual ~Importance();
 
 	int get_max_importance();
-	pair<double,vector<string>> get_discretization();
+	pair<double,vector<string>*> get_discretization();
 };
 
 #endif /* IMPORTANCE_HH_ */

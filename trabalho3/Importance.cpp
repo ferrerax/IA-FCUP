@@ -19,6 +19,7 @@ Importance::Importance(vector< pair< types_t,vector<string> > > & dataset, vecto
 	this->classes			= this->dataset[this->dataset.size()-1].second;
 	this->split_point		= 0;
 	this->attributes		= attributes;
+	this->last_result		= -1;
 }
 
 int Importance::get_max_importance() {
@@ -125,7 +126,7 @@ Importance::~Importance() {
 	// TODO Auto-generated destructor stub
 }
 
-pair<double, vector<string> > Importance::get_discretization() {
+pair<double, vector<string>* > Importance::get_discretization() {
 
-	return make_pair(this->split_point, this->discretizations[last_result]);
+	return make_pair(this->split_point, &this->discretizations[last_result]);
 }
