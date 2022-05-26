@@ -31,13 +31,14 @@ int Importance::get_max_importance() {
 	dataset_entropy = get_entropy(this->classes);
 
 	for (size_t i = 0; i < attributes.size(); i++){
-		info_gain = dataset_entropy-get_gain(dataset[attributes[i].index].first, dataset[attributes[i].index].second);
+		info_gain = dataset_entropy-get_gain(dataset[attributes[i].index].first, i, dataset[attributes[i].index].second);
 		if (info_gain > max){
 			max = info_gain;
 			result = i;
 		}
 	}
 
+	this->last_result;
 	return result;
 }
 
@@ -69,7 +70,7 @@ double Importance::get_entropy(vector<string> v) {
 	return entropy;
 }
 
-double Importance::get_gain(types_t type, const vector<string> & v) {
+double Importance::get_gain(types_t type, int attr_it, const vector<string> & v) {
 
 	double gain = 0, pi;
 	this->importance_map.clear();
@@ -90,17 +91,22 @@ double Importance::get_gain(types_t type, const vector<string> & v) {
 		sort(vec.begin(), vec.end());
 		split_point = vec[vec.size()/2];
 	}
+	else {
+		//No action
+	}
 
 	for (int i = 0; i < this->size; i++){
 		if(type == INT) {
 			string value = stoi(v[i]) > (int)split_point ? ">":"<";
 			importance_map[value].second.push_back(classes[i]);
 			importance_map[value].first++;
+			discretizations[attr_it].push_back(value);
 		}
 		else if (type == FLOAT){
 			string value = stof(v[i]) > split_point ? ">":"<";
 			importance_map[value].second.push_back(classes[i]);
 			importance_map[value].first++;
+			discretizations[attr_it].push_back(value);
 		} else {
 			importance_map[v[i]].second.push_back(classes[i]);
 			importance_map[v[i]].first++;
@@ -119,10 +125,7 @@ Importance::~Importance() {
 	// TODO Auto-generated destructor stub
 }
 
-pair<double, vector<string> > Importance::get_discretization(int it) {
+pair<double, vector<string> > Importance::get_discretization() {
 
-	if (it >= dataset.size()){
-		return make_pair(0, vector<string>());
-	}
-	return make_pair(this->split_point, dataset[it].second);
+	return make_pair(this->split_point, discretizations[last_result]);
 }

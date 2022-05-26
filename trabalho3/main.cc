@@ -8,6 +8,7 @@
 #include <utility>
 #include <iostream>
 #include <map>
+#include <set>
 
 #include "DecisionTree.hh"
 #include "Attribute.hh"
@@ -210,7 +211,7 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 			values = set<string>(examples[a_i].second.begin(), examples[a_i].second.end());
 		}
 		else {
-			values = set<string>(imp.get_discretization(a.index).second.begin(), imp.get_discretization(a.index).second.end());
+			values = set<string>(imp.get_discretization().second.begin(), imp.get_discretization().second.end());
 		}
 		for (auto &&vk: values)
 		{
@@ -218,7 +219,7 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 			if(a.type == STRING) {
 				subset = subset_examples(examples, a.index, vk);
 			} else {
-				subset = subset_examples_continuous(examples, imp.get_discretization(a.index).second, vk);
+				subset = subset_examples_continuous(examples, imp.get_discretization().second, vk);
 			}
 			vector<attribute_t> sub_att = vector<attribute_t>(attributes);
 			sub_att.erase(sub_att.begin()+a_i);
