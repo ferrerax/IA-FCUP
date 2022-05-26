@@ -210,6 +210,8 @@ int main(int argc, char *argv[])
 		dataset_t dataset = read_csv(argv[2], attr_names, id);
 		// Importance importance = Importance(dataset, id);
 		// int i = importance.get_max_importance();
+		attr_names.erase(attr_names.end()-1);  // delete attribute of class
+		if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
 		DecisionTree * dt = decision_tree_learning(dataset, attr_names, dataset, id);
 
 		dt->print_representation(cout);
