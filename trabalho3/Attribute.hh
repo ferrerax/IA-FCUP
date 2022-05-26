@@ -3,7 +3,14 @@
 #define ATTRIBUTE_H_
 
 #include <string>
-#include "ValueType.hh"
+
+
+typedef enum {
+	STRING,
+	INT,
+	FLOAT,
+	NO_TYPE
+} types_t;
 
 using namespace std;
 

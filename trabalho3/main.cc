@@ -12,7 +12,6 @@
 
 #include "DecisionTree.hh"
 #include "Attribute.hh"
-#include "ValueType.hh"
 #include "Importance.hh"
 
 using namespace std;
