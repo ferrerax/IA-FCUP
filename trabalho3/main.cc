@@ -268,7 +268,7 @@ int main(int argc, char *argv[])
 
 	DecisionTree * dt = decision_tree_learning(dataset, attr_names, dataset, id);
 
-	cout << "----- DESICION TREE ------" << endl;
+	cout << "----- DECISION TREE ------" << endl;
 
 	dt->print_representation(cout);
 
