@@ -19,7 +19,9 @@
 #include <algorithm>
 
 
+#include "Attribute.hh"
 #include "ValueType.hh"
+
 
 
 using namespace std;
@@ -29,10 +31,10 @@ class Importance {
 
 private:
 	vector< pair< types_t,vector<string> > >  dataset;
+	vector<attribute_t> attributes;
 	unordered_map<string,pair<int,vector<string>>> importance_map;
 	double size;    //number of elements in dataset.
 	vector<string> classes;
-	bool id;
 	double split_point;
 
 	int get_num_elems(vector<string> v);
@@ -42,7 +44,7 @@ private:
 
 
 public:
-	Importance(vector< pair< types_t,vector<string> > > & examples, bool id);
+	Importance(vector< pair< types_t,vector<string> > > & examples, vector<attribute_t> & attributes );
 	virtual ~Importance();
 
 	int get_max_importance();

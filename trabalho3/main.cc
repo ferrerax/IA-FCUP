@@ -201,7 +201,7 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 	}
 	else if(attributes.empty()) return plurality_value(examples);
 	else {
-		Importance imp = Importance(examples, id_row);
+		Importance imp = Importance(examples, attributes);
 		int a_i = imp.get_max_importance();
 		attribute_t a = attributes[a_i];
 		DecisionTree * node = new DecisionTree(a, "", LEAF_NODE);

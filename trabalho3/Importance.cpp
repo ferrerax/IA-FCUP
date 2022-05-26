@@ -11,14 +11,14 @@
 
 using namespace std;
 
-Importance::Importance(vector< pair< types_t,vector<string> > > & dataset, bool id) {
+Importance::Importance(vector< pair< types_t,vector<string> > > & dataset, vector<attribute_t> & attributes ) {
 
 	this->dataset 			= dataset;
 	this->importance_map 	= unordered_map<string,pair<int,vector<string>>>();
 	this->size 				= dataset[0].second.size();
 	this->classes			= this->dataset[this->dataset.size()-1].second;
-	this->id 				= id;
 	this->split_point		= 0;
+	this->attributes		= attributes;
 }
 
 int Importance::get_max_importance() {
@@ -30,11 +30,11 @@ int Importance::get_max_importance() {
 
 	dataset_entropy = get_entropy(this->classes);
 
-	for (int i = id ? 1 : 0; i < dataset.size()-1; i++){
-		info_gain = dataset_entropy-get_gain(dataset[i].first, dataset[i].second);
+	for (attribute_t attr : attributes){
+		info_gain = dataset_entropy-get_gain(dataset[attr.index].first, dataset[attr.index].second);
 		if (info_gain > max){
 			max = info_gain;
-			result = i;
+			result = attr.index;
 		}
 	}
 
@@ -93,12 +93,12 @@ double Importance::get_gain(types_t type, const vector<string> & v) {
 
 	for (int i = 0; i < this->size; i++){
 		if(type == INT) {
-			string value = stoi(v[i]) > (int)split_point ? "<":">";
+			string value = stoi(v[i]) > (int)split_point ? ">":"<";
 			importance_map[value].second.push_back(classes[i]);
 			importance_map[value].first++;
 		}
 		else if (type == FLOAT){
-			string value = stof(v[i]) > split_point ? "<":">";
+			string value = stof(v[i]) > split_point ? ">":"<";
 			importance_map[value].second.push_back(classes[i]);
 			importance_map[value].first++;
 		} else {
