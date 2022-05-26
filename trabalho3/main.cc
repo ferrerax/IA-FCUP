@@ -248,39 +248,49 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 
 int main(int argc, char *argv[])
 {
-	//Falta fer check de l'input.
 
-	if(string(argv[1]).find("learn") != string::npos)
+
+	vector<attribute_t> attr_names;
+	bool id;
+
+//Learning Phase
+
+	dataset_t dataset = read_csv(argv[1], attr_names, id);
+	attr_names.erase(attr_names.end()-1);  // delete attribute of class
+	if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
+
+	// Store all initial possible values for all attributes
+	for (size_t i = 0; i < attr_names.size(); i++)
 	{
-		vector<attribute_t> attr_names;
-		bool id;
-		dataset_t dataset = read_csv(argv[2], attr_names, id);
-		// Importance importance = Importance(dataset, id);
-		// int i = importance.get_max_importance();
-		attr_names.erase(attr_names.end()-1);  // delete attribute of class
-		if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
-
-		// Store all initial possible values for all attributes
-		for (size_t i = 0; i < attr_names.size(); i++)
-		{
-			attr_names[i].possible_values = set<string>(dataset[attr_names[i].index].second.begin(), dataset[attr_names[i].index].second.end());
-		}
-		
-
-		DecisionTree * dt = decision_tree_learning(dataset, attr_names, dataset, id);
-
-		dt->print_representation(cout);
+		attr_names[i].possible_values = set<string>(dataset[attr_names[i].index].second.begin(), dataset[attr_names[i].index].second.end());
 	}
-	else if (string(argv[1]).find("test") != string::npos) {
-		cout << "Testing with decision tree in " << string(argv[3]) << endl;
 
-		ifstream treeFile;
-		treeFile.open(argv[3]);
-		DecisionTree * tree = new DecisionTree(treeFile);
 
-		cout << "Tree read." << endl << endl;
-		tree->print_representation(std::cout);
+	DecisionTree * dt = decision_tree_learning(dataset, attr_names, dataset, id);
+
+	cout << "----- DESICION TREE ------" << endl;
+
+	dt->print_representation(cout);
+
+
+//Clasification Phase
+
+	cout << endl << "Testing with decision tree with file " << string(argv[2]) << endl;
+	dataset = read_csv(argv[2], attr_names, id);
+	if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
+	vector<string> classifications = dt->classify(dataset, attr_names);
+
+	for (int i = 0; i < classifications.size(); i++){
+		cout << dataset[0].second[i] << " --> " << classifications[i] << endl;
 	}
+
+
+//	ifstream treeFile;
+//	treeFile.open(argv[2]);
+//	DecisionTree * tree = new DecisionTree(treeFile);
+//
+//	cout << "Tree read." << endl << endl;
+//	tree->print_representation(std::cout);
 
 
 	return 0;
