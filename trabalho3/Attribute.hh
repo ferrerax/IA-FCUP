@@ -4,9 +4,16 @@
 
 #include <string>
 #include <set>
-#include "ValueType.hh"
 
 using namespace std;
+
+typedef enum
+{
+    STRING,
+    INT,
+    FLOAT,
+    NO_TYPE
+} types_t;
 
 typedef struct {
     string name;

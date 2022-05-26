@@ -20,7 +20,7 @@
 
 
 #include "Attribute.hh"
-#include "ValueType.hh"
+
 
 
 
@@ -33,14 +33,16 @@ private:
 	vector< pair< types_t,vector<string> > >  dataset;
 	vector<attribute_t> attributes;
 	unordered_map<string,pair<int,vector<string>>> importance_map;
+	map<int,vector<string>> discretizations;
 	double size;    //number of elements in dataset.
 	vector<string> classes;
+	int last_result;
 	double split_point;
 
 	int get_num_elems(vector<string> v);
 	set<string> split_elems(vector<string> v);
 	double get_entropy(vector<string> v);
-	double get_gain(types_t type, const vector<string> & v);
+	double get_gain(types_t type, int attr_it, const vector<string> & v);
 
 
 public:
@@ -48,7 +50,7 @@ public:
 	virtual ~Importance();
 
 	int get_max_importance();
-	pair<double,vector<string>> get_discretization(int it);
+	pair<double,vector<string>> get_discretization();
 };
 
 #endif /* IMPORTANCE_HH_ */
