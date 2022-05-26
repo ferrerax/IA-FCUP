@@ -116,7 +116,7 @@ vector<string> DecisionTree::classify(dataset_t &examples, vector<attribute_t> a
     result.reserve(examples[0].second.size());
 
     // First, connect the tree attributes with dataset column indexes
-    this->assignAttributeIndexes(examples, at_list);
+    //this->assignAttributeIndexes(examples, at_list);
 
     vector<string> aux_example;
     for (size_t i = 0; i < examples[0].second.size(); i++)
