@@ -25,12 +25,12 @@ int Importance::get_max_importance() {
 
 	int result;
 	double dataset_entropy;
-	double info_gain;
+	double info_gain = 0;
 	double max = 0;
 
 	dataset_entropy = get_entropy(this->classes);
 
-	for (int i = id ? 1: 0; i < dataset.size()-1; i++){
+	for (int i = id ? 1 : 0; i < dataset.size()-1; i++){
 		info_gain = dataset_entropy-get_gain(dataset[i].first, dataset[i].second);
 		if (info_gain > max){
 			max = info_gain;
@@ -72,6 +72,7 @@ double Importance::get_entropy(vector<string> v) {
 double Importance::get_gain(types_t type, const vector<string> & v) {
 
 	double gain = 0, pi;
+	this->importance_map.clear();
 
 	if(type == INT){
 		vector<int> vec;
