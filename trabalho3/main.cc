@@ -174,6 +174,25 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
 	return sub;
 	
  }
+
+ dataset_t subset_examples_continuous(dataset_t &examples, const vector<string> &discretizedAttribute, string value)
+ {
+	 dataset_t sub = dataset_t(examples); // Copia estructura de dades
+	 for (size_t i = 0; i < discretizedAttribute.size(); i++)
+	 {
+		 string vk = discretizedAttribute[i];
+		 if (vk != value)
+		 {
+			 // delete record
+			 for (size_t j = 0; j < sub.size(); j++)
+			 {
+				 sub[j].second.erase(sub[j].second.begin() + i);
+			 }
+		 }
+	 }
+	 return sub;
+ }
+
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples, bool id_row) {
 	string classif;
 	if(examples.empty()) return plurality_value(parent_examples);
@@ -186,10 +205,21 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 		int a_i = imp.get_max_importance();
 		attribute_t a = attributes[a_i];
 		DecisionTree * node = new DecisionTree(a, "", LEAF_NODE);
-		set<string> values = set<string>(examples[a_i].second.begin(), examples[a_i].second.end());
+		set<string> values;
+		if(a.type == STRING) {
+			values = set<string>(examples[a_i].second.begin(), examples[a_i].second.end());
+		}
+		else {
+			values = set<string>(imp.get_discretization(a_i).second.begin(), imp.get_discretization(a_i).second.end());
+		}
 		for (auto &&vk: values)
 		{
-			dataset_t subset = subset_examples(examples, a_i, vk);
+			dataset_t subset;
+			if(a.type == STRING) {
+				subset = subset_examples(examples, a_i, vk);
+			} else {
+				subset = subset_examples_continuous(examples, imp.get_discretization(a_i).second, vk);
+			}
 			attributes.erase(attributes.begin()+a_i);
 			DecisionTree * child = decision_tree_learning(subset, attributes, examples, id_row);
 			node->addChild(child, vk);
