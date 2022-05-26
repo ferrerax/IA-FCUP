@@ -21,8 +21,6 @@ typedef vector<float> 	v_float;
 typedef vector<string> 	v_string;
 typedef vector< pair< types_t, vector<string> > > dataset_t;
 
-vector<attribute_t> att_list;
-
 char *getCmdOption(char **begin, char **end, const std::string &option)
 {
 	char **itr = std::find(begin, end, option);
@@ -152,14 +150,16 @@ DecisionTree *plurality_value(dataset_t examples)
 		}
 	}
 	
-	return new DecisionTree(attribute_t(), className, LEAF_NODE);
+	DecisionTree * dt = new DecisionTree(attribute_t(), className, LEAF_NODE);
+	dt->setCount(max);
+	return dt;
 	
 }
 
 dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
  {
 	dataset_t sub = dataset_t(examples);  // Copia estructura de dades
-	for (size_t i = 0; i < sub[attributeIndex].second.size(); i++)
+	for (size_t i = 0; i < sub[attributeIndex].second.size(); )
 	{
 		string vk = sub[attributeIndex].second[i];
 		if(vk != value) {
@@ -169,6 +169,8 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
 				sub[j].second.erase(sub[j].second.begin()+i);
 			}
 			
+		} else {
+			i++;
 		}
 	}
 	return sub;
@@ -178,6 +180,7 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
  dataset_t subset_examples_continuous(dataset_t &examples, const vector<string> &discretizedAttribute, string value)
  {
 	 dataset_t sub = dataset_t(examples); // Copia estructura de dades
+	 int ii = 0;
 	 for (size_t i = 0; i < discretizedAttribute.size(); i++)
 	 {
 		 string vk = discretizedAttribute[i];
@@ -186,8 +189,10 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
 			 // delete record
 			 for (size_t j = 0; j < sub.size(); j++)
 			 {
-				 sub[j].second.erase(sub[j].second.begin() + i);
+				 sub[j].second.erase(sub[j].second.begin() + ii);
 			 }
+		 } else {
+			 ++ii;
 		 }
 	 }
 	 return sub;
@@ -195,19 +200,21 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
 
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples, bool id_row) {
 	string classif;
-	if(examples.empty()) return plurality_value(parent_examples);
+	if(examples[0].second.empty()) return plurality_value(parent_examples);
 	else if((classif = same_classification(examples)) != "") {
-		return new DecisionTree(attribute_t(), classif, LEAF_NODE);
+		DecisionTree *dt = new DecisionTree(attribute_t(), classif, LEAF_NODE);
+		dt->setCount(examples[0].second.size());
+		return dt;
 	}
 	else if(attributes.empty()) return plurality_value(examples);
 	else {
 		Importance imp = Importance(examples, attributes);
 		int a_i = imp.get_max_importance();
 		attribute_t a = attributes[a_i];
-		DecisionTree * node = new DecisionTree(a, "", LEAF_NODE);
+		DecisionTree * node = new DecisionTree(a, "", ATTRIBUTE_NODE);
 		set<string> values;
 		if(a.type == STRING) {
-			values = set<string>(examples[a_i].second.begin(), examples[a_i].second.end());
+			values = a.possible_values;
 		}
 		else {
 			values = set<string>(imp.get_discretization(a.index).second.begin(), imp.get_discretization(a.index).second.end());
@@ -243,6 +250,14 @@ int main(int argc, char *argv[])
 		// int i = importance.get_max_importance();
 		attr_names.erase(attr_names.end()-1);  // delete attribute of class
 		if(id) attr_names.erase(attr_names.begin());  // delete attribute of ID
+
+		// Store all initial possible values for all attributes
+		for (size_t i = 0; i < attr_names.size(); i++)
+		{
+			attr_names[i].possible_values = set<string>(dataset[attr_names[i].index].second.begin(), dataset[attr_names[i].index].second.end());
+		}
+		
+
 		DecisionTree * dt = decision_tree_learning(dataset, attr_names, dataset, id);
 
 		dt->print_representation(cout);
