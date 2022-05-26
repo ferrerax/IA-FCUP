@@ -98,13 +98,13 @@ double Importance::get_gain(types_t type, int attr_it, const vector<string> & v)
 
 	for (int i = 0; i < this->size; i++){
 		if(type == INT) {
-			string value = stoi(v[i]) > (int)split_point ? ">" + to_string(split_point) :"<" + to_string(split_point);
+			string value = stoi(v[i]) > (int)split_point ? ">" + to_string(split_point) :"<=" + to_string(split_point);
 			importance_map[value].second.push_back(classes[i]);
 			importance_map[value].first++;
 			discretizations[attr_it].push_back(value);
 		}
 		else if (type == FLOAT){
-			string value = stof(v[i]) > split_point ? ">" + to_string(split_point):"<" + to_string(split_point);
+			string value = stof(v[i]) > split_point ? ">" + to_string(split_point):"<=" + to_string(split_point);
 			importance_map[value].second.push_back(classes[i]);
 			importance_map[value].first++;
 			discretizations[attr_it].push_back(value);
