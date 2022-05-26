@@ -121,12 +121,12 @@ vector<string> DecisionTree::classify(dataset_t &examples, vector<attribute_t> a
     vector<string> aux_example;
     for (size_t i = 0; i < examples[0].second.size(); i++)
     {
+        aux_example.clear();
         for (size_t j = 0; j < examples.size(); j++)
         {
-            aux_example.clear();
             aux_example.push_back(examples[j].second[i]);
-            result.push_back(evaluate(aux_example));
         }
+        result.push_back(evaluate(aux_example));
     }
     return result;
 }
