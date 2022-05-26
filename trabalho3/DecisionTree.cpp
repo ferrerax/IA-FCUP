@@ -136,7 +136,7 @@ string DecisionTree::evaluate(vector<string> ex)
     if(type == LEAF_NODE) return classValue;
     for (auto &&child : children)
     {
-        if(this->type == STRING) {
+        if(this->attribute.type == STRING) {
             if(child->branchValue == ex[attribute.index])
                 return child->evaluate(ex);
         } else {
