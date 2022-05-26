@@ -174,7 +174,7 @@ dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
 	return sub;
 	
  }
-DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
+DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples, bool id_row) {
 	string classif;
 	if(examples.empty()) return plurality_value(parent_examples);
 	else if((classif = same_classification(examples)) != "") {
@@ -182,7 +182,7 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 	}
 	else if(attributes.empty()) return plurality_value(examples);
 	else {
-		Importance imp = Importance(examples, true);
+		Importance imp = Importance(examples, id_row);
 		int a_i = imp.get_max_importance();
 		attribute_t a = attributes[a_i];
 		DecisionTree * node = new DecisionTree(a, "", LEAF_NODE);
@@ -191,7 +191,7 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 		{
 			dataset_t subset = subset_examples(examples, a_i, vk);
 			attributes.erase(attributes.begin()+a_i);
-			DecisionTree * child = decision_tree_learning(subset, attributes, examples);
+			DecisionTree * child = decision_tree_learning(subset, attributes, examples, id_row);
 			node->addChild(child, vk);
 		}
 		return node;
@@ -208,8 +208,11 @@ int main(int argc, char *argv[])
 		vector<attribute_t> attr_names;
 		bool id;
 		dataset_t dataset = read_csv(argv[2], attr_names, id);
-		Importance importance = Importance(dataset, id);
-		int i = importance.get_max_importance();
+		// Importance importance = Importance(dataset, id);
+		// int i = importance.get_max_importance();
+		DecisionTree * dt = decision_tree_learning(dataset, attr_names, dataset, id);
+
+		dt->print_representation(cout);
 	}
 	else if (string(argv[1]).find("test") != string::npos) {
 		cout << "Testing with decision tree in " << string(argv[3]) << endl;
