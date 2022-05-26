@@ -156,10 +156,24 @@ DecisionTree *plurality_value(dataset_t examples)
 	
 }
 
-float importance(attribute_t a, dataset_t examples)
-{
-}
-
+dataset_t subset_examples(dataset_t &examples, int attributeIndex, string value)
+ {
+	dataset_t sub = dataset_t(examples);  // Copia estructura de dades
+	for (size_t i = 0; i < sub[attributeIndex].second.size(); i++)
+	{
+		string vk = sub[attributeIndex].second[i];
+		if(vk != value) {
+			// delete record
+			for (size_t j = 0; j < sub.size(); j++)
+			{
+				sub[j].second.erase(sub[j].second.begin()+i);
+			}
+			
+		}
+	}
+	return sub;
+	
+ }
 DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> attributes, dataset_t parent_examples) {
 	string classif;
 	if(examples.empty()) return plurality_value(parent_examples);
@@ -168,7 +182,19 @@ DecisionTree *decision_tree_learning(dataset_t examples, vector<attribute_t> att
 	}
 	else if(attributes.empty()) return plurality_value(examples);
 	else {
-		
+		Importance imp = Importance(examples, true);
+		int a_i = imp.get_max_importance();
+		attribute_t a = attributes[a_i];
+		DecisionTree * node = new DecisionTree(a, "", LEAF_NODE);
+		set<string> values = set<string>(examples[a_i].second.begin(), examples[a_i].second.end());
+		for (auto &&vk: values)
+		{
+			dataset_t subset = subset_examples(examples, a_i, vk);
+			attributes.erase(attributes.begin()+a_i);
+			DecisionTree * child = decision_tree_learning(subset, attributes, examples);
+			node->addChild(child, vk);
+		}
+		return node;
 	}
 	return nullptr;
 }
