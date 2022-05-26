@@ -38,7 +38,7 @@ int Importance::get_max_importance() {
 		}
 	}
 
-	this->last_result;
+	this->last_result = result;
 	return result;
 }
 
